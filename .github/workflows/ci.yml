@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: migrateright
+          POSTGRES_PASSWORD: ci_only_password
+          POSTGRES_DB: migrateright
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U migrateright"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      MIGRATERIGHT_DB_URL: postgresql+psycopg2://migrateright:ci_only_password@localhost:5432/migrateright
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt pytest==9.2.0 ruff==0.17.6
+      - name: Lint (ruff)
+        run: ruff check .
+      - name: Tests against PostgreSQL
+        run: pytest -q
+      - name: Tests against SQLite (fallback)
+        run: MIGRATERIGHT_DB_URL= pytest -q
+      # Uses the committed legacy extracts (data/legacy/*.csv), no 45 MB download in CI
+      - name: Full pipeline run against PostgreSQL
+        run: python -m src.pipeline | tee pipeline_run.log
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: migrateright-reports
+          path: |
+            reports/
+            metrics.json
+            pipeline_run.log
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t migrateright:ci .
