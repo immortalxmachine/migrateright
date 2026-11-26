@@ -1,0 +1,33 @@
+# docker compose up --build
+#   Postgres  -> localhost:5450
+#   Dashboard -> http://localhost:8540
+name: migrateright
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-migrateright}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+      POSTGRES_DB: ${POSTGRES_DB:-migrateright}
+    ports:
+      - "5450:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-migrateright}"]
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MIGRATERIGHT_DB_URL: postgresql+psycopg2://${POSTGRES_USER:-migrateright}:${POSTGRES_PASSWORD:-change_me}@db:5432/${POSTGRES_DB:-migrateright}
+    ports:
+      - "8540:8540"
+
+volumes:
+  pgdata:

@@ -1,0 +1,8 @@
+.venv
+.tmp
+.git
+data/raw
+data/*.db
+reports
+docs
+tests
