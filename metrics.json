@@ -1,0 +1,137 @@
+{
+  "generated_at": "2026-11-26T18:33:38+00:00",
+  "database": "sqlite",
+  "runtime_seconds": 12.8,
+  "totals": {
+    "records_in": 7044,
+    "records_loaded": 5245,
+    "records_quarantined": 1568,
+    "duplicates_merged": 231,
+    "quarantined_pct": 22.26,
+    "business_partners_created": 1298,
+    "shared_customer_vendor_bps": 20
+  },
+  "objects": {
+    "customer": {
+      "records_in": 1290,
+      "records_loaded": 974,
+      "records_quarantined": 226,
+      "duplicates_merged": 90,
+      "rejected_pct": 17.52,
+      "rejected_pct_by_reason": {
+        "OBSOLETE": 5.58,
+        "MISSING_MANDATORY": 3.72,
+        "INVALID_PHONE": 3.26,
+        "INVALID_POSTAL_CODE": 2.79,
+        "INVALID_EMAIL": 2.33,
+        "INVALID_COUNTRY": 0.78
+      },
+      "rejected_records_by_reason": {
+        "OBSOLETE": 72,
+        "MISSING_MANDATORY": 48,
+        "INVALID_PHONE": 42,
+        "INVALID_POSTAL_CODE": 36,
+        "INVALID_EMAIL": 30,
+        "INVALID_COUNTRY": 10
+      },
+      "recon_checks_passed": "16/16"
+    },
+    "vendor": {
+      "records_in": 450,
+      "records_loaded": 344,
+      "records_quarantined": 76,
+      "duplicates_merged": 30,
+      "rejected_pct": 16.89,
+      "rejected_pct_by_reason": {
+        "OBSOLETE": 5.33,
+        "INVALID_PHONE": 3.78,
+        "MISSING_MANDATORY": 3.56,
+        "INVALID_POSTAL_CODE": 2.67,
+        "INVALID_EMAIL": 2.22,
+        "INVALID_COUNTRY": 0.89
+      },
+      "rejected_records_by_reason": {
+        "OBSOLETE": 24,
+        "INVALID_PHONE": 17,
+        "MISSING_MANDATORY": 16,
+        "INVALID_POSTAL_CODE": 12,
+        "INVALID_EMAIL": 10,
+        "INVALID_COUNTRY": 4
+      },
+      "recon_checks_passed": "17/17"
+    },
+    "material": {
+      "records_in": 5304,
+      "records_loaded": 3927,
+      "records_quarantined": 1266,
+      "duplicates_merged": 111,
+      "rejected_pct": 23.87,
+      "rejected_pct_by_reason": {
+        "OBSOLETE": 23.27,
+        "MISSING_PRICE": 7.05,
+        "MISSING_MANDATORY": 6.69,
+        "NON_PRODUCT": 0.51,
+        "INVALID_DESCRIPTION": 0.26
+      },
+      "rejected_records_by_reason": {
+        "OBSOLETE": 1234,
+        "MISSING_PRICE": 374,
+        "MISSING_MANDATORY": 355,
+        "NON_PRODUCT": 27,
+        "INVALID_DESCRIPTION": 14
+      },
+      "recon_checks_passed": "12/12"
+    }
+  },
+  "reconciliation_checks_passed": 45,
+  "reconciliation_checks_total": 45,
+  "overall_status": "PASS",
+  "detection_vs_injected_issues": {
+    "MISSING_MANDATORY": {
+      "injected": 64,
+      "detected": 64,
+      "detection_pct": 100.0
+    },
+    "INVALID_POSTAL_CODE": {
+      "injected": 48,
+      "detected": 48,
+      "detection_pct": 100.0
+    },
+    "INVALID_EMAIL": {
+      "injected": 40,
+      "detected": 40,
+      "detection_pct": 100.0
+    },
+    "INVALID_PHONE": {
+      "injected": 40,
+      "detected": 40,
+      "detection_pct": 100.0
+    },
+    "INVALID_COUNTRY": {
+      "injected": 14,
+      "detected": 14,
+      "detection_pct": 100.0
+    },
+    "OBSOLETE": {
+      "injected": 96,
+      "detected": 96,
+      "detection_pct": 100.0
+    },
+    "COUNTRY_VARIANT_auto_fixed": {
+      "injected": 200,
+      "fixed_and_loaded": 200,
+      "fixed_pct": 100.0
+    },
+    "DUPLICATE": {
+      "injected_pairs": 120,
+      "merges_made": 120,
+      "recall_pct": 100.0,
+      "precision_pct": 100.0
+    },
+    "SHARED_BP": {
+      "injected": 20,
+      "detected": 20,
+      "detection_pct": 100.0
+    }
+  }
+}
