@@ -1,64 +1,51 @@
 {
-  "generated_at": "2026-11-26T18:33:38+00:00",
+  "generated_at": "2026-11-26T19:22:09+00:00",
   "database": "sqlite",
-  "runtime_seconds": 12.8,
+  "runtime_seconds": 16.9,
   "totals": {
-    "records_in": 7044,
-    "records_loaded": 5245,
-    "records_quarantined": 1568,
-    "duplicates_merged": 231,
-    "quarantined_pct": 22.26,
-    "business_partners_created": 1298,
-    "shared_customer_vendor_bps": 20
+    "records_in": 18330,
+    "records_loaded": 16167,
+    "records_quarantined": 1719,
+    "duplicates_merged": 444,
+    "quarantined_pct": 9.38,
+    "business_partners_created": 12240
   },
   "objects": {
     "customer": {
-      "records_in": 1290,
-      "records_loaded": 974,
-      "records_quarantined": 226,
-      "duplicates_merged": 90,
-      "rejected_pct": 17.52,
+      "records_in": 9931,
+      "records_loaded": 9524,
+      "records_quarantined": 74,
+      "duplicates_merged": 333,
+      "rejected_pct": 0.75,
       "rejected_pct_by_reason": {
-        "OBSOLETE": 5.58,
-        "MISSING_MANDATORY": 3.72,
-        "INVALID_PHONE": 3.26,
-        "INVALID_POSTAL_CODE": 2.79,
-        "INVALID_EMAIL": 2.33,
-        "INVALID_COUNTRY": 0.78
+        "OBSOLETE": 0.39,
+        "ZIP_NOT_FOUND": 0.35
       },
       "rejected_records_by_reason": {
-        "OBSOLETE": 72,
-        "MISSING_MANDATORY": 48,
-        "INVALID_PHONE": 42,
-        "INVALID_POSTAL_CODE": 36,
-        "INVALID_EMAIL": 30,
-        "INVALID_COUNTRY": 10
+        "OBSOLETE": 39,
+        "ZIP_NOT_FOUND": 35
       },
-      "recon_checks_passed": "16/16"
+      "recon_checks_passed": "20/20"
     },
     "vendor": {
-      "records_in": 450,
-      "records_loaded": 344,
-      "records_quarantined": 76,
-      "duplicates_merged": 30,
-      "rejected_pct": 16.89,
+      "records_in": 3095,
+      "records_loaded": 2716,
+      "records_quarantined": 379,
+      "duplicates_merged": 0,
+      "rejected_pct": 12.25,
       "rejected_pct_by_reason": {
-        "OBSOLETE": 5.33,
-        "INVALID_PHONE": 3.78,
-        "MISSING_MANDATORY": 3.56,
-        "INVALID_POSTAL_CODE": 2.67,
-        "INVALID_EMAIL": 2.22,
-        "INVALID_COUNTRY": 0.89
+        "OBSOLETE": 9.79,
+        "CITY_ZIP_MISMATCH": 1.36,
+        "ZIP_STATE_MISMATCH": 1.13,
+        "ZIP_NOT_FOUND": 0.23
       },
       "rejected_records_by_reason": {
-        "OBSOLETE": 24,
-        "INVALID_PHONE": 17,
-        "MISSING_MANDATORY": 16,
-        "INVALID_POSTAL_CODE": 12,
-        "INVALID_EMAIL": 10,
-        "INVALID_COUNTRY": 4
+        "OBSOLETE": 303,
+        "CITY_ZIP_MISMATCH": 42,
+        "ZIP_STATE_MISMATCH": 35,
+        "ZIP_NOT_FOUND": 7
       },
-      "recon_checks_passed": "17/17"
+      "recon_checks_passed": "20/20"
     },
     "material": {
       "records_in": 5304,
@@ -83,55 +70,146 @@
       "recon_checks_passed": "12/12"
     }
   },
-  "reconciliation_checks_passed": 45,
-  "reconciliation_checks_total": 45,
+  "reconciliation_checks_passed": 52,
+  "reconciliation_checks_total": 52,
   "overall_status": "PASS",
-  "detection_vs_injected_issues": {
-    "MISSING_MANDATORY": {
-      "injected": 64,
-      "detected": 64,
-      "detection_pct": 100.0
+  "unmapped_target_fields": [
+    {
+      "object": "customer",
+      "table": "BUT000",
+      "field": "NAME_FIRST",
+      "note": "KNA1-NAME1 in the real legacy system (anonymised in Olist)"
     },
-    "INVALID_POSTAL_CODE": {
-      "injected": 48,
-      "detected": 48,
-      "detection_pct": 100.0
+    {
+      "object": "customer",
+      "table": "BUT000",
+      "field": "NAME_LAST",
+      "note": "KNA1-NAME1 in the real legacy system (anonymised in Olist)"
     },
-    "INVALID_EMAIL": {
-      "injected": 40,
-      "detected": 40,
-      "detection_pct": 100.0
+    {
+      "object": "customer",
+      "table": "BUT000",
+      "field": "NAME_ORG1",
+      "note": "organisations only"
     },
-    "INVALID_PHONE": {
-      "injected": 40,
-      "detected": 40,
-      "detection_pct": 100.0
+    {
+      "object": "customer",
+      "table": "BUT000",
+      "field": "BPEXT",
+      "note": "CHAR 20 - Olist ids are 32-char hashes; kept in CVI_CUST_LINK"
     },
-    "INVALID_COUNTRY": {
-      "injected": 14,
-      "detected": 14,
-      "detection_pct": 100.0
+    {
+      "object": "customer",
+      "table": "ADRC",
+      "field": "STREET",
+      "note": "KNA1-STRAS (not published by Olist)"
     },
-    "OBSOLETE": {
-      "injected": 96,
-      "detected": 96,
-      "detection_pct": 100.0
+    {
+      "object": "customer",
+      "table": "ADRC",
+      "field": "TEL_NUMBER",
+      "note": "KNA1-TELF1 (not published by Olist)"
     },
-    "COUNTRY_VARIANT_auto_fixed": {
-      "injected": 200,
-      "fixed_and_loaded": 200,
-      "fixed_pct": 100.0
+    {
+      "object": "customer",
+      "table": "ADRC",
+      "field": "SMTP_ADDR",
+      "note": "ADR6-SMTP_ADDR (not published by Olist)"
     },
-    "DUPLICATE": {
-      "injected_pairs": 120,
-      "merges_made": 120,
-      "recall_pct": 100.0,
-      "precision_pct": 100.0
+    {
+      "object": "vendor",
+      "table": "BUT000",
+      "field": "NAME_FIRST",
+      "note": "persons only"
     },
-    "SHARED_BP": {
-      "injected": 20,
-      "detected": 20,
-      "detection_pct": 100.0
+    {
+      "object": "vendor",
+      "table": "BUT000",
+      "field": "NAME_LAST",
+      "note": "persons only"
+    },
+    {
+      "object": "vendor",
+      "table": "BUT000",
+      "field": "NAME_ORG1",
+      "note": "LFA1-NAME1 in the real legacy system (anonymised in Olist)"
+    },
+    {
+      "object": "vendor",
+      "table": "BUT000",
+      "field": "BPEXT",
+      "note": "CHAR 20 - Olist ids are 32-char hashes; kept in CVI_VEND_LINK"
+    },
+    {
+      "object": "vendor",
+      "table": "ADRC",
+      "field": "STREET",
+      "note": "LFA1-STRAS (not published by Olist)"
+    },
+    {
+      "object": "vendor",
+      "table": "ADRC",
+      "field": "TEL_NUMBER",
+      "note": "LFA1-TELF1 (not published by Olist)"
+    },
+    {
+      "object": "vendor",
+      "table": "ADRC",
+      "field": "SMTP_ADDR",
+      "note": "ADR6-SMTP_ADDR (not published by Olist)"
+    }
+  ],
+  "real_data_findings": {
+    "city_standardisation": {
+      "customer": {
+        "exact": {
+          "records": 9896,
+          "pct": 99.65
+        },
+        "fuzzy": {
+          "records": 0,
+          "pct": 0.0
+        },
+        "cleaned": {
+          "records": 0,
+          "pct": 0.0
+        },
+        "none": {
+          "records": 35,
+          "pct": 0.35
+        }
+      },
+      "vendor": {
+        "exact": {
+          "records": 2999,
+          "pct": 96.9
+        },
+        "fuzzy": {
+          "records": 33,
+          "pct": 1.07
+        },
+        "cleaned": {
+          "records": 14,
+          "pct": 0.45
+        },
+        "none": {
+          "records": 49,
+          "pct": 1.58
+        }
+      }
+    },
+    "customer_duplicates": {
+      "customer_id_rows": 9931,
+      "unique_customers": 9593,
+      "duplicate_rows": 338
+    },
+    "location_only_matcher_vs_unique_id": {
+      "records_compared": 9896,
+      "true_duplicate_pairs": 361,
+      "pairs_proposed": 8530,
+      "correct_pairs": 327,
+      "precision_pct": 3.83,
+      "recall_pct": 90.58
     }
   }
 }
