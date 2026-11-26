@@ -1,14 +1,22 @@
-"""Download the public Online Retail II dataset (CC BY 4.0) from the UCI ML Repository.
+"""Download the two public datasets used by the case study (raw files are gitignored).
 
-Source : https://archive.ics.uci.edu/dataset/502/online+retail+ii  (no login needed)
-Mirror : https://www.kaggle.com/datasets/mashlyn/online-retail-ii-uci (same data, needs login)
+1. Online Retail II (CC BY 4.0), UCI ML Repository - no login needed
+   https://archive.ics.uci.edu/dataset/502/online+retail+ii
+   (same data on Kaggle: mashlyn/online-retail-ii-uci)
+2. Brazilian E-Commerce Public Dataset by Olist (CC BY-NC-SA 4.0), Kaggle
+   https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+   Needs the Kaggle CLI (pip install kaggle) and YOUR Kaggle API token in
+   ~/.kaggle (the CLI reads it; this script never touches it).
 
-The raw .xlsx (~45 MB) is gitignored. Only the small derived legacy material
-master (data/legacy/mara_legacy.csv, built by src/extract.py) is committed.
+Only the small derived extracts in data/legacy/ (built by src/extract.py) are
+committed, so tests and CI need neither download.
 
-Usage:  python -m src.download
+Usage:  python -m src.download [uci|olist|all]
 """
 
+import shutil
+import subprocess
+import sys
 import time
 import urllib.request
 import zipfile
@@ -59,5 +67,24 @@ def download() -> Path:
     return xlsx
 
 
+OLIST_DIR = RAW_DIR.parent / "olist"
+
+
+def download_olist() -> Path:
+    """Fetch the Olist CSVs with the Kaggle CLI (credentials handled by the CLI itself)."""
+    if (OLIST_DIR / "olist_customers_dataset.csv").exists():
+        print(f"Already present: {OLIST_DIR}")
+        return OLIST_DIR
+    kaggle = shutil.which("kaggle") or str(Path(sys.executable).parent / "kaggle")
+    OLIST_DIR.mkdir(parents=True, exist_ok=True)
+    subprocess.run([kaggle, "datasets", "download", "-d", "olistbr/brazilian-ecommerce",
+                    "-p", str(OLIST_DIR), "--unzip"], check=True)
+    return OLIST_DIR
+
+
 if __name__ == "__main__":
-    download()
+    what = sys.argv[1] if len(sys.argv) > 1 else "all"
+    if what in ("uci", "all"):
+        download()
+    if what in ("olist", "all"):
+        download_olist()
