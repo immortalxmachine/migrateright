@@ -1,24 +1,20 @@
-"""Duplicate detection and survivorship.
+"""Duplicate handling: exact-key merge with survivorship, plus a fuzzy location matcher.
 
-Business partners (customers / vendors):
-  1. Blocking   - only compare records in the same block (country), which keeps
-                  the number of comparisons small.
-  2. Matching   - rapidfuzz token_sort_ratio on a "match key" of the name
-                  (lower case, no punctuation, no legal suffixes such as Ltd/GmbH).
-                  A pair is a duplicate when the name score >= threshold AND at
-                  least one support field (city, postcode, e-mail, phone) is equal.
-  3. Clustering - pairs are joined into groups with union-find (A~B, B~C -> {A,B,C}).
-  4. Survivorship - per group the most complete record survives (tie: newest
-                  ERDAT, then lowest legacy number); its empty fields are filled
-                  from the other members -> one "golden record".
-Materials: exact match on the upper-cased material number; the code with the
-most sales history survives.
+Merge (configured per object in config/rules.yaml -> dedup):
+  method: exact  group records on a key and keep one survivor per group
+                 customers: UNIQUE_ID (Olist customer_unique_id - one real person,
+                            many customer_id rows, one per order)
+                 materials: upper-cased material number (85123A == 85123a)
+  method: none   no duplicate handling (vendors: seller_id is already unique)
+Survivorship: sort the group by the configured fields (highest/newest first),
+ties -> lowest legacy id; the survivor's empty fields are filled from the
+other members (golden record). Merged ids go to the merge log, never deleted.
 
-Merged records are never deleted: they are written to the merge log with the
-survivor's id and the match score, so reconciliation can account for them.
+Location matcher (customers, evaluation only):
+  Could we have found the same duplicates WITHOUT the cross-reference id?
+  Block on zip prefix, rapidfuzz ratio on the standardised city, same state.
+  src/evaluate.py measures its precision/recall against UNIQUE_ID.
 """
-
-import re
 
 import pandas as pd
 from rapidfuzz import fuzz
@@ -26,81 +22,11 @@ from rapidfuzz import fuzz
 MERGE_COLUMNS = ["object", "survivor_id", "merged_id", "score", "match_reason"]
 
 
-def match_key(name, legal_suffixes) -> str:
-    """'The Acme & Sons Ltd.' -> 'acme sons'"""
-    if name is None:
-        return ""
-    text = str(name).lower().replace(".", "")            # 'G.m.b.H.' -> 'gmbh'
-    words = re.sub(r"[^a-z0-9 ]", " ", text).split()     # '&', ',' ... -> space
-    stop = set(legal_suffixes)
-    # Legacy names are cut at 35 characters, so 'Limited' may arrive as 'Limite':
-    # drop a last word that is the start of a legal suffix.
-    if words and len(words[-1]) >= 3 and any(s.startswith(words[-1]) for s in stop):
-        words = words[:-1]
-    return " ".join(w for w in words if w not in stop)
-
-
-def name_score(a: str, b: str) -> float:
-    """0-100 similarity that ignores word order ('Home Acme' == 'Acme Home')."""
-    return fuzz.token_sort_ratio(a, b)
-
-
-class UnionFind:
-    """Tiny union-find (disjoint set) to turn duplicate pairs into groups."""
-
-    def __init__(self, items):
-        self.parent = {i: i for i in items}
-
-    def find(self, x):
-        while self.parent[x] != x:
-            self.parent[x] = self.parent[self.parent[x]]   # path halving
-            x = self.parent[x]
-        return x
-
-    def union(self, a, b):
-        self.parent[self.find(a)] = self.find(b)
-
-
-def find_duplicate_pairs(df: pd.DataFrame, spec: dict, legal_suffixes) -> list[tuple]:
-    """Return (id_a, id_b, score, reason) for every matching pair inside each block."""
-    keys = df[spec["name_field"]].map(lambda n: match_key(n, legal_suffixes))
-    work = df.assign(_key=keys)
-    pairs = []
-    for _, block in work.groupby(spec["block_on"], dropna=False):
-        records = block.to_dict("records")
-        for i in range(len(records)):
-            for j in range(i + 1, len(records)):
-                a, b = records[i], records[j]
-                score = name_score(a["_key"], b["_key"])
-                if score < spec["name_threshold"]:
-                    continue
-                support = [f for f in spec["support_fields"]
-                           if a[f] is not None and a[f] == b[f]]
-                if len(support) >= spec["min_support_matches"]:
-                    reason = f"name {score:.0f} + {', '.join(support)}"
-                    pairs.append((a["LEGACY_ID"], b["LEGACY_ID"], round(score, 1), reason))
-    return pairs
-
-
-def completeness(row: pd.Series) -> int:
-    """Number of filled fields - the main survivorship criterion."""
-    return int(row.notna().sum())
-
-
-def pick_survivor(group: pd.DataFrame, rule: list[str]) -> str:
-    """Survivorship: most complete, then newest ERDAT, then lowest legacy id."""
-    ranked = group.assign(_complete=group.apply(completeness, axis=1))
-    sort_cols, ascending = [], []
-    for criterion in rule:
-        if criterion == "completeness":
-            sort_cols.append("_complete")
-            ascending.append(False)
-        else:                               # a date / number field: higher wins
-            sort_cols.append(criterion)
-            ascending.append(False)
-    sort_cols.append("LEGACY_ID")
-    ascending.append(True)
-    return ranked.sort_values(sort_cols, ascending=ascending).iloc[0]["LEGACY_ID"]
+def pick_survivor(group: pd.DataFrame, survivorship: list[str]) -> str:
+    """Highest value of the survivorship fields wins (newest date / most sales), then lowest id."""
+    ranked = group.sort_values(survivorship + ["LEGACY_ID"],
+                               ascending=[False] * len(survivorship) + [True])
+    return ranked.iloc[0]["LEGACY_ID"]
 
 
 def golden_record(group: pd.DataFrame, survivor_id: str) -> pd.Series:
@@ -115,52 +41,41 @@ def golden_record(group: pd.DataFrame, survivor_id: str) -> pd.Series:
     return survivor
 
 
-def deduplicate_partners(df, obj, spec, legal_suffixes):
-    """Return (golden records, merge log) for customers or vendors."""
-    pairs = find_duplicate_pairs(df, spec, legal_suffixes)
-    uf = UnionFind(df["LEGACY_ID"])
-    best = {}
-    for a, b, score, reason in pairs:
-        uf.union(a, b)
-        best[a] = best[b] = (score, reason)
-
-    groups = df.assign(_group=df["LEGACY_ID"].map(uf.find)).groupby("_group")
+def deduplicate_exact(df: pd.DataFrame, obj: str, spec: dict):
+    """Group on spec['key']; return (survivors, merge log)."""
+    key, survivorship = spec["key"], spec["survivorship"]
     survivors, merges = [], []
-    for _, group in groups:
-        group = group.drop(columns="_group")
+    for _, group in df.groupby(key, sort=True):
         if len(group) == 1:
             survivors.append(group.iloc[0])
             continue
-        survivor_id = pick_survivor(group, spec["survivorship"])
+        survivor_id = pick_survivor(group, survivorship)
         survivors.append(golden_record(group, survivor_id))
-        for merged_id in group["LEGACY_ID"]:
+        for merged_id in sorted(group["LEGACY_ID"]):
             if merged_id != survivor_id:
-                score, reason = best[merged_id]
-                merges.append({"object": obj, "survivor_id": survivor_id,
-                               "merged_id": merged_id, "score": score,
-                               "match_reason": reason})
-    result = pd.DataFrame(survivors).reset_index(drop=True)
+                merges.append({"object": obj, "survivor_id": survivor_id, "merged_id": merged_id,
+                               "score": 100.0, "match_reason": f"same {key}"})
+    result = pd.DataFrame(survivors).reset_index(drop=True) if survivors else df.iloc[0:0]
     return result, pd.DataFrame(merges, columns=MERGE_COLUMNS)
-
-
-def deduplicate_materials(df, obj, spec):
-    """Exact match on the normalised material number (85123A == 85123a)."""
-    key = spec["exact_key"]
-    order = spec["survivorship"]                          # e.g. ["TXN_COUNT"]
-    ranked = df.sort_values(order + ["LEGACY_ID"], ascending=[False] * len(order) + [True])
-    survivors = ranked.drop_duplicates(subset=key, keep="first")
-    survivor_of = dict(zip(survivors[key], survivors["LEGACY_ID"]))   # code -> survivor id
-    merges = []
-    for legacy_id, code in zip(ranked["LEGACY_ID"], ranked[key]):
-        survivor_id = survivor_of[code]
-        if legacy_id != survivor_id:
-            merges.append({"object": obj, "survivor_id": survivor_id, "merged_id": legacy_id,
-                           "score": 100.0, "match_reason": f"same {key} after upper-casing"})
-    return survivors.sort_values(key).reset_index(drop=True), pd.DataFrame(merges, columns=MERGE_COLUMNS)
 
 
 def deduplicate(df: pd.DataFrame, obj: str, rules: dict):
     spec = rules[obj]["dedup"]
-    if obj == "material":
-        return deduplicate_materials(df, obj, spec)
-    return deduplicate_partners(df, obj, spec, rules["legal_suffixes"])
+    if spec["method"] == "exact" and not df.empty:
+        return deduplicate_exact(df, obj, spec)
+    return df.reset_index(drop=True), pd.DataFrame(columns=MERGE_COLUMNS)
+
+
+def location_match_pairs(df: pd.DataFrame, spec: dict, state_field: str = "REGIO") -> set[tuple]:
+    """Candidate duplicate pairs using location only (zip block + fuzzy city + same state)."""
+    pairs = set()
+    for _, block in df.groupby(spec["block_on"]):
+        records = block[["LEGACY_ID", spec["city_field"], state_field]].to_dict("records")
+        for i in range(len(records)):
+            for j in range(i + 1, len(records)):
+                a, b = records[i], records[j]
+                if a[state_field] != b[state_field] or a[spec["city_field"]] is None:
+                    continue
+                if fuzz.ratio(str(a[spec["city_field"]]), str(b[spec["city_field"]] or "")) >= spec["city_threshold"]:
+                    pairs.add(tuple(sorted((a["LEGACY_ID"], b["LEGACY_ID"]))))
+    return pairs
