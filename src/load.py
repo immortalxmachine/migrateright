@@ -42,15 +42,13 @@ def stage_source(engine: Engine, obj: str, raw: pd.DataFrame) -> None:
     staged.to_sql(f"src_{obj}", engine, if_exists="replace", index=False)
 
 
-def load_all(engine: Engine, target_tables: dict, quarantine: pd.DataFrame,
-             merges: pd.DataFrame, shared: pd.DataFrame) -> dict:
+def load_all(engine: Engine, target_tables: dict, quarantine: pd.DataFrame, merges: pd.DataFrame) -> dict:
     """Insert every target and control table; return rows written per table."""
     written = {}
     for name, df in target_tables.items():
         written[f"tgt_{name.lower()}"] = write_table(engine, f"tgt_{name.lower()}", df)
     written["mig_quarantine"] = write_table(engine, "mig_quarantine", quarantine)
     written["mig_merge_log"] = write_table(engine, "mig_merge_log", merges)
-    written["mig_shared_bp"] = write_table(engine, "mig_shared_bp", shared)
     return written
 
 

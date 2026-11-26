@@ -38,17 +38,27 @@ def check_formats(df, obj, key, formats):
     return issues
 
 
-def check_postal_codes(df, obj, key, spec, postal_formats):
-    """Postcode must match the format of its (already mapped) country."""
+def check_address(df, obj, key, spec):
+    """Zip prefix / state / city against the geolocation reference (columns added by cleanse).
+
+    ZIP_NOT_FOUND       zip prefix is not in the reference at all
+    ZIP_STATE_MISMATCH  the zip prefix belongs to a different state (UF)
+    CITY_ZIP_MISMATCH   the city could not be matched to a city of that zip prefix
+    """
     issues = []
-    field, country_field = spec["field"], spec["country_field"]
-    for legacy_id, code, country in zip(df[key], df[field], df[country_field]):
-        pattern = postal_formats.get(country)
-        # Missing code / unknown country are reported by other rules already
-        if code is None or pattern is None:
+    zip_f, state_f, city_f = spec["zip_field"], spec["state_field"], spec["city_field"]
+    for legacy_id, zip_prefix, state, city, geo_state, match in zip(
+            df[key], df[zip_f], df[state_f], df[city_f], df["GEO_REGIO"], df["CITY_MATCH"]):
+        if zip_prefix is None:
+            continue                                   # reported as MISSING_MANDATORY
+        if geo_state is None:
+            issues.append(_issue(obj, legacy_id, "ZIP_NOT_FOUND", zip_f, zip_prefix))
             continue
-        if not re.fullmatch(pattern, str(code)):
-            issues.append(_issue(obj, legacy_id, spec["reason"], field, code))
+        if state is not None and state != geo_state:
+            detail = f"{state} (zip {zip_prefix} is {geo_state})"
+            issues.append(_issue(obj, legacy_id, "ZIP_STATE_MISMATCH", state_f, detail))
+        if city is not None and match == "none":
+            issues.append(_issue(obj, legacy_id, "CITY_ZIP_MISMATCH", city_f, city))
     return issues
 
 
@@ -80,8 +90,9 @@ def check_min_value(df, obj, key, minimums):
     return issues
 
 
-def check_non_product(df, obj, key, spec, code_field="MATNR"):
+def check_non_product(df, obj, key, spec):
     """Postage, bank charges, test codes... are not products -> NON_PRODUCT (out of scope)."""
+    code_field = spec.get("field", "MATNR")
     patterns = [re.compile(p) for p in spec["patterns"]]
     issues = []
     for legacy_id, code in zip(df[key], df[code_field]):
@@ -112,8 +123,8 @@ def validate(df: pd.DataFrame, obj: str, rules: dict) -> pd.DataFrame:
     issues = []
     issues += check_mandatory(df, obj, key, r.get("mandatory", []))
     issues += check_formats(df, obj, key, r.get("formats", {}))
-    if "postal_code" in r:
-        issues += check_postal_codes(df, obj, key, r["postal_code"], rules["postal_formats"])
+    if "address" in r:
+        issues += check_address(df, obj, key, r["address"])
     issues += check_max_length(df, obj, key, r.get("max_length", {}))
     issues += check_allowed_values(df, obj, key, r.get("allowed_values", {}))
     issues += check_min_value(df, obj, key, r.get("min_value", {}))

@@ -1,62 +1,75 @@
 # ---------------------------------------------------------------------------
 # MigrateRight data-quality rules  (business-editable: no code change needed)
 #
-# Each object (customer / vendor / material) lists:
+# Case study sources (all real, public):
+#   customer = Olist customers (Brazil)     vendor = Olist sellers (Brazil)
+#   material = Online Retail II stock codes (UK)
+#
+# Each object lists:
 #   key            legacy primary key
 #   mandatory      fields that must be filled, else record -> quarantine
 #   formats        regex checks, applied only when the field is filled
 #   max_length     target field lengths in S/4HANA (longer -> quarantine)
-#   allowed_values field -> list of allowed values (checked after value mapping)
+#   allowed_values field -> list of allowed values
+#   address        check zip prefix / city / state against the geolocation reference
 #   obsolete       when a legacy record is out of scope (not migrated)
 #   dedup          how duplicates are found and which record survives
 # Reason codes written to the quarantine table are shown in [brackets].
+#
+# NOT APPLICABLE to this source: e-mail, phone, name and tax-number rules.
+# Olist publishes no names, e-mails, phones or CPF/CNPJ tax numbers (anonymised),
+# so those rules are not configured. In a real ECC extract they would be:
+#   EMAIL: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'   TELF1: E.164 '^\+[1-9][0-9]{8,14}$'
 # ---------------------------------------------------------------------------
+
+brazil_states: &UF [AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR,
+                    RJ, RN, RO, RR, RS, SC, SE, SP, TO]
 
 customer:
   key: KUNNR
-  mandatory: [KUNNR, NAME1, STRAS, ORT01, PSTLZ, LAND1]          # [MISSING_MANDATORY]
+  mandatory: [KUNNR, UNIQUE_ID, PSTLZ, ORT01, REGIO]                 # [MISSING_MANDATORY]
   formats:
-    EMAIL: {regex: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$', reason: INVALID_EMAIL}
-    TELF1: {regex: '^\+[1-9][0-9]{8,14}$', reason: INVALID_PHONE}   # E.164 after cleansing
-  postal_code: {field: PSTLZ, country_field: LAND1, reason: INVALID_POSTAL_CODE}
-  max_length: {NAME1: 40, STRAS: 60, ORT01: 40}                   # [FIELD_TOO_LONG]
+    PSTLZ: {regex: '^[0-9]{5}$', reason: INVALID_POSTAL_CODE}       # 5-digit CEP prefix
+  max_length: {ORT01: 40}                                           # [FIELD_TOO_LONG]
   allowed_values:
-    LAND1: {values: [GB, DE, FR, NL, ES, IE, US, IN], reason: INVALID_COUNTRY}
-    KTOKD: {values: [Z001, Z002], reason: INVALID_ACCOUNT_GROUP}
-  obsolete:                                                        # [OBSOLETE]
-    deletion_flag_field: LOEVM       # 'X' = flagged for deletion in ECC
+    REGIO: {values: *UF, reason: INVALID_STATE}
+  address:
+    zip_field: PSTLZ
+    city_field: ORT01
+    state_field: REGIO
+    city_fuzzy_threshold: 85         # rapidfuzz ratio to accept a misspelt city
+    # [ZIP_NOT_FOUND] zip prefix not in the reference, [ZIP_STATE_MISMATCH] zip belongs to
+    # another state, [CITY_ZIP_MISMATCH] city is not a city of that zip prefix
+  obsolete:                                                          # [OBSOLETE]
     last_activity_field: LAST_ACTIVITY
-    cutoff_date: "2019-01-01"        # no business since this date -> not migrated
+    cutoff_date: "2017-01-01"        # no order since then -> not migrated
   dedup:
-    block_on: [LAND1]                # only compare records in the same country
-    name_field: NAME1
-    name_threshold: 90               # rapidfuzz token_sort_ratio on cleaned names
-    support_fields: [ORT01, PSTLZ, EMAIL, TELF1]
-    min_support_matches: 2           # plus at least two equal: city, postcode, e-mail, phone
-    survivorship: [completeness, ERDAT]   # most complete record wins, then newest
+    method: exact
+    key: UNIQUE_ID                   # legacy cross-reference: many customer_ids, one real customer
+    survivorship: [LAST_ACTIVITY]    # newest order = most recent address survives
+  location_matcher:                  # evaluated against UNIQUE_ID, NOT used to merge (see README)
+    block_on: PSTLZ
+    city_field: CITY_STD
+    city_threshold: 90
 
 vendor:
   key: LIFNR
-  mandatory: [LIFNR, NAME1, STRAS, ORT01, PSTLZ, LAND1]
+  mandatory: [LIFNR, PSTLZ, ORT01, REGIO]
   formats:
-    EMAIL: {regex: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$', reason: INVALID_EMAIL}
-    TELF1: {regex: '^\+[1-9][0-9]{8,14}$', reason: INVALID_PHONE}
-  postal_code: {field: PSTLZ, country_field: LAND1, reason: INVALID_POSTAL_CODE}
-  max_length: {NAME1: 40, STRAS: 60, ORT01: 40}
+    PSTLZ: {regex: '^[0-9]{5}$', reason: INVALID_POSTAL_CODE}
+  max_length: {ORT01: 40}
   allowed_values:
-    LAND1: {values: [GB, DE, FR, NL, ES, IE, US, IN], reason: INVALID_COUNTRY}
-    KTOKK: {values: [Z100, Z200], reason: INVALID_ACCOUNT_GROUP}
+    REGIO: {values: *UF, reason: INVALID_STATE}
+  address:
+    zip_field: PSTLZ
+    city_field: ORT01
+    state_field: REGIO
+    city_fuzzy_threshold: 85
   obsolete:
-    deletion_flag_field: LOEVM
     last_activity_field: LAST_ACTIVITY
-    cutoff_date: "2019-01-01"
+    cutoff_date: "2017-07-01"        # no sale in the last ~14 months of the extract
   dedup:
-    block_on: [LAND1]
-    name_field: NAME1
-    name_threshold: 90
-    support_fields: [ORT01, PSTLZ, EMAIL, TELF1]
-    min_support_matches: 2
-    survivorship: [completeness, ERDAT]
+    method: none                     # seller_id is unique; no name/tax id to match on
 
 material:
   key: MATNR
@@ -72,29 +85,13 @@ material:
     STPRS: {min: 0.01, reason: MISSING_PRICE}   # no positive sales price ever recorded
   non_product_codes:                            # postage, fees, adjustments, tests [NON_PRODUCT]
     reason: NON_PRODUCT
+    field: MATNR
     patterns: ['^POST$', '^DOT$', '^C2$', '^M$', '^D$', '^S$', '^B$', '^CRUK$', '^PADS$',
                '^C3$', '^GIFT$', '^BANK CHARGES$', '^AMAZONFEE$', '^ADJUST', '^TEST', '^GIFT_']
   obsolete:
     last_activity_field: LAST_SOLD
     cutoff_date: "2010-12-01"        # not sold in the final 12 months of the extract
   dedup:
-    exact_key: MATNR                 # legacy codes differing only in case (85123A vs 85123a)
+    method: exact
+    key: MATNR                       # legacy codes differing only in case (85123A vs 85123a)
     survivorship: [TXN_COUNT]        # the code with the most sales history survives
-
-# Postal-code patterns per ISO country (checked after country value mapping)
-postal_formats:
-  GB: '^[A-Z]{1,2}[0-9][A-Z0-9]? [0-9][A-Z]{2}$'
-  DE: '^[0-9]{5}$'
-  FR: '^[0-9]{5}$'
-  ES: '^[0-9]{5}$'
-  NL: '^[0-9]{4} [A-Z]{2}$'
-  IE: '^[A-Z][0-9]{2} [A-Z0-9]{4}$'
-  US: '^[0-9]{5}(-[0-9]{4})?$'
-  IN: '^[1-9][0-9]{5}$'
-
-# International dialling codes used to turn local phone numbers into E.164
-phone_country_codes: {GB: "44", DE: "49", FR: "33", ES: "34", NL: "31", IE: "353", US: "1", IN: "91"}
-
-# Words ignored when comparing names for duplicates ("Acme Ltd" == "ACME Limited")
-legal_suffixes: [ltd, limited, plc, gmbh, ag, kg, sarl, sas, sa, bv, nv, sl, inc, incorporated,
-                 llc, corp, co, company, pvt, private, teoranta, teo, the, and]

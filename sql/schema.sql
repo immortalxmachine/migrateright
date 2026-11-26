@@ -8,9 +8,10 @@ CREATE TABLE tgt_but000 (            -- BP general data
     partner     VARCHAR(10) PRIMARY KEY,
     bu_type     VARCHAR(1)  NOT NULL, -- 1 person, 2 organisation
     bu_group    VARCHAR(4),           -- BP grouping (number range / account group)
-    name_org1   VARCHAR(40) NOT NULL,
-    name_org2   VARCHAR(40),
-    bpext       VARCHAR(20),          -- external / legacy number
+    name_first  VARCHAR(40),          -- person names: not in the Olist source (left empty)
+    name_last   VARCHAR(40),
+    name_org1   VARCHAR(40),          -- organisation name: not in the Olist source (left empty)
+    bpext       VARCHAR(20),          -- external number (Olist ids are 32 chars -> CVI link tables)
     crdat       VARCHAR(10)
 );
 
@@ -24,10 +25,10 @@ CREATE TABLE tgt_but020 (            -- BP -> address link
 DROP TABLE IF EXISTS tgt_adrc;
 CREATE TABLE tgt_adrc (              -- central address (phone/e-mail simplified from ADR2/ADR6)
     addrnumber  VARCHAR(10) PRIMARY KEY,
-    name1       VARCHAR(40),
     street      VARCHAR(60),
     city1       VARCHAR(40),
     post_code1  VARCHAR(10),
+    region      VARCHAR(3),           -- Brazilian state (UF)
     country     VARCHAR(3),
     tel_number  VARCHAR(30),
     smtp_addr   VARCHAR(241)
@@ -43,13 +44,13 @@ CREATE TABLE tgt_but100 (            -- BP roles
 DROP TABLE IF EXISTS tgt_cvi_cust_link;
 CREATE TABLE tgt_cvi_cust_link (     -- legacy customer number -> BP
     partner     VARCHAR(10) NOT NULL,
-    kunnr       VARCHAR(10) PRIMARY KEY
+    kunnr       VARCHAR(32) PRIMARY KEY   -- widened: Olist customer ids are 32-char hashes
 );
 
 DROP TABLE IF EXISTS tgt_cvi_vend_link;
 CREATE TABLE tgt_cvi_vend_link (     -- legacy vendor number -> BP
     partner     VARCHAR(10) NOT NULL,
-    lifnr       VARCHAR(10) PRIMARY KEY
+    lifnr       VARCHAR(32) PRIMARY KEY   -- widened: Olist seller ids are 32-char hashes
 );
 
 -- ===== Product master =======================================================
@@ -96,10 +97,4 @@ CREATE TABLE mig_merge_log (         -- duplicates merged into a survivor
     merged_id    VARCHAR(40) NOT NULL,
     score        NUMERIC(5, 1),
     match_reason VARCHAR(120)
-);
-
-DROP TABLE IF EXISTS mig_shared_bp;
-CREATE TABLE mig_shared_bp (         -- vendors that re-used a customer's BP (CVI)
-    partner     VARCHAR(10) NOT NULL,
-    vendor_id   VARCHAR(10) NOT NULL
 );

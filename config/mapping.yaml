@@ -1,69 +1,38 @@
 # ---------------------------------------------------------------------------
-# MigrateRight field & value mapping: legacy SAP ECC -> SAP S/4HANA
+# MigrateRight field & value mapping: legacy ECC-style extract -> SAP S/4HANA
 #
 #   Customer (KNA1) and Vendor (LFA1) both become a Business Partner:
 #     BUT000  BP general data (one row per partner)
 #     BUT020  BP -> address link
-#     ADRC    address (simplified: phone/e-mail kept here; in S/4 they sit in ADR2/ADR6)
+#     ADRC    address
 #     BUT100  BP roles: FLCU01 = customer, FLVN01 = vendor
 #     CVI_CUST_LINK / CVI_VEND_LINK  legacy number -> BP (Customer-Vendor Integration)
 #   Material (MARA/MAKT in ECC) stays a product master in S/4HANA:
 #     MARA general data, MAKT description, MBEW valuation (standard price)
 #
-# Column spec:  {source: FIELD}  copy a cleansed legacy field
-#               {constant: X}    fixed value
+# Column spec:  {source: FIELD}           copy a cleansed legacy field
+#               {constant: X}             fixed value
 #               {generated: partner | address}  number assigned by the loader
-#               value_map: NAME  translate through value_maps below
+#               {not_in_source: "why"}    target field left EMPTY - the case-study source
+#                                         does not have it; it would come from the legacy system
+#               value_map: NAME           translate through value_maps below
+# Nothing is invented: Olist is anonymised, so names, street, phone, e-mail and
+# tax numbers stay empty in the target and are listed in the README.
 # ---------------------------------------------------------------------------
 
-# Value maps are applied during cleansing (before validation), so "UK" is fixed
-# to "GB" instead of being rejected. Keys are compared in UPPER CASE.
 value_maps:
-  country:
-    UK: GB
-    UNITED KINGDOM: GB
-    GREAT BRITAIN: GB
-    GBR: GB
-    ENGLAND: GB
-    GERMANY: DE
-    DEUTSCHLAND: DE
-    DEU: DE
-    FRANCE: FR
-    FRA: FR
-    NETHERLANDS: NL
-    HOLLAND: NL
-    NLD: NL
-    SPAIN: ES
-    ESP: ES
-    ESPANA: ES
-    IRELAND: IE
-    EIRE: IE
-    IRL: IE
-    USA: US
-    UNITED STATES: US
-    U.S.A.: US
-    INDIA: IN
-    IND: IN
   uom:            # ECC internal (German) unit keys -> S/4HANA ISO-style units
     ST: PC        # Stueck = piece
     STK: PC
     EA: PC
     SET: SET
     PAK: PAC      # Packung = pack
-  customer_account_group:   # ECC KNA1-KTOKD -> BP grouping
-    Z001: BPCU    # domestic customer
-    Z002: BPCU    # export customer
-  vendor_account_group:     # ECC LFA1-KTOKK -> BP grouping
-    Z100: BPVN    # trade vendor
-    Z200: BPVN    # service vendor
-  material_type:            # derived legacy MTART -> S/4HANA product type
+  material_type:  # derived legacy MTART -> S/4HANA product type
     HAWA: HAWA    # trading goods
     DIEN: DIEN    # service
 
 # Which legacy fields get a value map during cleansing
 cleanse_value_maps:
-  customer: {LAND1: country}
-  vendor: {LAND1: country}
   material: {MEINS: uom}
 
 objects:
@@ -74,24 +43,25 @@ objects:
     tables:
       BUT000:
         PARTNER: {generated: partner}
-        BU_TYPE: {constant: "2"}                 # 2 = organisation
-        BU_GROUP: {source: KTOKD, value_map: customer_account_group}
-        NAME_ORG1: {source: NAME1}
-        NAME_ORG2: {source: NAME2}
-        BPEXT: {source: KUNNR}                   # legacy number kept for traceability
+        BU_TYPE: {constant: "1"}                 # 1 = person (Olist customers are consumers)
+        BU_GROUP: {constant: "BPCU"}             # BP grouping for customers
+        NAME_FIRST: {not_in_source: "KNA1-NAME1 in the real legacy system (anonymised in Olist)"}
+        NAME_LAST: {not_in_source: "KNA1-NAME1 in the real legacy system (anonymised in Olist)"}
+        NAME_ORG1: {not_in_source: "organisations only"}
+        BPEXT: {not_in_source: "CHAR 20 - Olist ids are 32-char hashes; kept in CVI_CUST_LINK"}
         CRDAT: {source: ERDAT}
       BUT020:
         PARTNER: {generated: partner}
         ADDRNUMBER: {generated: address}
       ADRC:
         ADDRNUMBER: {generated: address}
-        NAME1: {source: NAME1}
-        STREET: {source: STRAS}
-        CITY1: {source: ORT01}
-        POST_CODE1: {source: PSTLZ}
-        COUNTRY: {source: LAND1}
-        TEL_NUMBER: {source: TELF1}
-        SMTP_ADDR: {source: EMAIL}
+        STREET: {not_in_source: "KNA1-STRAS (not published by Olist)"}
+        CITY1: {source: CITY_STD}                # city standardised against geolocation
+        POST_CODE1: {source: PSTLZ}              # 5-digit CEP prefix; full 8-digit CEP not in source
+        REGION: {source: REGIO}
+        COUNTRY: {constant: "BR"}
+        TEL_NUMBER: {not_in_source: "KNA1-TELF1 (not published by Olist)"}
+        SMTP_ADDR: {not_in_source: "ADR6-SMTP_ADDR (not published by Olist)"}
 
   vendor:
     role: FLVN01
@@ -100,24 +70,25 @@ objects:
     tables:
       BUT000:
         PARTNER: {generated: partner}
-        BU_TYPE: {constant: "2"}
-        BU_GROUP: {source: KTOKK, value_map: vendor_account_group}
-        NAME_ORG1: {source: NAME1}
-        NAME_ORG2: {source: NAME2}
-        BPEXT: {source: LIFNR}
+        BU_TYPE: {constant: "2"}                 # 2 = organisation (sellers are companies)
+        BU_GROUP: {constant: "BPVN"}             # BP grouping for vendors
+        NAME_FIRST: {not_in_source: "persons only"}
+        NAME_LAST: {not_in_source: "persons only"}
+        NAME_ORG1: {not_in_source: "LFA1-NAME1 in the real legacy system (anonymised in Olist)"}
+        BPEXT: {not_in_source: "CHAR 20 - Olist ids are 32-char hashes; kept in CVI_VEND_LINK"}
         CRDAT: {source: ERDAT}
       BUT020:
         PARTNER: {generated: partner}
         ADDRNUMBER: {generated: address}
       ADRC:
         ADDRNUMBER: {generated: address}
-        NAME1: {source: NAME1}
-        STREET: {source: STRAS}
-        CITY1: {source: ORT01}
+        STREET: {not_in_source: "LFA1-STRAS (not published by Olist)"}
+        CITY1: {source: CITY_STD}
         POST_CODE1: {source: PSTLZ}
-        COUNTRY: {source: LAND1}
-        TEL_NUMBER: {source: TELF1}
-        SMTP_ADDR: {source: EMAIL}
+        REGION: {source: REGIO}
+        COUNTRY: {constant: "BR"}
+        TEL_NUMBER: {not_in_source: "LFA1-TELF1 (not published by Olist)"}
+        SMTP_ADDR: {not_in_source: "ADR6-SMTP_ADDR (not published by Olist)"}
 
   material:
     tables:
