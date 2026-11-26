@@ -20,5 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Note: the Online Retail II data in data/legacy/mara_legacy.csv is derived from a
-CC BY 4.0 dataset (Daqing Chen, UCI Machine Learning Repository); see README.
+Note: the data files in data/legacy/ are NOT covered by this licence. mara_legacy.csv is
+derived from Online Retail II (CC BY 4.0, Daqing Chen, UCI ML Repository); kna1_legacy.csv,
+lfa1_legacy.csv and geo_reference.csv are derived from the Olist Brazilian E-Commerce
+Public Dataset (CC BY-NC-SA 4.0, Kaggle olistbr/brazilian-ecommerce). See README.
