@@ -2,40 +2,41 @@
 
 import pandas as pd
 
-from src.mapping import map_business_partners, map_materials
+from src.mapping import map_business_partners, map_materials, unmapped_fields
 
 
-def partner(legacy_id, name, country="DE", postcode="20095"):
-    return {"LEGACY_ID": legacy_id, "KUNNR": legacy_id, "LIFNR": legacy_id, "NAME1": name,
-            "NAME2": None, "STRAS": "Gartenweg 2", "ORT01": "Hamburg", "PSTLZ": postcode,
-            "LAND1": country, "TELF1": "+494098765432",
-            "EMAIL": "info@x.example", "KTOKD": "Z002", "KTOKK": "Z100", "ERDAT": "2012-06-01"}
+def partner(legacy_id, city="São Paulo", zip_prefix="01001", state="SP"):
+    return {"LEGACY_ID": legacy_id, "KUNNR": legacy_id, "LIFNR": legacy_id, "PSTLZ": zip_prefix,
+            "ORT01": "sao paulo", "CITY_STD": city, "REGIO": state, "ERDAT": "2017-05-01"}
 
 
-def test_customer_maps_to_but000_adrc_and_role(mapping):
-    customers = pd.DataFrame([partner("0000000008", "Beta Kitchen GmbH")])
-    tables, _ = map_business_partners(customers, customers.iloc[0:0], mapping, ["gmbh"])
+def test_customer_maps_to_person_bp_with_address_and_role(mapping):
+    customers = pd.DataFrame([partner("c1")])
+    tables = map_business_partners(customers, customers.iloc[0:0], mapping)
     but000 = tables["BUT000"].iloc[0]
-    assert but000["BU_TYPE"] == "2"                    # organisation
-    assert but000["BU_GROUP"] == "BPCU"                # KTOKD Z002 -> BP grouping
-    assert but000["NAME_ORG1"] == "Beta Kitchen GmbH"
-    assert but000["BPEXT"] == "0000000008"             # legacy number kept
+    assert but000["BU_TYPE"] == "1" and but000["BU_GROUP"] == "BPCU"
+    assert but000["NAME_FIRST"] is None and but000["NAME_LAST"] is None      # not in source: left empty
+    assert but000["CRDAT"] == "2017-05-01"
     adrc = tables["ADRC"].iloc[0]
-    assert adrc["COUNTRY"] == "DE" and adrc["POST_CODE1"] == "20095"
+    assert adrc["CITY1"] == "São Paulo"          # standardised city, not the raw text
+    assert adrc["POST_CODE1"] == "01001" and adrc["REGION"] == "SP" and adrc["COUNTRY"] == "BR"
+    assert adrc["TEL_NUMBER"] is None and adrc["SMTP_ADDR"] is None and adrc["STREET"] is None
     assert tables["BUT020"].iloc[0]["ADDRNUMBER"] == adrc["ADDRNUMBER"]
     assert list(tables["BUT100"]["RLTYP"]) == ["FLCU01"]
-    assert tables["CVI_CUST_LINK"].iloc[0]["KUNNR"] == "0000000008"
+    assert tables["CVI_CUST_LINK"].iloc[0]["KUNNR"] == "c1"
 
 
-def test_customer_and_vendor_share_one_business_partner(mapping):
-    customers = pd.DataFrame([partner("0000000008", "Beta Kitchen GmbH")])
-    vendors = pd.DataFrame([partner("0000000102", "Beta Kitchen G.m.b.H."),
-                            partner("0000000101", "Hotel Packaging Ltd", "GB", "BS2 0AA")])
-    tables, shared = map_business_partners(customers, vendors, mapping, ["gmbh", "ltd"])
-    assert len(tables["BUT000"]) == 2                  # 3 legacy records -> 2 partners
-    assert len(shared) == 1
-    roles = tables["BUT100"].groupby("PARTNER")["RLTYP"].apply(sorted).tolist()
-    assert ["FLCU01", "FLVN01"] in roles               # one BP carries both roles
+def test_vendor_is_organisation_with_vendor_role(mapping):
+    vendors = pd.DataFrame([partner("s1"), partner("s2", "Campinas", "13023")])
+    tables = map_business_partners(vendors.iloc[0:0], vendors, mapping)
+    assert list(tables["BUT000"]["BU_TYPE"]) == ["2", "2"]
+    assert list(tables["BUT100"]["RLTYP"]) == ["FLVN01", "FLVN01"]
+    assert tables["BUT000"]["PARTNER"].is_unique
+
+
+def test_unmapped_fields_are_documented(mapping):
+    gaps = {(g["object"], g["table"], g["field"]) for g in unmapped_fields(mapping)}
+    assert ("customer", "ADRC", "SMTP_ADDR") in gaps and ("vendor", "BUT000", "NAME_ORG1") in gaps
 
 
 def test_material_maps_to_mara_makt_mbew(mapping):

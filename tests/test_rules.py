@@ -3,9 +3,12 @@
 import pandas as pd
 
 from src import rules as r
+from src.address import GeoReference
 from src.cleanse import cleanse
-from src.extract import load_legacy
+from src.extract import load_geo_reference, load_legacy
 from tests.conftest import FIXTURES
+
+GEO = GeoReference(load_geo_reference(FIXTURES))
 
 
 def frame(**cols):
@@ -21,40 +24,35 @@ def hits(issues):
 
 
 def test_mandatory():
-    df = frame(NAME1=["Acme", None])
-    assert hits(r.check_mandatory(df, "customer", "LEGACY_ID", ["NAME1"])) == [("ID1", "MISSING_MANDATORY")]
+    df = frame(ORT01=["campinas", None])
+    assert hits(r.check_mandatory(df, "customer", "LEGACY_ID", ["ORT01"])) == [("ID1", "MISSING_MANDATORY")]
 
 
-def test_email_format(rules):
-    df = frame(EMAIL=["info@acme.example", "bad.email", None])
-    spec = {"EMAIL": rules["customer"]["formats"]["EMAIL"]}
-    # an empty optional e-mail is fine; only the malformed one fails
-    assert hits(r.check_formats(df, "customer", "LEGACY_ID", spec)) == [("ID1", "INVALID_EMAIL")]
+def test_postal_code_format(rules):
+    df = frame(PSTLZ=["01001", "1234X", None])
+    issues = r.check_formats(df, "customer", "LEGACY_ID", rules["customer"]["formats"])
+    assert hits(issues) == [("ID1", "INVALID_POSTAL_CODE")]        # empty is MISSING_MANDATORY's job
 
 
-def test_phone_format(rules):
-    df = frame(TELF1=["+442079460123", "+4412345", "N/A"])
-    spec = {"TELF1": rules["customer"]["formats"]["TELF1"]}
-    assert hits(r.check_formats(df, "customer", "LEGACY_ID", spec)) == [
-        ("ID1", "INVALID_PHONE"), ("ID2", "INVALID_PHONE")]
+def test_allowed_state(rules):
+    df = frame(REGIO=["SP", "XX"])
+    spec = {"REGIO": rules["customer"]["allowed_values"]["REGIO"]}
+    assert hits(r.check_allowed_values(df, "customer", "LEGACY_ID", spec)) == [("ID1", "INVALID_STATE")]
+    assert len(rules["customer"]["allowed_values"]["REGIO"]["values"]) == 27   # 26 states + DF
 
 
-def test_postal_code_per_country(rules):
-    df = frame(PSTLZ=["SW1A 1AA", "20095", "1234", "ABC"], LAND1=["GB", "DE", "DE", "GB"])
-    issues = r.check_postal_codes(df, "customer", "LEGACY_ID", rules["customer"]["postal_code"],
-                                  rules["postal_formats"])
-    assert hits(issues) == [("ID2", "INVALID_POSTAL_CODE"), ("ID3", "INVALID_POSTAL_CODE")]
-
-
-def test_allowed_country(rules):
-    df = frame(LAND1=["GB", "Atlantis"])
-    spec = {"LAND1": rules["customer"]["allowed_values"]["LAND1"]}
-    assert hits(r.check_allowed_values(df, "customer", "LEGACY_ID", spec)) == [("ID1", "INVALID_COUNTRY")]
+def test_address_rules():
+    df = frame(PSTLZ=["01001", "99999", "88301", "01001"], ORT01=["sao paulo", "x", "itajai", "sp"],
+               REGIO=["SP", "SP", "SP", "SP"],
+               GEO_REGIO=["SP", None, "SC", "SP"], CITY_MATCH=["exact", "none", "exact", "none"])
+    spec = {"zip_field": "PSTLZ", "city_field": "ORT01", "state_field": "REGIO"}
+    assert hits(r.check_address(df, "vendor", "LEGACY_ID", spec)) == [
+        ("ID1", "ZIP_NOT_FOUND"), ("ID2", "ZIP_STATE_MISMATCH"), ("ID3", "CITY_ZIP_MISMATCH")]
 
 
 def test_max_length():
-    df = frame(NAME1=["Short", "X" * 41])
-    assert hits(r.check_max_length(df, "customer", "LEGACY_ID", {"NAME1": 40})) == [("ID1", "FIELD_TOO_LONG")]
+    df = frame(ORT01=["campinas", "X" * 41])
+    assert hits(r.check_max_length(df, "customer", "LEGACY_ID", {"ORT01": 40})) == [("ID1", "FIELD_TOO_LONG")]
 
 
 def test_min_price(rules):
@@ -75,15 +73,20 @@ def test_material_description_rule(rules):
     assert hits(issues) == [("ID1", "INVALID_DESCRIPTION"), ("ID2", "INVALID_DESCRIPTION")]
 
 
-def test_obsolete_flag_and_date(rules):
-    df = frame(LOEVM=[None, "X", None], LAST_ACTIVITY=["2024-01-01", "2024-01-01", "2015-06-30"])
+def test_obsolete_by_last_activity(rules):
+    df = frame(LAST_ACTIVITY=["2018-01-01", "2016-06-30"])
     issues = r.check_obsolete(df, "customer", "LEGACY_ID", rules["customer"]["obsolete"])
-    assert hits(issues) == [("ID1", "OBSOLETE"), ("ID2", "OBSOLETE")]
+    assert hits(issues) == [("ID1", "OBSOLETE")]
 
 
-def test_validate_on_fixture(rules, mapping):
-    clean = cleanse(load_legacy("customer", FIXTURES), "customer", rules, mapping)
-    q = r.validate(clean, "customer", rules)
+def test_validate_vendor_fixture(rules, mapping):
+    clean = cleanse(load_legacy("vendor", FIXTURES), "vendor", rules, mapping, GEO)
+    q = r.validate(clean, "vendor", rules)
     assert list(q.columns) == r.QUARANTINE_COLUMNS
-    # 3 = missing name, 4 = bad e-mail, 6 = deletion flag, 7 = DE postcode '1234'
-    assert set(q["legacy_id"]) == {"0000000003", "0000000004", "0000000006", "0000000007"}
+    by_id = q.groupby("legacy_id")["rule"].apply(set).to_dict()
+    assert by_id == {
+        "s0000000000000000000000000000002": {"ZIP_STATE_MISMATCH"},        # zip of SC typed as SP
+        "s0000000000000000000000000000003": {"CITY_ZIP_MISMATCH"},         # city typed as 'sp'
+        "s0000000000000000000000000000006": {"OBSOLETE"},
+        "s0000000000000000000000000000007": {"INVALID_STATE", "ZIP_STATE_MISMATCH"},
+    }

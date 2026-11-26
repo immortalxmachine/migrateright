@@ -1,47 +1,49 @@
-"""Cleansing: whitespace, value maps, postcode and phone normalisation."""
+"""Cleansing and address standardisation."""
 
-from src.cleanse import apply_value_map, clean_text, cleanse, normalise_phone, normalise_postcode
-from src.extract import load_legacy
+from src.address import GeoReference, pretty_city
+from src.cleanse import apply_value_map, clean_text, cleanse, normalise_zip_prefix
+from src.extract import city_key, load_geo_reference, load_legacy
 from tests.conftest import FIXTURES
 
-CODES = {"GB": "44", "DE": "49", "US": "1"}
+GEO = GeoReference(load_geo_reference(FIXTURES))
 
 
 def test_clean_text_collapses_whitespace_and_blanks():
-    assert clean_text("  Acme   Gifts  Ltd ") == "Acme Gifts Ltd"
+    assert clean_text("  sao   paulo ") == "sao paulo"
     assert clean_text("   ") is None
     assert clean_text(None) is None
 
 
-def test_country_value_map_is_case_insensitive(mapping):
-    countries = mapping["value_maps"]["country"]
-    assert apply_value_map("UK", countries) == "GB"
-    assert apply_value_map("germany", countries) == "DE"
-    assert apply_value_map("gb", countries) == "GB"              # valid code typed in lower case
-    assert apply_value_map("Atlantis", countries) == "Atlantis"  # unknown -> left for validation
-
-
 def test_uom_value_map(mapping):
     assert apply_value_map("ST", mapping["value_maps"]["uom"]) == "PC"
-    assert apply_value_map("PAK", mapping["value_maps"]["uom"]) == "PAC"
+    assert apply_value_map("pak", mapping["value_maps"]["uom"]) == "PAC"
+    assert apply_value_map("XYZ", mapping["value_maps"]["uom"]) == "XYZ"   # unknown -> validation
 
 
-def test_postcode_normalisation():
-    assert normalise_postcode("sw1a1aa", "GB") == "SW1A 1AA"
-    assert normalise_postcode("1234ab", "NL") == "1234 AB"
-    assert normalise_postcode("20095", "DE") == "20095"
+def test_zip_prefix_gets_leading_zero_back():
+    assert normalise_zip_prefix("1001") == "01001"
+    assert normalise_zip_prefix("01001") == "01001"
+    assert normalise_zip_prefix("abc") == "abc"            # left for the format rule
 
 
-def test_phone_to_e164():
-    assert normalise_phone("020 7946 0123", "GB", CODES) == "+442079460123"
-    assert normalise_phone("0049 30 1234 5678", "DE", CODES) == "+493012345678"
-    assert normalise_phone("+1 (617) 555-0100", "US", CODES) == "+16175550100"
-    assert normalise_phone("N/A", "GB", CODES) == "N/A"          # left unchanged -> fails validation
+def test_city_key_and_pretty_city():
+    assert city_key("São  Paulo") == "sao paulo"
+    assert city_key("sao paulo / sp") == "sao paulo sp"
+    assert pretty_city("são joão del rei") == "São João del Rei"
+
+
+def test_city_matching_methods():
+    assert GEO.match_city("01001", "sao paulo", 85) == ("São Paulo", "exact", 100.0)
+    assert GEO.match_city("01001", "sao pauo", 85)[:2] == ("São Paulo", "fuzzy")
+    assert GEO.match_city("80240", "curitiba / pr", 85)[:2] == ("Curitiba", "cleaned")
+    assert GEO.match_city("01001", "sp", 85)[:2] == (None, "none")
+    assert GEO.match_city("99999", "campinas", 85)[:2] == (None, "none")     # unknown zip
 
 
 def test_cleanse_fixture_customers(rules, mapping):
-    clean = cleanse(load_legacy("customer", FIXTURES), "customer", rules, mapping)
-    row = clean.set_index("LEGACY_ID").loc["0000000002"]
-    assert row["LAND1"] == "GB"               # 'UK' fixed by the value map
-    assert row["PSTLZ"] == "SW1A 1AA"         # 'sw1a1aa' normalised
-    assert row["TELF1"] is None               # missing stays None (not NaN)
+    clean = cleanse(load_legacy("customer", FIXTURES), "customer", rules, mapping, GEO)
+    row = clean.set_index("LEGACY_ID").loc["c0000000000000000000000000000003"]
+    assert row["PSTLZ"] == "01001"            # leading zero restored
+    assert row["REGIO"] == "SP"               # 'sp' upper-cased
+    assert row["CITY_STD"] == "São Paulo"     # reference spelling
+    assert row["GEO_REGIO"] == "SP"

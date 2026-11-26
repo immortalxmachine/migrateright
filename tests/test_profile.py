@@ -19,12 +19,12 @@ def test_shape():
 
 
 def test_profile_measures(rules):
-    df = pd.DataFrame({"KUNNR": ["1", "2", "3", "4"], "NAME1": ["A", None, "C", "C"],
-                       "EMAIL": ["a@x.example", "bad", None, None],
-                       "LAND1": ["GB", "UK", "GB", "DE"]}, dtype=object)
+    df = pd.DataFrame({"KUNNR": ["1", "2", "3", "4"], "ORT01": ["campinas", None, "sao paulo", "sao paulo"],
+                       "PSTLZ": ["01001", "1001", None, None], "REGIO": ["SP", "sp", "SP", "RJ"]},
+                      dtype=object)
     p = profiling.profile_dataframe(df, "customer", rules).set_index("field")
-    assert p.loc["NAME1", "filled_pct"] == 75.0
-    assert p.loc["NAME1", "distinct"] == 2
-    assert p.loc["NAME1", "mandatory"] == "Y"
-    assert p.loc["EMAIL", "validity_pct"] == 50.0
-    assert p.loc["LAND1", "validity_pct"] == 75.0    # 'UK' is not an allowed code before mapping
+    assert p.loc["ORT01", "filled_pct"] == 75.0
+    assert p.loc["ORT01", "distinct"] == 2
+    assert p.loc["ORT01", "mandatory"] == "Y"
+    assert p.loc["PSTLZ", "validity_pct"] == 50.0       # '1001' lost its leading zero
+    assert p.loc["REGIO", "validity_pct"] == 75.0       # 'sp' is not an allowed code before cleansing
