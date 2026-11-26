@@ -1,0 +1,30 @@
+{
+  "title": "MigrateRight",
+  "tagline": "SAP ECC to S/4HANA master-data migration toolkit",
+  "description": "Profiling, YAML rule-based cleansing with quarantine, fuzzy de-duplication with survivorship, Business Partner and product mapping, load to PostgreSQL/SQLite and reconciliation reports (Excel + Streamlit) for business sign-off.",
+  "repo": "https://github.com/immortalxmachine/migrateright",
+  "tech": ["Python 3.11", "pandas", "SQL", "PostgreSQL", "SQLite", "SQLAlchemy", "rapidfuzz", "openpyxl", "Streamlit", "pytest", "ruff", "Docker", "GitHub Actions"],
+  "metrics": {
+    "records_in": 7044,
+    "records_loaded": 5245,
+    "records_quarantined": 1568,
+    "quarantined_pct": 22.26,
+    "duplicates_merged": 231,
+    "business_partners_created": 1298,
+    "shared_customer_vendor_bps": 20,
+    "reconciliation_checks_passed": "45/45"
+  },
+  "data": [
+    {"name": "Online Retail II (UCI ML Repository id 502 / Kaggle mashlyn/online-retail-ii-uci)", "license": "CC BY 4.0", "use": "real legacy material master"},
+    {"name": "Synthetic KNA1/LFA1 customers and vendors", "license": "generated", "use": "SYNTHETIC business partners with injected issues"}
+  ],
+  "images": [
+    {"src": "docs/screenshots/demo.gif", "caption": "Streamlit sign-off flow"},
+    {"src": "docs/screenshots/01-reconciliation.png", "caption": "Reconciliation dashboard"},
+    {"src": "docs/screenshots/02-rejections.png", "caption": "Rejected records (quarantine)"},
+    {"src": "docs/screenshots/03-excel-report.png", "caption": "Excel reconciliation workbook (rendered from the real .xlsx)"},
+    {"src": "docs/screenshots/04-profiling.png", "caption": "Legacy data profiling report"},
+    {"src": "docs/screenshots/05-terminal-run.png", "caption": "Terminal output of a pipeline run"},
+    {"src": "docs/screenshots/06-ci-passing.png", "caption": "GitHub Actions CI passing"}
+  ]
+}
