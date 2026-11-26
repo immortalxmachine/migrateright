@@ -23,22 +23,16 @@ from src.mapping import build_rows
 SAMPLE_SIZE = 20
 
 # How to read the loaded records back, keyed by legacy id (one SQL per object)
+BP_SQL = """
+        SELECT l.{key} AS legacy_id, b.bu_type, b.bu_group, b.name_first, b.name_last, b.name_org1, b.crdat,
+               a.street, a.city1, a.post_code1, a.region, a.country, a.tel_number, a.smtp_addr
+        FROM {link} l
+        JOIN tgt_but000 b ON b.partner = l.partner
+        JOIN tgt_but020 r ON r.partner = b.partner
+        JOIN tgt_adrc a ON a.addrnumber = r.addrnumber"""
 ACTUAL_SQL = {
-    "customer": """
-        SELECT l.kunnr AS legacy_id, b.name_org1, b.name_org2, b.bu_group, a.street, a.city1,
-               a.post_code1, a.country, a.tel_number, a.smtp_addr
-        FROM tgt_cvi_cust_link l
-        JOIN tgt_but000 b ON b.partner = l.partner
-        JOIN tgt_but020 r ON r.partner = b.partner
-        JOIN tgt_adrc a ON a.addrnumber = r.addrnumber""",
-    "vendor": """
-        SELECT l.lifnr AS legacy_id, b.name_org1, b.name_org2, b.bu_group, a.street, a.city1,
-               a.post_code1, a.country, a.tel_number, a.smtp_addr
-        FROM tgt_cvi_vend_link l
-        JOIN tgt_but000 b ON b.partner = l.partner
-        JOIN tgt_but020 r ON r.partner = b.partner
-        JOIN tgt_adrc a ON a.addrnumber = r.addrnumber
-        WHERE l.lifnr NOT IN (SELECT vendor_id FROM mig_shared_bp)""",
+    "customer": BP_SQL.format(key="kunnr", link="tgt_cvi_cust_link"),
+    "vendor": BP_SQL.format(key="lifnr", link="tgt_cvi_vend_link"),
     "material": """
         SELECT m.bismt AS legacy_id, m.matnr, m.mtart, m.meins, t.maktx, w.stprs
         FROM tgt_mara m
@@ -94,7 +88,7 @@ def check(obj, name, expected, actual, detail=""):
 
 
 def reconcile_object(engine: Engine, obj: str, records_in: int, survivors: pd.DataFrame,
-                     shared_ids: set, mapping: dict) -> tuple[list, pd.DataFrame]:
+                     mapping: dict) -> tuple[list, pd.DataFrame]:
     """All checks for one object. Returns (check rows, sample comparison)."""
     checks = []
     src_count = scalar(engine, f"SELECT COUNT(*) FROM src_{obj}")
@@ -121,15 +115,8 @@ def reconcile_object(engine: Engine, obj: str, records_in: int, survivors: pd.Da
     if obj in ROLE:
         roles = scalar(engine, f"SELECT COUNT(*) FROM tgt_but100 WHERE rltyp = '{ROLE[obj]}'")
         checks.append(check(obj, f"BP role {ROLE[obj]} assigned", len(survivors), roles))
-    if obj == "vendor":
-        both = scalar(engine, """SELECT COUNT(*) FROM mig_shared_bp s
-                                 JOIN tgt_but100 c ON c.partner = s.partner AND c.rltyp = 'FLCU01'
-                                 JOIN tgt_but100 v ON v.partner = s.partner AND v.rltyp = 'FLVN01'""")
-        checks.append(check(obj, "Shared customer/vendor BPs carry both roles", len(shared_ids), both,
-                            "one Business Partner, two roles (CVI)"))
-
     # ---- field-level checksums: expected (transformation output) vs loaded (SQL)
-    expected = expected_frame(survivors[~survivors["LEGACY_ID"].isin(shared_ids)], obj, mapping)
+    expected = expected_frame(survivors, obj, mapping)
     actual = read_sql(engine, ACTUAL_SQL[obj])
     for col in [c for c in actual.columns if c != "legacy_id"]:
         exp_n, exp_sum = checksum(expected[col])
@@ -157,18 +144,19 @@ def sample_comparison(engine, obj, expected, actual) -> pd.DataFrame:
     exp = expected.set_index("legacy_id")
     act = actual.set_index("legacy_id")
     # target column -> legacy column, for showing the raw value
-    legacy_of = {"name_org1": "name1", "name_org2": "name2", "bu_group": "ktokd" if obj == "customer" else "ktokk",
-                 "street": "stras", "city1": "ort01", "post_code1": "pstlz", "country": "land1",
-                 "tel_number": "telf1", "smtp_addr": "email", "matnr": "matnr", "mtart": "mtart",
-                 "meins": "meins", "maktx": "maktx", "stprs": "stprs"}
+    legacy_of = {"city1": "ort01", "post_code1": "pstlz", "region": "regio", "crdat": "erdat",
+                 "matnr": "matnr", "mtart": "mtart", "meins": "meins", "maktx": "maktx", "stprs": "stprs"}
     rows = []
     for legacy_id in ids:
         for col in act.columns:
-            legacy_val = raw.at[legacy_id, legacy_of[col]] if legacy_id in raw.index else None
+            source_col = legacy_of.get(col)          # None = constant / not in source
+            legacy_val = raw.at[legacy_id, source_col] if source_col and legacy_id in raw.index else None
             exp_val = normalise(exp.at[legacy_id, col])
             act_val = normalise(act.at[legacy_id, col]) if legacy_id in act.index else "<missing>"
             if exp_val != act_val:
                 result = "MISMATCH"
+            elif source_col is None:
+                result = "CONSTANT" if act_val else "NOT_IN_SOURCE"
             elif normalise(legacy_val) == act_val:
                 result = "MATCH"
             else:
@@ -199,7 +187,6 @@ def summarise(checks: pd.DataFrame, counts: dict) -> pd.DataFrame:
         rows.append({
             "object": obj, "records_in": c["records_in"], "loaded": c["loaded"],
             "quarantined": c["quarantined"], "duplicates_merged": c["merged"],
-            "shared_bp": c.get("shared_bp", 0),
             "rejected_pct": round(100 * c["quarantined"] / c["records_in"], 2),
             "checks_passed": passed, "checks_total": len(obj_checks),
             "status": "PASS" if passed == len(obj_checks) else "FAIL",

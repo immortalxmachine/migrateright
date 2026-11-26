@@ -97,14 +97,15 @@ def write_html_report(profiles: dict, raw: dict, path) -> None:
     parts = [f"<html><head><meta charset='utf-8'><title>MigrateRight - Data Profiling</title>"
              f"<style>{CSS}</style></head><body>",
              "<h1>Legacy data profiling report</h1>",
-             f"<div class='sub'>MigrateRight &middot; SAP ECC extract before cleansing &middot; "
+             f"<div class='sub'>MigrateRight case study &middot; legacy ECC-style extracts before cleansing &middot; "
              f"generated {datetime.now():%Y-%m-%d %H:%M}</div>"]
     for obj, prof in profiles.items():
         df = raw[obj]
         mandatory = prof[prof["mandatory"] == "Y"]
         complete_rows = df[list(mandatory["field"])].notna().all(axis=1).mean() * 100
-        label = {"customer": "Customers (KNA1, SYNTHETIC)", "vendor": "Vendors (LFA1, SYNTHETIC)",
-                 "material": "Materials (MARA/MAKT, real Online Retail II stock codes)"}[obj]
+        label = {"customer": "Customers (KNA1-like) - Olist customers, Brazil",
+                 "vendor": "Vendors (LFA1-like) - Olist sellers, Brazil",
+                 "material": "Materials (MARA/MAKT-like) - Online Retail II stock codes, UK"}[obj]
         parts.append(f"<h2>{label}</h2><div class='cards'>"
                      f"<div class='card'>Records<b>{len(df):,}</b></div>"
                      f"<div class='card'>Fields<b>{len(df.columns)}</b></div>"

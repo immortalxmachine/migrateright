@@ -12,13 +12,14 @@ from datetime import UTC, datetime
 import pandas as pd
 
 from src import profile as profiling  # our src/profile.py, not the stdlib module
+from src.address import GeoReference
 from src.cleanse import cleanse
 from src.config import METRICS_PATH, OBJECTS, REPORTS_DIR, get_engine, load_mapping, load_rules
 from src.dedup import deduplicate
-from src.evaluate import evaluate_detection
-from src.extract import load_legacy
+from src.evaluate import evaluate_findings
+from src.extract import load_geo_reference, load_legacy
 from src.load import load_all, run_ddl, stage_source
-from src.mapping import map_business_partners, map_materials
+from src.mapping import map_business_partners, map_materials, unmapped_fields
 from src.reconcile import reason_breakdown, reconcile_object, summarise
 from src.report_excel import build_workbook
 from src.rules import validate
@@ -38,8 +39,11 @@ def run(engine=None, legacy_folder=None, reports_dir=REPORTS_DIR, metrics_path=M
 
     # 1. EXTRACT ------------------------------------------------------------
     raw = {obj: load_legacy(obj, legacy_folder) for obj in OBJECTS}
+    geo_table = load_geo_reference(legacy_folder)
+    geo = GeoReference(geo_table)
     for obj in OBJECTS:
         log("EXTRACT", f"{obj:<9} {len(raw[obj]):>6,} legacy records")
+    log("EXTRACT", f"address reference: {len(geo.cities):,} zip prefixes")
 
     # 2. PROFILE (raw data, before any change) ------------------------------
     profiles = {obj: profiling.profile_dataframe(raw[obj], obj, rules) for obj in OBJECTS}
@@ -48,9 +52,10 @@ def run(engine=None, legacy_folder=None, reports_dir=REPORTS_DIR, metrics_path=M
                    "reports/profiling_report.html")
 
     # 3-5. CLEANSE -> VALIDATE -> DEDUP --------------------------------------
-    survivors, quarantine, merges, counts = {}, [], [], {}
+    survivors, quarantine, merges, counts, cleansed = {}, [], [], {}, {}
     for obj in OBJECTS:
-        clean = cleanse(raw[obj], obj, rules, mapping)
+        clean = cleanse(raw[obj], obj, rules, mapping, geo)
+        cleansed[obj] = clean
         issues = validate(clean, obj, rules)
         bad_ids = set(issues["legacy_id"])
         valid = clean[~clean["LEGACY_ID"].isin(bad_ids)]
@@ -66,27 +71,22 @@ def run(engine=None, legacy_folder=None, reports_dir=REPORTS_DIR, metrics_path=M
     merges = pd.concat(merges, ignore_index=True)
 
     # 6. MAP to S/4HANA structures -------------------------------------------
-    bp_tables, shared = map_business_partners(survivors["customer"], survivors["vendor"],
-                                              mapping, rules["legal_suffixes"])
+    bp_tables = map_business_partners(survivors["customer"], survivors["vendor"], mapping)
     product_tables = map_materials(survivors["material"], mapping)
-    counts["vendor"]["shared_bp"] = len(shared)
-    log("MAP", f"{len(bp_tables['BUT000']):,} business partners "
-               f"({len(shared)} customer+vendor shared), {len(product_tables['MARA']):,} products")
+    log("MAP", f"{len(bp_tables['BUT000']):,} business partners, {len(product_tables['MARA']):,} products, "
+               f"{len(unmapped_fields(mapping))} target fields left empty (not in source)")
 
     # 7. LOAD ----------------------------------------------------------------
     run_ddl(engine)
     for obj in OBJECTS:
         stage_source(engine, obj, raw[obj])
-    written = load_all(engine, {**bp_tables, **product_tables}, quarantine, merges, shared)
+    written = load_all(engine, {**bp_tables, **product_tables}, quarantine, merges)
     log("LOAD", ", ".join(f"{t}={n:,}" for t, n in written.items() if t.startswith("tgt_")))
 
     # 8. RECONCILE -----------------------------------------------------------
     checks, samples = [], []
-    shared_ids = set(shared["vendor_id"])
     for obj in OBJECTS:
-        obj_checks, sample = reconcile_object(engine, obj, counts[obj]["records_in"],
-                                              survivors[obj],
-                                              shared_ids if obj == "vendor" else set(), mapping)
+        obj_checks, sample = reconcile_object(engine, obj, counts[obj]["records_in"], survivors[obj], mapping)
         checks += obj_checks
         samples.append(sample)
     checks = pd.DataFrame(checks)
@@ -106,8 +106,12 @@ def run(engine=None, legacy_folder=None, reports_dir=REPORTS_DIR, metrics_path=M
     log("REPORT", "reports/reconciliation_report.xlsx")
 
     metrics = build_metrics(counts, reasons, summary, checks, backend, started)
-    if evaluate and legacy_folder is None:
-        metrics["detection_vs_injected_issues"] = evaluate_detection(quarantine, merges, shared, survivors)
+    metrics["unmapped_target_fields"] = unmapped_fields(mapping)
+    if evaluate:
+        metrics["real_data_findings"] = evaluate_findings(cleansed, rules)
+        loc = metrics["real_data_findings"]["location_only_matcher_vs_unique_id"]
+        log("EVALUATE", f"location-only duplicate matcher vs customer_unique_id: precision "
+                        f"{loc['precision_pct']}%, recall {loc['recall_pct']}%")
     metrics_path.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
     log("METRICS", f"metrics.json written - overall status {metrics['overall_status']}")
     for obj, c in counts.items():
@@ -130,9 +134,7 @@ def build_metrics(counts, reasons, summary, checks, backend, started) -> dict:
             "records_quarantined": total_q,
             "duplicates_merged": sum(c["merged"] for c in counts.values()),
             "quarantined_pct": round(100 * total_q / total_in, 2),
-            "business_partners_created": int(summary.loc[summary["object"] != "material", "loaded"].sum()
-                                             - counts["vendor"].get("shared_bp", 0)),
-            "shared_customer_vendor_bps": counts["vendor"].get("shared_bp", 0),
+            "business_partners_created": int(summary.loc[summary["object"] != "material", "loaded"].sum()),
         },
         "objects": {
             row["object"]: {

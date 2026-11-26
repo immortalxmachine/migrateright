@@ -54,14 +54,15 @@ metrics = load_metrics()
 
 # ---------------------------------------------------------------- sidebar
 st.sidebar.title("MigrateRight")
-st.sidebar.caption("SAP ECC → S/4HANA master-data migration")
+st.sidebar.caption("Case study: SAP ECC → S/4HANA master-data migration")
 page = st.sidebar.radio("View", ["Reconciliation", "Rejected records", "Duplicates merged",
                                  "Data profiling", "Sign-off"])
 st.sidebar.markdown("---")
 st.sidebar.write(f"**Target DB:** {engine.dialect.name}")
 if metrics:
     st.sidebar.write(f"**Run:** {metrics['generated_at'].replace('T', ' ')[:16]} UTC")
-st.sidebar.caption("Customers/vendors are SYNTHETIC. Materials: Online Retail II (UCI/Kaggle, CC BY 4.0).")
+st.sidebar.caption("Real public data. Customers/vendors: Olist Brazilian E-Commerce (Kaggle, CC BY-NC-SA 4.0). "
+                   "Materials: Online Retail II (UCI/Kaggle, CC BY 4.0).")
 
 # ---------------------------------------------------------------- pages
 if page == "Reconciliation":
@@ -88,7 +89,10 @@ if page == "Reconciliation":
     with right:
         st.subheader("Business Partners")
         st.metric("BPs created", f"{totals.get('business_partners_created', 0):,}")
-        st.metric("Customer + vendor in one BP (CVI)", totals.get("shared_customer_vendor_bps", 0))
+        loc = metrics.get("real_data_findings", {}).get("location_only_matcher_vs_unique_id", {})
+        if loc:
+            st.metric("Location-only dedup precision", f"{loc['precision_pct']}%",
+                      help="Pairs found by zip + city alone vs. the real customer_unique_id - why we merge on the id")
 
     st.subheader("Reconciliation checks")
     obj = st.selectbox("Object", list(OBJECT_LABEL), format_func=OBJECT_LABEL.get)
@@ -127,12 +131,12 @@ elif page == "Rejected records":
 
 elif page == "Duplicates merged":
     st.title("Duplicates merged")
-    st.caption("Fuzzy name match (rapidfuzz) + at least two equal supporting fields. "
-               "Survivor = most complete record, then newest.")
+    st.caption("Customers: many Olist customer_id rows belong to one customer_unique_id -> merged; survivor = "
+               "newest order (latest address). Materials: codes differing only in case; survivor = most sales.")
     merges = table("SELECT * FROM mig_merge_log")
     names = pd.concat([
-        table("SELECT kunnr AS id, name1 AS name FROM src_customer"),
-        table("SELECT lifnr AS id, name1 AS name FROM src_vendor"),
+        table("SELECT kunnr AS id, ort01 || ' ' || pstlz || ' (' || erdat || ')' AS name FROM src_customer"),
+        table("SELECT lifnr AS id, ort01 AS name FROM src_vendor"),
         table("SELECT matnr AS id, maktx AS name FROM src_material")])
     lookup = dict(zip(names["id"], names["name"]))
     merges["survivor_name"] = merges["survivor_id"].map(lookup)

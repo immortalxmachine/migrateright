@@ -81,7 +81,7 @@ def build_workbook(path, summary: pd.DataFrame, reasons: pd.DataFrame, checks: p
     ws["A1"] = "MigrateRight - ECC to S/4HANA master data reconciliation"
     ws["A1"].font = TITLE_FONT
     ws["A2"] = f"Run: {datetime.now():%Y-%m-%d %H:%M}   |   Target DB: {db_backend}   |   " \
-               "Customers/vendors are SYNTHETIC; materials from Online Retail II (CC BY 4.0)"
+               "Case study - customers/vendors: Olist (CC BY-NC-SA 4.0); materials: Online Retail II (CC BY 4.0)"
     ws["A2"].font = Font(italic=True, color="52606D")
     first, last = write_table(ws, summary, 4, "Records by object")
     colour_status(ws, col_of(summary, "status"), first, last)
