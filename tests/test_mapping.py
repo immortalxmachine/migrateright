@@ -7,7 +7,8 @@ from src.mapping import map_business_partners, map_materials
 
 def partner(legacy_id, name, country="DE", postcode="20095"):
     return {"LEGACY_ID": legacy_id, "KUNNR": legacy_id, "LIFNR": legacy_id, "NAME1": name,
-            "NAME2": None, "STRAS": "Gartenweg 2", "ORT01": "Hamburg", "PSTLZ": postcode, "LAND1": country, "TELF1": "+494098765432",
+            "NAME2": None, "STRAS": "Gartenweg 2", "ORT01": "Hamburg", "PSTLZ": postcode,
+            "LAND1": country, "TELF1": "+494098765432",
             "EMAIL": "info@x.example", "KTOKD": "Z002", "KTOKK": "Z100", "ERDAT": "2012-06-01"}
 
 
