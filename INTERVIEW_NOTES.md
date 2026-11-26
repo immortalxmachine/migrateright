@@ -1,131 +1,128 @@
 # MigrateRight – interview notes (20 Q&As)
 
-Numbers quoted are from the committed `metrics.json` (7,044 legacy records in, 5,245 loaded, 1,568 quarantined,
-231 duplicates merged, 45/45 reconciliation checks passed).
+Case study: a Brazilian retailer's customer and vendor master (real Olist data) and a UK retailer's product master
+(real Online Retail II data) migrated from legacy ECC-style extracts to S/4HANA. Numbers are from the committed
+`metrics.json`: 18,330 legacy records in, 16,167 loaded, 1,719 quarantined (9.38 %), 444 duplicates merged,
+12,240 Business Partners, 52/52 reconciliation checks passed.
 
 ### SAP background
 
 **1. What changes between SAP ECC and S/4HANA for master data?**
-S/4HANA runs only on the HANA database and simplifies the data model. For master data the big change is that the
-**Business Partner (BP)** is mandatory: customers (KNA1) and vendors (LFA1) are no longer maintained directly but
-through a BP with roles. Material numbers can be 40 characters (ECC: 18). In this project the targets are modelled
-in `sql/schema.sql` (BUT000, BUT020, ADRC, BUT100, CVI link tables, MARA, MAKT, MBEW).
+S/4HANA runs only on HANA and simplifies the data model. For master data the big change is the mandatory
+**Business Partner (BP)**: customers (KNA1) and vendors (LFA1) are maintained through a BP with roles. Material
+numbers can be 40 characters (ECC: 18). The target tables are modelled in `sql/schema.sql`
+(BUT000, BUT020, ADRC, BUT100, CVI link tables, MARA, MAKT, MBEW).
 
 **2. Why does the Business Partner replace separate customer and vendor masters?**
-One legal entity often is both customer and vendor. In ECC that meant two records with duplicated names and
-addresses that drift apart. The BP holds general data and address once (BUT000/ADRC) and adds **roles**
-(FLCU01 customer, FLVN01 vendor). Customer-Vendor Integration (CVI) keeps the old KNA1/LFA1 numbers linked
-(CVI_CUST_LINK/CVI_VEND_LINK). See `map_business_partners()` in `src/mapping.py`: 20 companies that existed as
-both a customer and a vendor became 20 BPs with two roles, so 1,318 survivors → 1,298 BPs.
+One legal entity is often both customer and vendor; in ECC that meant two records whose names and addresses drift
+apart. The BP holds general data and address once and adds **roles** (FLCU01 customer, FLVN01 vendor).
+Customer-Vendor Integration (CVI) keeps the legacy numbers linked (CVI_CUST_LINK / CVI_VEND_LINK) – see
+`map_business_partners()` in `src/mapping.py`. In this data there is no shared tax id or name between Olist
+customers and sellers, so I did **not** claim any customer+vendor BP; in a real Brazilian project the CNPJ/CPF tax
+number would be the key for that.
 
 **3. What are the phases of a data-migration project?**
-Typical: *analyse/scope* (which objects, which records are in scope) → *extract* → *profile* → *cleanse* →
-*map/transform* → *load* (mock loads 1, 2, 3, dress rehearsal, cut-over) → *reconcile and sign off*. MigrateRight
-implements one full mock-load cycle in `src/pipeline.py` and is designed to be re-run after every rule change.
+Scope → extract → profile → cleanse → map/transform → load (mock loads, dress rehearsal, cut-over) → reconcile and
+sign off. `src/pipeline.py` implements one full mock-load cycle and is re-run after every rule change.
 
 **4. What does SAP Migration Cockpit (LTMC/LTMOM, "Migrate Your Data") do, and how does this relate?**
-Migration Cockpit is SAP's standard tool: predefined *migration objects* (e.g. "Customer", "Supplier",
-"Product"), file or staging-table templates, field/value mapping, simulation, and posting through SAP APIs with
-SAP's own validations. LTMOM lets you adjust the objects. MigrateRight covers what happens **before and after**
-the cockpit: profiling, cleansing, dedup and an independent reconciliation. In a real project its cleansed output
-would fill the cockpit's staging tables instead of the simplified tables used here.
+It is SAP's standard tool: predefined migration objects (Customer, Supplier, Product…), file or staging-table
+templates, field/value mapping, simulation, and posting through SAP APIs with SAP's own checks; LTMOM adjusts the
+objects. MigrateRight covers what happens before and after it – profiling, cleansing, dedup and an independent
+reconciliation. In a real project its output would fill the cockpit's staging tables.
 
-### Profiling
+### Data and profiling
 
-**5. What do you profile and why before cleansing?**
-`profile_dataframe()` in `src/profile.py` measures per field: completeness, distinct values/uniqueness, validity
-against the rules (regex or allowed values), the most frequent "shapes" (`SW1A 1AA` → `AA9A 9AA`) and top values.
-It runs on the **raw** extract so the business sees the real starting point – e.g. LAND1 was only 87.5 % valid
-before value mapping because of `UK`, `Germany`, `DEU`.
+**5. Why Olist and Online Retail II, and what did you NOT have?**
+Both are real, public and licensed (Olist CC BY-NC-SA 4.0, Online Retail II CC BY 4.0). Olist is anonymised: no
+names, streets, phones, e-mails or CPF/CNPJ. Those S/4HANA fields are marked `not_in_source` in
+`config/mapping.yaml` and left empty – `unmapped_fields()` lists 14 of them in `metrics.json`. Inventing them would
+make the reconciliation meaningless.
 
-**6. What did profiling reveal in the real Online Retail II data?**
-355 stock codes never had a description (MISSING_MANDATORY), 374 never had a positive price, 173 codes differed
-only in case (`85123A` vs `85123a`), and some "descriptions" were stock-adjustment notes (`damaged`,
-`wet/rusty`) – caught by the `INVALID_DESCRIPTION` regex in `config/rules.yaml`.
+**6. What does profiling measure and what did it show?**
+`profile_dataframe()` in `src/profile.py` on the raw extract: completeness, uniqueness, validity against the rules,
+"shapes" (`99999`) and top values. It showed the seller city field is free text: `sp`, `sao paulo / sp`,
+`rio de janeiro \rio de janeiro`, even an e-mail address; in Online Retail II 355 stock codes have no description and
+374 never had a positive price.
 
-### Rules and cleansing
+**7. How did you make the 99k-row customer file small enough to commit for CI?**
+`in_sample()` in `src/extract.py` keeps 1 in 10 real customers by MD5 of `customer_unique_id`. Hashing the person
+id (not the row) keeps whole duplicate groups together, and the sample is identical on every machine. CI uses the
+committed extracts, so it needs no Kaggle credentials.
 
-**7. Why put rules in YAML instead of code?**
-So the business can own them. A data owner can change the obsolete cutoff, add a mandatory field or a country
-spelling in `config/rules.yaml` / `config/mapping.yaml` and re-run – no developer, no code review of Python.
-`validate()` in `src/rules.py` just loops over whatever is configured.
+### Rules, cleansing and address validation
 
-**8. What is the difference between cleansing and validation here?**
-Cleansing (`src/cleanse.py`) fixes only what is safe to fix automatically: whitespace, value maps (`UK` → `GB`,
-`ST` → `PC`), postcode spacing, phone to E.164. Validation (`src/rules.py`) then *judges* the cleansed value.
-Result: 200/200 injected country variants were fixed and loaded rather than rejected.
+**8. Why rules in YAML instead of code?**
+So the business owns them: obsolete cutoffs, the 27 valid UFs, the city fuzzy threshold and the dedup key live in
+`config/rules.yaml`; `validate()` in `src/rules.py` just loops over what is configured.
 
-**9. Why a quarantine table instead of dropping bad records?**
-Silent drops are the classic migration failure – nobody can explain the missing records at go-live.
-Every failure is written to `mig_quarantine` with object, legacy id, rule, field and value, and reconciliation
-proves `records_in = loaded + quarantined + merged`. The quarantine list goes back to the data owners to fix in
-ECC or to accept as out of scope (e.g. OBSOLETE).
+**9. How does address validation work?**
+`src/address.py` builds a reference from `olist_geolocation` (zip prefix → cities, state). For each record:
+exact city match for that zip prefix; else rapidfuzz ratio ≥ 85 (`sao pauo` → São Paulo); else retry on the text
+before `/ - , (` (`mogi das cruzes / sp`). Then `check_address()` quarantines ZIP_NOT_FOUND, ZIP_STATE_MISMATCH
+(e.g. SP typed for a Santa Catarina zip) and CITY_ZIP_MISMATCH. Vendors: 96.9 % exact, 47 auto-corrected,
+49 unmatched.
 
-**10. How do you handle obsolete records?**
-`check_obsolete()` in `src/rules.py`: deletion flag `LOEVM = 'X'` or no activity since a cutoff date from
-rules.yaml. For materials the cutoff is "not sold in the last 12 months of the extract" → 1,234 materials
-(23.27 %) not migrated. That's a business decision, so it's a config value, not code.
+**10. Cleansing vs validation?**
+Cleansing (`src/cleanse.py`) only fixes what is safe: whitespace, zip prefix back to 5 digits, state upper case,
+UoM value map, the reference spelling of the city. Validation judges the result. A city we cannot match is not
+"fixed" by guessing – it goes to quarantine.
 
-### De-duplication
+**11. Why a quarantine table instead of dropping bad records?**
+Silent drops are the classic migration failure. Every failure is a row in `mig_quarantine` (object, legacy id,
+rule, field, value), and reconciliation proves `records_in = loaded + quarantined + merged`.
 
-**11. How does the fuzzy matching work?**
-`find_duplicate_pairs()` in `src/dedup.py`: (1) **blocking** – only compare records in the same country;
-(2) **match key** – lower case, remove punctuation and legal suffixes (`Ltd`, `GmbH`, `S.A.R.L.`), also a
-truncated last word (`Limite`) because ECC names are cut at 35 chars; (3) rapidfuzz `token_sort_ratio` ≥ 90;
-(4) at least **two** supporting fields equal (city, postcode, e-mail, phone).
+**12. How do you handle obsolete records?**
+`check_obsolete()`: no activity since a cutoff from rules.yaml. Vendors with no sale since 2017-07-01 (303, 9.79 %),
+customers with no order since 2017-01-01 (39), materials not sold in the last 12 months (1,234, 23.27 %). It is a
+business decision, so it is configuration.
 
-**12. Why two supporting fields? Show me a false positive.**
-With one supporting field the run produced 2 false merges, e.g. "Pinecrest Lighting Supplies Ltd" vs
-"Pinecrest Living & Supplies Ltd" (score 92, same city London, different postcodes). Two fields gave
-120/120 injected pairs found and 0 false merges. `test_different_companies_not_merged` in `tests/test_dedup.py`
-locks this in. Thresholds are always a precision/recall trade-off; borderline scores should go to a review queue.
+### Duplicates and survivorship
 
-**13. What is survivorship?**
-Deciding which record of a duplicate group becomes the master. `pick_survivor()`: most complete record first,
-then newest `ERDAT`, then lowest legacy number (deterministic). `golden_record()` then fills the survivor's empty
+**13. Where do the real duplicates come from?**
+Olist creates a new `customer_id` per order; `customer_unique_id` identifies the person. In the extract 9,931 rows
+belong to 9,593 people → 333 merged by `deduplicate_exact()` in `src/dedup.py` (5 more duplicate rows were already
+quarantined). Materials: 111 codes that differ only in case (`85123A` / `85123a`).
+
+**14. What is survivorship here?**
+`pick_survivor()`: highest value of the configured fields wins – newest order for customers (most recent address),
+most sales history for materials – ties go to the lowest legacy id. `golden_record()` fills the survivor's empty
 fields from the other duplicates. Merged ids are logged in `mig_merge_log`, never deleted.
 
-**14. Why union-find?**
-Pairs are not groups: A~B and B~C means A, B and C are one company even if A and C score below the threshold.
-`UnionFind` in `src/dedup.py` turns pairs into clusters in near-linear time.
+**15. Could you have found the duplicates without customer_unique_id? Show me numbers.**
+`location_match_pairs()` (same zip prefix + rapidfuzz city ≥ 90 + same state) was measured against the real id in
+`src/evaluate.py`: **recall 90.58 %, precision 3.83 %** – 327 of 361 true pairs found but 8,530 pairs proposed.
+Many different people live in the same zip prefix. Without a name, e-mail or CPF, merging on location would destroy
+thousands of real customers, so the rule merges only on the cross-reference id. `test_location_matcher_has_false_positives`
+locks this in.
 
-### Mapping and load
+**16. When would fuzzy matching be the right tool?**
+On attributes that identify an entity: names, street + house number, e-mails, tax ids – with blocking, a score
+threshold, at least two agreeing fields, and a manual review band for borderline scores. Here rapidfuzz is used where
+it is safe: correcting city names against a closed reference list.
 
-**15. Walk me through the mapping of one customer.**
-`config/mapping.yaml` → `map_business_partners()`: new partner number (10 digits) and address number;
-BUT000 (BU_TYPE 2 = organisation, BU_GROUP from KTOKD via value map, NAME_ORG1, BPEXT = legacy KUNNR),
-BUT020 (partner→address), ADRC (street, city, postcode, country, phone, e-mail), BUT100 role FLCU01 and a
-CVI_CUST_LINK row. Materials: MARA (MATNR upper case, BISMT = old number as typed), MAKT (SPRAS E), MBEW price.
+### Mapping, load and reconciliation
 
-**16. Why load into a schema with primary keys?**
-`sql/schema.sql` defines PKs (partner, address, matnr+spras…). If dedup or mapping created two BPs with the
-same number, the load fails loudly instead of creating bad data. The same DDL runs on PostgreSQL (CI) and SQLite
-(local fallback) – column names are lower case to avoid quoting differences.
+**17. Walk me through one customer's mapping.**
+`config/mapping.yaml` → new 10-digit partner and address numbers; BUT000 (BU_TYPE 1 = person, BU_GROUP BPCU,
+CRDAT = first order date; names empty, not in source); BUT020 partner→address; ADRC (CITY1 = standardised city,
+POST_CODE1 = 5-digit CEP prefix, REGION = UF, COUNTRY = BR); BUT100 role FLCU01; CVI_CUST_LINK keeps the 32-char
+legacy id (BPEXT is only CHAR 20).
 
-### Reconciliation
+**18. What exactly does reconciliation check?**
+`reconcile_object()` in `src/reconcile.py`: staged rows = file rows; records in = loaded + quarantined + merged;
+no legacy id unaccounted for or in two buckets; target rows = survivors; roles assigned; per-field filled count +
+CRC32 checksum (expected transformation output vs data read back with SQL joins); sum of standard prices; a
+20-record sample labelled MATCH / TRANSFORMED / CONSTANT / NOT_IN_SOURCE / MISMATCH. 52/52 passed, on SQLite and on
+PostgreSQL in CI.
 
-**17. What exactly does reconciliation check?**
-`reconcile_object()` in `src/reconcile.py`, per object: staged source rows = file rows; records in = loaded +
-quarantined + merged; no legacy id unaccounted for; no id in two buckets; target rows = survivors; roles
-assigned; shared BPs carry both roles; per-field filled count + CRC32 checksum (expected transformation output vs
-data read back with SQL joins); sum of standard prices; a 20-record field-by-field sample labelled
-MATCH / TRANSFORMED / MISMATCH. 45/45 passed.
-
-**18. How do you know the reconciliation would catch a problem?**
+**19. How do you know the reconciliation would catch a problem?**
 `test_reconciliation_detects_a_lost_record` deletes one loaded material and asserts the balance and coverage checks
 turn FAIL. A check that can never fail is worthless.
 
-**19. What does the business actually sign off?**
-The Excel workbook (`src/report_excel.py`): Summary (counts, % rejected, PASS/FAIL with conditional formatting,
-rejection reasons with data bars), one sheet per object with checks and sample comparison, full Rejections and
-Duplicates lists, and a Sign-off sheet. The Streamlit dashboard shows the same data and records sign-offs in
-`mig_signoff`.
-
-### Limitations
-
-**20. What are the limitations and what would you do next?**
-Simplified target tables (no bank, sales-area or company-code data; phone/e-mail on ADRC instead of ADR2/ADR6);
-synthetic customers/vendors so detection rates show rule coverage, not field accuracy; O(n²) comparison inside a
-country block; record-level survivorship only. Next: tighter blocking (postcode prefix / phonetic keys), a manual
-review queue for match scores 85–95, field-level survivorship (trust by source), and generating Migration
-Cockpit staging-table files instead of loading simplified tables.
+**20. Limitations and next steps?**
+Simplified target (no bank, sales-area, company-code or tax-number tables); anonymised source, so identity matching
+relies on the cross-reference id; the geolocation reference is incomplete, so ZIP_NOT_FOUND records need human
+review rather than rejection; obsolete cutoffs are assumptions. Next: generate Migration Cockpit staging files,
+add a review queue in the dashboard to release quarantined records, and add CPF/CNPJ check-digit rules when a source
+has tax numbers.
