@@ -1,0 +1,100 @@
+# ---------------------------------------------------------------------------
+# MigrateRight data-quality rules  (business-editable: no code change needed)
+#
+# Each object (customer / vendor / material) lists:
+#   key            legacy primary key
+#   mandatory      fields that must be filled, else record -> quarantine
+#   formats        regex checks, applied only when the field is filled
+#   max_length     target field lengths in S/4HANA (longer -> quarantine)
+#   allowed_values field -> list of allowed values (checked after value mapping)
+#   obsolete       when a legacy record is out of scope (not migrated)
+#   dedup          how duplicates are found and which record survives
+# Reason codes written to the quarantine table are shown in [brackets].
+# ---------------------------------------------------------------------------
+
+customer:
+  key: KUNNR
+  mandatory: [KUNNR, NAME1, STRAS, ORT01, PSTLZ, LAND1]          # [MISSING_MANDATORY]
+  formats:
+    EMAIL: {regex: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$', reason: INVALID_EMAIL}
+    TELF1: {regex: '^\+[1-9][0-9]{8,14}$', reason: INVALID_PHONE}   # E.164 after cleansing
+  postal_code: {field: PSTLZ, country_field: LAND1, reason: INVALID_POSTAL_CODE}
+  max_length: {NAME1: 40, STRAS: 60, ORT01: 40}                   # [FIELD_TOO_LONG]
+  allowed_values:
+    LAND1: {values: [GB, DE, FR, NL, ES, IE, US, IN], reason: INVALID_COUNTRY}
+    KTOKD: {values: [Z001, Z002], reason: INVALID_ACCOUNT_GROUP}
+  obsolete:                                                        # [OBSOLETE]
+    deletion_flag_field: LOEVM       # 'X' = flagged for deletion in ECC
+    last_activity_field: LAST_ACTIVITY
+    cutoff_date: "2019-01-01"        # no business since this date -> not migrated
+  dedup:
+    block_on: [LAND1]                # only compare records in the same country
+    name_field: NAME1
+    name_threshold: 90               # rapidfuzz token_sort_ratio on cleaned names
+    support_fields: [ORT01, PSTLZ, EMAIL, TELF1]
+    min_support_matches: 2           # plus at least two equal: city, postcode, e-mail, phone
+    survivorship: [completeness, ERDAT]   # most complete record wins, then newest
+
+vendor:
+  key: LIFNR
+  mandatory: [LIFNR, NAME1, STRAS, ORT01, PSTLZ, LAND1]
+  formats:
+    EMAIL: {regex: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$', reason: INVALID_EMAIL}
+    TELF1: {regex: '^\+[1-9][0-9]{8,14}$', reason: INVALID_PHONE}
+  postal_code: {field: PSTLZ, country_field: LAND1, reason: INVALID_POSTAL_CODE}
+  max_length: {NAME1: 40, STRAS: 60, ORT01: 40}
+  allowed_values:
+    LAND1: {values: [GB, DE, FR, NL, ES, IE, US, IN], reason: INVALID_COUNTRY}
+    KTOKK: {values: [Z100, Z200], reason: INVALID_ACCOUNT_GROUP}
+  obsolete:
+    deletion_flag_field: LOEVM
+    last_activity_field: LAST_ACTIVITY
+    cutoff_date: "2019-01-01"
+  dedup:
+    block_on: [LAND1]
+    name_field: NAME1
+    name_threshold: 90
+    support_fields: [ORT01, PSTLZ, EMAIL, TELF1]
+    min_support_matches: 2
+    survivorship: [completeness, ERDAT]
+
+material:
+  key: MATNR
+  mandatory: [MATNR, MAKTX, MEINS]
+  formats:
+    # A real product description has at least 3 letters and is not a lower-case
+    # stock-adjustment note ("damaged", "wet/rusty", "?") typed into the legacy field.
+    MAKTX: {regex: '^(?=(?:.*[A-Za-z]){3})(?!^[^A-Z]*$).+$', reason: INVALID_DESCRIPTION}
+  max_length: {MATNR: 40, MAKTX: 40}
+  allowed_values:
+    MEINS: {values: [PC, SET, PAC], reason: INVALID_UOM}
+  min_value:
+    STPRS: {min: 0.01, reason: MISSING_PRICE}   # no positive sales price ever recorded
+  non_product_codes:                            # postage, fees, adjustments, tests [NON_PRODUCT]
+    reason: NON_PRODUCT
+    patterns: ['^POST$', '^DOT$', '^C2$', '^M$', '^D$', '^S$', '^B$', '^CRUK$', '^PADS$',
+               '^C3$', '^GIFT$', '^BANK CHARGES$', '^AMAZONFEE$', '^ADJUST', '^TEST', '^GIFT_']
+  obsolete:
+    last_activity_field: LAST_SOLD
+    cutoff_date: "2010-12-01"        # not sold in the final 12 months of the extract
+  dedup:
+    exact_key: MATNR                 # legacy codes differing only in case (85123A vs 85123a)
+    survivorship: [TXN_COUNT]        # the code with the most sales history survives
+
+# Postal-code patterns per ISO country (checked after country value mapping)
+postal_formats:
+  GB: '^[A-Z]{1,2}[0-9][A-Z0-9]? [0-9][A-Z]{2}$'
+  DE: '^[0-9]{5}$'
+  FR: '^[0-9]{5}$'
+  ES: '^[0-9]{5}$'
+  NL: '^[0-9]{4} [A-Z]{2}$'
+  IE: '^[A-Z][0-9]{2} [A-Z0-9]{4}$'
+  US: '^[0-9]{5}(-[0-9]{4})?$'
+  IN: '^[1-9][0-9]{5}$'
+
+# International dialling codes used to turn local phone numbers into E.164
+phone_country_codes: {GB: "44", DE: "49", FR: "33", ES: "34", NL: "31", IE: "353", US: "1", IN: "91"}
+
+# Words ignored when comparing names for duplicates ("Acme Ltd" == "ACME Limited")
+legal_suffixes: [ltd, limited, plc, gmbh, ag, kg, sarl, sas, sa, bv, nv, sl, inc, incorporated,
+                 llc, corp, co, company, pvt, private, teoranta, teo, the, and]
