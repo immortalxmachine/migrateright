@@ -1,6 +1,6 @@
 # Resume bullets – MigrateRight
 
-- Built a Python/SQL SAP ECC→S/4HANA migration pipeline that profiled, cleansed and loaded 7,044 legacy records into Business Partner and product tables.
-- Designed YAML-driven validation rules that quarantined 1,568 records (22.3%) with reason codes, catching all 302 injected data-quality defects without silent drops.
-- Implemented rapidfuzz duplicate matching with survivorship, merging 231 duplicates and consolidating 20 customer-vendor pairs into single Business Partners with two roles.
-- Delivered 45 automated reconciliation checks, an openpyxl sign-off workbook and Streamlit dashboard; CI runs 33 pytest tests against PostgreSQL and SQLite.
+- Built a Python/SQL SAP ECC→S/4HANA migration case study on real Olist and Online Retail II data, loading 16,167 of 18,330 legacy records.
+- Wrote YAML address rules against Brazilian geolocation data, quarantining 1,719 records (9.38%) with reason codes and no silent drops.
+- Merged 444 real duplicates with survivorship and showed location-only matching reached only 3.83% precision versus customer_unique_id.
+- Delivered 52 automated reconciliation checks, an openpyxl sign-off workbook and Streamlit dashboard; CI tests PostgreSQL and SQLite.
