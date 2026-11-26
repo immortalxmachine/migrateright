@@ -64,8 +64,15 @@ def sheet_html(ws, max_rows: int = 40, max_cols: int = 11) -> str:
     out.append("</tr>")
     for r in range(1, n_rows + 1):
         out.append(f"<tr><th class='rown'>{r}</th>")
-        for c in range(1, n_cols + 1):
+        c = 0
+        while c < n_cols:
+            c += 1
             cell = ws.cell(r, c)
+            # Like Excel, text spills into the empty cells to its right (titles, notes)
+            span = 1
+            if isinstance(cell.value, str):
+                while c + span <= n_cols and ws.cell(r, c + span).value is None:
+                    span += 1
             css = ""
             if cell.fill and cell.fill.fill_type == "solid":
                 colour = rgb(cell.fill.fgColor)
@@ -87,7 +94,9 @@ def sheet_html(ws, max_rows: int = 40, max_cols: int = 11) -> str:
                 value = f"{value:,}"
                 css += "text-align:right;"
             text = html.escape("" if value is None else str(value))
-            out.append(f"<td style='{css}'>{text}</td>")
+            colspan = f" colspan='{span}'" if span > 1 else ""
+            out.append(f"<td{colspan} style='{css}'>{text}</td>")
+            c += span - 1
         out.append("</tr>")
     out.append("</table>")
     return "".join(out)
@@ -109,6 +118,7 @@ def render(sheets: list[str]) -> Path:
     .grid th{{background:#f3f3f3;color:#555;font-weight:normal;border:1px solid #d4d4d4;padding:2px 4px}}
     .grid td{{border:1px solid #e1e1e1;padding:2px 5px;white-space:nowrap;overflow:hidden;
              text-overflow:ellipsis;max-width:330px;height:19px}}
+    .grid td[colspan]{{max-width:none;overflow:visible}}
     .rown{{width:30px}} .corner{{width:30px}}
     .tabs{{background:#f3f3f3;border-top:1px solid #d4d4d4;padding:4px 8px}}
     .tab{{display:inline-block;padding:3px 12px;margin-right:2px;color:#444}}
