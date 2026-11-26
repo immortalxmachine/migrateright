@@ -17,3 +17,6 @@ data/*.db
 # Generated outputs (re-created on every run)
 reports/
 logs/
+
+# Local temp files / browser binaries (kept off the C: drive)
+.tmp/
