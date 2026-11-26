@@ -1,0 +1,10 @@
+[server]
+port = 8540
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#0a6ed1"
