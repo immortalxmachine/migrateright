@@ -1,0 +1,451 @@
+LIFNR,NAME1,NAME2,STRAS,ORT01,PSTLZ,LAND1,TELF1,EMAIL,KTOKK,LOEVM,ERDAT,LAST_ACTIVITY
+0000300408,NORTHWIND BAKEWARE WHOLESALE LTD,Accounts Dept,175 High Street,Manchester,TY9 9XH,GB,020-9123-5600,,Z100,,2014-09-15,2024-10-25
+0000300445,Stonegate Toys & Logistics Ltd,,202 Church Lane,Birmingham,TJ3 4SK,GB,063 2886 8673,sales@stonegatetoyslogisti.example,Z100,,2016-09-12,2020-07-01
+0000300118,Elmstead Decor & Supplies B.V.,,131 Kerkstraat,Eindhoven,000,NL,031 5087 6656,accounts@elmsteaddecorsupplie.example,Z100,,2013-10-09,2020-10-23
+0000300031,Riverside Home Packaging GmbH,,227 Schulstrasse,Munich,46692,DE,065-8552-8562,sales@riversidehomepackagi.example,Z200,,2008-07-08,2023-08-18
+0000300416,Clearview Decor & Logistics Limited,,223 Victoria Road,Leeds,FN3 4LL,GB,056 7819 3665,sales@clearviewdecorlogist.example,Z100,,2017-02-15,2022-07-20
+0000300158,Silverline Woodworks Packaging Ltd,c/o Head Office,76 Station Road,Birmingham,SJ2 6FS,GB,098-8043-4429,accounts@silverlinewoodworksp.example,Z100,X,2009-10-24,2025-06-12
+0000300326,Bluebell Party & Supplies GmbH,Accounts Dept,126 Gartenweg,Frankfurt,52831,DEU,083 9215 5007,accounts@bluebellpartysupplie.example,Z200,,2014-10-13,2025-06-22
+0000300448,Elmstead Gifts Packaging Ltd,,199 Station Road,Manchester,WM7 2XE,GB,0044 46 4390 1972,accounts@elmsteadgiftspackagi.example,Z100,,2014-12-10,2022-10-09
+0000300269,Thornbury Home Wholesale Ltd,,133 High Street,Bristol,JD9 0JJ,GB,072 1696 9865,orders@thornburyhomewholesa.example,Z100,,2012-01-26,2024-04-09
+0000300298,Copperleaf Candle Imports Pvt Ltd,,222 Anna Salai,Mumbai,851725,IN,0091 36 5148 1385,sales@copperleafcandleimpo.example,Z200,,2019-03-20,2025-01-18
+0000300132,Northwind Garden Retail Ltd,,178 Station Road,Leeds,UU7 3CH,UK,079 4845 8569,accounts@northwindgardenretai.example,Z200,,2005-04-03,2020-09-02
+0000300431,Ironbridge Gifts & Services Ltd,,115 Church Lane,Birmingham,JS2 2WP,GB,+44 34 1651 4805,sales@ironbridgegiftsservi.example,Z100,,2008-12-23,2023-01-12
+0000300071,Northwind Lighting Supplies B.V.,c/o Head Office,250 Dorpsstraat,Amsterdam,5169 SW,NL,082 5023 5765,accounts@northwindlightingsup.example,Z200,,2022-06-02,2024-12-07
+0000300141,Ironbridge Candle Services Pvt Ltd,Accounts Dept,199 Park Street,Mumbai,958305,India,+91 47 4836 6901,info@ironbridgecandleserv.example,Z100,,2013-10-23,2024-10-06
+0000300317,Ashford Interiors Distribution Ltd,Accounts Dept,31 Station Road,Leeds,MW4 5AF,GB,0044 77 8060 8319,info@ashfordinteriorsdist.example,Z200,,2013-02-26,2021-03-16
+0000300125,Maplewood Party Merchants Ltd,Accounts Dept,116 Church Lane,London,UL8 1CP,GB,058 6805 8063,accounts@maplewoodpartymercha.example,Z200,,2016-04-10,2021-02-17
+0000300232,Wildrose Vintage & Trading Teoranta,,218 Main Street,Dublin,W62 Y227,IE,039-4613-9563,orders@wildrosevintagetradi.example,Z200,,2008-12-04,2025-12-25
+0000300056,Ironbridge Bakeware Retail Teoranta,,195 Main Street,Galway,T29 H530,IE,00353 75 9355 9425,orders@ironbridgebakewarere.example,Z200,,2017-08-14,2025-08-17
+0000300077,Wildrose Gifts Retail B.V.,c/o Head Office,100 Dorpsstraat,Amsterdam,2449 EE,NL,0031 45 3723 2237,sales@wildrosegiftsretail.example,Z200,,2009-07-03,2020-10-16
+0000300040,Silverline Textile Packaging SARL,c/o Head Office,87 Rue de la Paix,Marseille,69664,FR,058 5955 3100,sales@silverlinetextilepac.example,Z200,,2012-05-04,2020-12-28
+0000300074,Brightwater Decor Distribution GmbH,c/o Head Office,105 Hauptstrasse,Cologne,17575,DE,+49 78 3098 3176,accounts@brightwaterdecordist.example,Z100,,2010-04-26,2022-02-25
+0000300079,Redwood Bakeware Supplies Inc,c/o Head Office,171 Maple Dr,Boston,21184,US,TBC,info@redwoodbakewaresuppl.example,Z200,,2008-01-07,2024-11-21
+0000300424,Maplewood Party Logsitics Ltd,c/o Head Office,33 Victoria Road,Leeds,LT8 1EB,GB,080 6134 4401,sales@maplewoodpartylogist.example,Z200,,2016-10-15,2021-02-12
+0000300010,Redwood Living Services GmbH,,214 Gartenweg,Cologne,33331,DE,0049 73 2693 7857,orders@redwoodlivingservice.example,Z100,,2019-09-17,2010-06-30
+0000300114,Highland Stationery Wholesale Ltd,,82 Church Lane,London,KF4 1NX,GB,083-3352-2002,orders@highlandstationerywh.example,Z200,,2012-10-08,2024-04-10
+0000300425,ELMSTEAD CRAFTS MERCHANTS S.L.,,104 Avenida del Sol,Madrid,90544,ES,72 7649 7749,sales@elmsteadcraftsmercha.example,Z200,,2019-09-15,2021-09-07
+0000300397,Greenfield Textile & Trading Ltd,c/o Head Office,248 Station Road,Bristol,ES7 1RP,GB,054 1498 5534,accounts@greenfieldtextiletra.example,Z200,,2014-11-12,2017-06-30
+0000300287,Foxglove Crafts Imports Ltd,,165 Victoria Road,Birmingham,99999999,GB,+44 54 9897 6772,info@foxglovecraftsimport.example,Z100,,2010-05-21,2022-04-11
+0000300138,Pinecrest Florals Trading Pvt Ltd,Accounts Dept,62 MG Road,Mumbai,185159,IN,0091 23 9746 7652,accounts@pinecrestfloralstrad.example,Z200,,2007-03-11,2021-07-02
+0000300211,Bluebell Toys Merchants GmbH,,10 Hauptstrasse,Berlin,57969,DE,0049 47 4386 8488,salesbluebelltoysmerchant.example,Z200,,2016-08-01,2021-11-21
+0000300248,Wildrose Candle Packaging Ltd,,2 Church Lane,Manchester,YG5 0GR,GBR,+44 21 5376 4236,sales@wildrosecandlepackag.example,Z100,,2007-11-21,2024-09-07
+0000300335,Hawthorn Vintage Merchants Teoranta,Accounts Dept,149 Main Street,Cork,H19 C218,IE,+353 31 7276 8432,sales@hawthornvintagemerch.example,Z100,,2015-04-19,2021-12-08
+0000300339,Redwood Lighting Trading SARL,,113 Rue de la Paix,Paris,34108,FR,+33 63 3779 4669,orders@redwoodlightingtradi.example,Z100,,2018-11-27,2024-06-13
+0000300117,Kingsway Home Distribution Ltd,Accounts Dept,13 Station Road,Manchester,EL2 0SC,GB,066-6840-6312,info@kingswayhomedistribu.example,Z200,,2005-05-05,2021-11-27
+0000300076,Foxglove Crafts Trading B.V.,,206 Dorpsstraat,Eindhoven,6976 UE,NL,+31 69 1412 9415,accounts@foxglovecraftstradin.example,Z100,,2017-04-24,2023-10-09
+0000300355,Ironbridge Garden Wholesale B.V.,,126 Kerkstraat,Eindhoven,5032 KH,NL,055 7306 7275,accounts@ironbridgegardenwhol.example,Z200,,2019-11-02,2025-11-02
+0000300396,Westbrook Ceramics Services B.V.,,183 Molenweg,Utrecht,8477 TD,NL,042 8350 4162,orders@westbrookceramicsser.example,Z200,,2008-08-24,2020-09-08
+0000300438,Maplewood Party Distribution SARL,,120 Avenue Victor Hugo,Nantes,91737,FR,0033 70 2676 1120,accounts@maplewoodpartydistri.example,Z100,,2007-08-03,2022-05-21
+0000300078,Sunrise Interiors Retail S.L.,c/o Head Office,222 Avenida del Sol,Seville,51742,ES,77-5327-5470,accounts@sunriseinteriorsreta.example,Z100,,2009-06-22,2022-05-10
+0000300446,Fairway Decor & Distribution GmbH,,45 Gartenweg,Munich,37604,DE,+49 27 2281 3835,accounts@fairwaydecordistribu.example,Z100,,2009-04-01,2021-05-23
+0000300442,Wildrose Bakeware & Imports Ltd,Accounts Dept,60 High Street,Birmingham,UL1 3KJ,GB,+44 69 6863 2113,accounts@wildrosebakewareimpo.example,Z100,,2021-10-08,2024-10-17
+0000300154,Harbourside Party & Trading Inc,,83 Maple Dr,Boston,19497,US,001 88 1109 3870,accounts@harboursidepartytrad.example,Z200,,2018-04-24,2023-10-07
+0000300073,Sunrise Vintage & Services GmbH,c/o Head Office,81 Gartenweg,Berlin,62149,DE,+49 39 2799 6982,orders@sunrisevintageservic.example,Z200,,2016-11-08,2022-04-26
+0000300226,Sunrise Paper Services B.V.,,63 Dorpsstraat,Utrecht,1085 WS,NL,0031 43 3328 9595,sales@sunrisepaperservices.example,Z200,,2021-06-24,2022-06-11
+0000300400,Kingsway Kitchen & Trading GmbH,Accounts Dept,1 Schulstrasse,Cologne,31644,DE,0049 28 5218 4173,orders@kingswaykitchentradi.example,Z200,,2014-04-28,2017-06-30
+0000300356,Wildrose Candle Services GmbH,,14 Schulstrasse,Frankfurt,56854,Germany,0049 33 7409 4111,sales@wildrosecandleservic.example,Z100,,2012-11-25,2025-02-24
+0000300223,Copperleaf Lighting & Retail B.V.,Accounts Dept,194 Molenweg,Rotterdam,2927 NA,NL,N/A,info@copperleaflightingre.example,Z100,,2014-12-25,2023-01-07
+0000300186,Riverside Gifts Merchants Ltd,,86 Victoria Road,Bristol,UT1 3CY,GB,071-7193-6007,accounts@riversidegiftsmercha.example,Z100,X,2008-08-19,2024-04-04
+0000300399,Hawthorn Vintage Packaging GmbH,,47 Bahnhofstrasse,Frankfurt,37550,DE,+49 60 5341 4555,orders@hawthornvintagepacka.example,Z100,,2008-12-15,2013-06-30
+0000300080,Pinecrest Interiors Wholesale GmbH,Accounts Dept,132 Gartenweg,Berlin,80393,de,0049 55 9137 2315,orders@pinecrestinteriorswh.example,Z100,,2009-01-03,2022-11-17
+0000300034,Goldcrest Paper Trading GmbH,,202 Hauptstrasse,Berlin,84838,DE,0049 55 1548 7701,orders@goldcrestpapertradin.example,Z200,,2020-03-08,2025-05-24
+0000300181,Harbourside Living Supplies Inc,,176 Main St,Chicago,87092,USA,+1 29 3581 7191,info@harboursidelivingsup.example,Z100,,2014-04-01,2023-02-06
+0000300311,Pinecrest Party & Merchants Ltd,,78 High Street,London,WH1 5KT,gb,0044 56 8344 4563,orders@pinecrestpartymercha.example,Z200,,2018-04-19,2024-12-05
+0000300083,Stonegate Florals Merchants Ltd,Accounts Dept,144 High Street,Leeds,DT7 9HB,GB,0044 48 3651 7342,accounts@stonegatefloralsmerc.example,Z200,,2012-10-14,2023-05-04
+0000300357,Hawthorn Living Retail Ltd,,125 Church Lane,Bristol,CN9 0XL,GB,0044 75 5146 2407,accounts@hawthornlivingretail.example,Z100,,2010-04-22,2021-07-13
+0000300012,Elmstead Home Wholesale Teoranta,,154 Bridge Street,Galway,C57 T583,IE,063 7899 4840,sales@elmsteadhomewholesal.example,Z200,,2012-12-07,2024-11-05
+0000300395,Redwood Party & Trading Ltd,,16 Station Road,Birmingham,KH9 8JJ,GB,+44 39 8535 6857,sales@redwoodpartytrading.example,Z200,,2006-08-19,2022-10-14
+0000300016,Pinecrest Garden Supplies Ltd,,181 Church Lane,London,FK3 2YF,GB,0,info@pinecrestgardensuppl.example,Z200,,2011-03-24,2021-07-11
+0000300102,Stonegate Toys & Supplies GmbH,,38 Bahnhofstrasse,Berlin,20783,DE,0049 82 6912 5875,accounts@stonegatetoyssupplie.example,Z100,,2016-05-17,2023-10-05
+0000300212,Westbrook Party Distribution GmbH,c/o Head Office,95 Schulstrasse,Frankfurt,97528,DE,0049 57 6790 9104,accounts@westbrookpartydistri.example,Z200,,2015-01-11,2022-11-08
+0000300001,Ironbridge Home & Trading GmbH,,21 Gartenweg,Berlin,16600,DE,TBC,orders@ironbridgehometradin.example,Z100,,2012-09-12,2020-11-22
+0000300020,Maplewood Woodworks Retail Inc,c/o Head Office,89 Main St,Chicago,80419,US,N/A,info@maplewoodwoodworksre.example,Z100,,2004-10-26,2021-05-05
+0000300288,Starling Textile Services GmbH,c/o Head Office,24 Hauptstrasse,Frankfurt,96222,DEU,059 8094 6758,sales@starlingtextileservi.example,Z200,,2009-02-01,2023-12-08
+0000300297,Bluebell Living & Logistics Inc,Accounts Dept,102 Oak Ave,Seattle,55960,U.S.A.,001 96 7450 5322,orders@bluebelllivinglogist.example,Z200,,2016-10-09,2024-11-09
+0000300057,Brightwater Stationery Imports Ltd,c/o Head Office,84 Victoria Road,Leeds,EC4 5YG,GB,0044 30 8824 6281,accounts@brightwaterstationer.example,Z100,,2020-12-20,2023-05-18
+0000300354,Clearview Decor & Logistics Ltd,,223 Victoria Road,Leeds,FN3 4LL,GB,056 7819 3665,sales@clearviewdecorlogist.example,Z100,,2011-06-23,2022-07-20
+0000300449,Riverside Gifts Retail S.L.,Accounts Dept,104 Avenida del Sol,Seville,60242,ES,+34 20 1618 9745,accounts@riversidegiftsretail.example,Z100,,2014-09-07,2020-11-01
+0000300363,Harbourside Living Logistics Inc,,162 Main St,Chicago,11314,US,001 37 6130 5045,n/a,Z100,,2021-07-15,2020-08-16
+0000300292,Westbrook Ceramics Merchants SARL,,73 Rue de la Paix,Lyon,64093,FR,052 9182 3560,accounts@westbrookceramicsmer.example,Z100,,2006-01-28,2025-09-13
+0000300091,Stonegate Toys Services Ltd,Accounts Dept,,London,YS4 0HH,GB,042-5328-7884,accounts@stonegatetoysservice.example,Z200,,2012-06-04,2020-05-18
+0000300382,Thornbury Woodworks Imports Ltd,,32 Station Road,Leeds,ND8 5SU,GB,021 5579 2552,accounts@thornburywoodworksim.example,Z200,,2017-08-03,2024-07-09
+0000300026,Northwind Toys Supplies B.V.,c/o Head Office,109 Kerkstraat,Amsterdam,7297 SK,NL,0031 53 3960 4349,sales@northwindtoyssupplie.example,Z200,,2017-10-17,2022-01-09
+0000300279,Greenfield Toys Wholesale B.V.,,231 Dorpsstraat,Rotterdam,1413 LB,Netherlands,0031 51 5124 6511,sales@greenfieldtoyswholes.example,Z100,,2020-08-06,2020-05-15
+0000300204,Stonegate Garden Packaging GmbH,Accounts Dept,140 Schulstrasse,Hamburg,66030,DE,089-6536-4049,sales@stonegategardenpacka.example,Z200,,2016-01-24,2021-03-01
+0000300441,Greenfield Bakeware Wholesale Ltd,,117 High Street,Manchester,UX7 6PA,GB,+44 63 5085 5833,info@greenfieldbakewarewh.example,Z100,,2012-05-03,2025-11-14
+0000300043,Stonegate Gifts Retail SARL,c/o Head Office,97 Avenue Victor Hugo,Marseille,78003,FR,0033 34 7173 8548,sales@stonegategiftsretail.example,Z100,,2021-04-28,2020-10-08
+0000300176,Oakridge Stationery & Logistics Ltd,,28 Station Road,Birmingham,CY3 7AP,GB,061-1486-8169,info@oakridgestationerylo.example,Z100,,2009-03-18,2025-04-21
+0000300094,Ashford Crafts Wholesale Ltd,c/o Head Office,130 Church Lane,Bristol,TM7 0PN,GB,095 3981 7680,sales@ashfordcraftswholesa.example,Z100,,2017-09-16,2020-10-25
+0000300387,Riverside Ceramics Trading B.V.,,54 Dorpsstraat,Rotterdam,6164 CY,NL,039 4366 3022,accounts@riversideceramicstra.example,Z200,,2007-11-03,2020-10-27
+0000300182,Maplewood Home Trading Ltd,,227 Station Road,Birmingham,HY8 7JF,GB,0044 78 1887 6170,accounts@maplewoodhometrading.example,Z200,,2021-09-15,2021-09-05
+0000300133,Harbourside Party Services B.V.,,202 Kerkstraat,Rotterdam,7697 AN,Netherlands,030-1401-5320,info@harboursidepartyserv.example,Z100,,2007-10-26,2024-03-24
+0000300290,Brightwater Stationery Services Ltd,,54 Victoria Road,Manchester,NL8 2SN,GB,079-8006-9514,orders@brightwaterstationer.example,Z200,,2015-10-07,2022-09-14
+0000300023,Lakeshore Decor Retail Teoranta,c/o Head Office,163 Mill Road,Galway,C87 J703,Eire,00353 92 7994 7913,accounts@lakeshoredecorretail.example,Z100,,2014-10-04,2023-07-11
+0000300047,Sunrise Living Services Ltd,,105 Church Lane,Leeds,EB7 4CX,GB,033 1375 7870,orders@sunriselivingservice.example,Z200,,2006-01-02,2025-12-17
+0000300205,Hawthorn Stationery Packaging GmbH,,113 Hauptstrasse,Berlin,63306,DE,+49 43 9797 4728,accounts@hawthornstationerypa.example,Z200,,2015-08-08,2022-07-06
+0000300378,Starling Bakeware Logistics Ltd,,166 Victoria Road,Manchester,JD9 8AS,GB,094 7598 6106,sales@starlingbakewarelogi.example,Z100,,2015-08-26,2022-09-11
+0000300372,Redwood Gifts Retail Pvt Ltd,,243 Park Street,Delhi,356029,IN,083 4562 2152,accounts@redwoodgiftsretail.example,Z100,X,2011-02-01,2024-09-13
+0000300313,Highland Bakeware Supplies GmbH,,152 Hauptstrasse,Hamburg,17030,DE,0049 85 3030 7934,accounts@highlandbakewaresupp.example,Z200,,2020-08-13,2020-11-26
+0000300058,Oakridge Gifts Supplies B.V.,,249 Molenweg,Eindhoven,3563 PR,NL,061-2971-2930,orders@oakridgegiftssupplie,Z200,,2014-04-09,2024-07-12
+0000300166,Foxglove Gifts Supplies Pvt Ltd,Accounts Dept,152 Park Street,Bengaluru,ABC,IN,059-6428-8663,sales@foxglovegiftssupplie.example,Z200,,2012-06-25,2025-02-03
+0000300025,Pinecrest Kitchen Packaging Ltd,,224 Victoria Road,Birmingham,BC5 9RC,GB,0044 30 1431 4520,orders@pinecrestkitchenpack.example,Z100,,2014-07-16,2022-07-14
+0000300018,Maplewood Gifts Distribution B.V.,,3 Molenweg,Utrecht,2688 KS,NL,064 4152 9833,sales@maplewoodgiftsdistri.example,Z200,,2005-06-10,2025-03-10
+0000300067,Starling Crafts Services Pvt Ltd,c/o Head Office,220 MG Road,Delhi,524584,IN,0091 50 5889 2844,sales@starlingcraftsservic.example,Z200,,2022-08-15,2020-01-22
+0000300149,Elmstead Ceramics Supplies Pvt Ltd,,164 Park Street,Bengaluru,968713,IN,023-3548-4106,accounts@elmsteadceramicssupp.example,Z100,,2017-10-08,2023-09-07
+0000300250,Pinecrest Decor Imports Inc,,25 Oak Ave,Seattle,97253,US,+1 89 4644 8595,orderspinecrestdecorimport.example,Z200,,2004-06-07,2025-03-21
+0000300032,Bluebell Bakeware Services Ltd,c/o Head Office,235 Victoria Road,Bristol,JS6 9JK,GB,0044 50 5673 9231,sales@bluebellbakewareserv.example,Z200,,2010-08-24,2023-05-27
+0000300085,Starling Decor Merchants Pvt Ltd,,102 Park Street,Bengaluru,707730,IN,070-8611-1176,accounts@starlingdecormerchan.example,Z100,,2007-06-08,2020-10-08
+0000300308,Sunrise Bakeware Wholesale Teoranta,Accounts Dept,206 Bridge Street,Dublin,D64 S859,IE,00353 84 5374 5277,info@sunrisebakewarewhole.example,Z200,,2022-04-01,2021-03-21
+0000300407,Pinecrest Decor and Supplies S.L.,,189 Calle Mayor,Valencia,16171,ES,+34 31 3466 9897,sales@pinecrestdecorsuppli.example,Z100,,2009-12-15,2024-11-19
+0000300390,Thornbury Toys Merchants GmbH,Accounts Dept,136 Bahnhofstrasse,Frankfurt,58332,DE,0049 27 9746 2744,accounts@thornburytoysmerchan.example,Z100,,2009-04-05,2021-06-18
+0000300272,Stonegate Lighting Logistics SARL,c/o Head Office,22 Rue du Moulin,Marseille,35591,FR,0033 25 2568 7401,orders@stonegatelightinglog.example,Z100,,2020-11-13,2020-08-10
+0000300095,Kingsway Lighting Trading Teoranta,,146 Mill Road,Cork,T58 H779,IE,043 8275 2142,info@kingswaylightingtrad.example,Z200,,2011-06-04,2021-09-20
+0000300394,Wildrose Decor Wholesale Ltd,,24 Victoria Road,London,99999999,GB,+44 79 1509 8214,orders@wildrosedecorwholesa.example,Z100,,2015-11-26,2020-12-16
+0000300300,Hawthorn Party & Services GmbH,c/o Head Office,31 Bahnhofstrasse,Cologne,,DE,068 5963 9599,accounts@hawthornpartyservice.example,Z100,,2019-04-15,2021-01-26
+0000300177,Northwind Decor Logistics B.V.,Accounts Dept,143 Molenweg,Utrecht,99999999,NL,0031 67 7057 6305,accounts@northwinddecorlogist.example,Z100,,2008-07-07,2025-06-14
+0000300249,Kingsway Party & Supplies GmbH,Accounts Dept,229 Hauptstrasse,Munich,70914,DE,0049 48 8207 2655,info@kingswaypartysupplie.example,Z200,,2017-10-22,2023-09-01
+0000300193,Elmstead Toys Merchants Ltd,,189 High Street,Leeds,RJ5 5AW,GB,+44 99 8155 4425,accounts@elmsteadtoysmerchant.example,Z200,,2011-06-05,2023-12-19
+0000300105,Harbourside Stationery Supplies Ltd,c/o Head Office,88 High Street,Birmingham,YR1 1MB,GB,033-8082-9132,sales@harboursidestationer.example,Z100,,2008-06-03,2024-03-02
+0000300375,Bluebell Crafts Imports Ltd,,17 High Street,Leeds,DG2 3LM,GB,+44 62 8458 5971,info@bluebellcraftsimport.example,Z200,,2008-11-22,2021-11-08
+0000300006,Sunrise Interiors Logistics Ltd,Accounts Dept,238 High Street,Manchester,NU9 3AA,GB,055-9868-4602,sales@sunriseinteriorslogi.example,Z200,,2011-12-27,2016-06-30
+0000300046,Sunrise Gifts Supplies GmbH,c/o Head Office,228 Schulstrasse,Munich,90466,Germany,0049 90 5965 6125,orders@sunrisegiftssupplies.example,Z200,,2017-04-24,2022-06-10
+0000300352,Lakeshore Textile Imports GmbH,,202 Hauptstrasse,Berlin,49300,XX,0049 38 8975 8765,sales@lakeshoretextileimpo.example,Z200,,2012-10-05,2020-01-04
+0000300306,Highland Crafts Packaging Inc,,161 Oak Ave,Boston,25611,US,23 8001 5379,orders@highlandcraftspackag.example,Z100,,2018-09-07,2014-06-30
+0000300398,Brightwater Bakeware Supplies SARL,,90 Rue de la Paix,Lyon,27204,FR,088-3653-1620,accounts@brightwaterbakewares.example,Z200,X,2022-06-06,2024-12-05
+0000300282,Fairway Party Imports S.L.,Accounts Dept,80 Avenida del Sol,Barcelona,37988,ES,28 8845 2584,accounts@fairwaypartyimports.example,Z100,,2011-04-09,2024-08-06
+0000300017,Northwind Kitchen & Merchants Ltd,,75 Church Lane,Manchester,KU5 2AF,GB,055 5008 7026,accounts@northwindkitchenmerc.example,Z200,,2017-06-23,2020-02-22
+0000300417,  Stonegate  Lighting  Logistics SA,c/o Head Office,22 Rue du Moulin,Marseille,35591,FR,0033 25 2568 7401,orders@stonegatelightinglog.example,Z100,,2013-12-15,2020-08-10
+0000300127,Oakridge Home Retail Ltd,,87 Church Lane,London,BL5 9BT,GB,024-4420-9126,orders@oakridgehomeretail.example,Z100,,2020-09-16,2021-05-13
+0000300321,Redwood Decor & Wholesale Ltd,,104 Church Lane,London,BX4 3GW,GB,075 4981 9188,n/a,Z100,,2011-09-18,2025-08-17
+0000300004,Foxglove Bakeware Packaging GmbH,,43 Bahnhofstrasse,Hamburg,95888,  ,0049 56 7238 2127,accounts@foxglovebakewarepack.example,Z200,,2016-03-16,2023-04-24
+0000300019,Elmstead Living Logistics Teoranta,,7 Mill Road,Dublin,C59 L942,IE,+353 93 3874 1577,sales@elmsteadlivinglogist.example,Z200,,2016-12-13,2023-10-22
+0000300174,Ironbridge Lighting Wholesale Ltd,,208 High Street,Leeds,XR3 4XB,GB,+44 44 3288 3096,accounts@ironbridgelightingwh.example,Z200,,2019-02-10,2023-10-11
+0000300061,Silverline Bakeware Trading B.V.,,51 Dorpsstraat,Amsterdam,2179 LH,NL,076-4965-7139,orders@silverlinebakewaretr.example,Z200,,2007-06-11,2022-05-14
+0000300219,Northwind Living & Services Ltd,,129 High Street,Manchester,BC5 9KU,GB,024 3666 9612,info@northwindlivingservi.example,Z200,,2017-05-26,2022-03-07
+0000300228,Sunrise Crafts Trading Pvt Ltd,,106 Anna Salai,Delhi,481778,IN,086-6098-7771,accounts@sunrisecraftstrading.example,Z200,,2019-12-09,2020-07-08
+0000300325,Lakeshore Party Logistics SARL,c/o Head Office,17 Rue de la Paix,Nantes,33863,FRA,+33 37 3390 4981,accounts@lakeshorepartylogist.example,Z200,,2021-08-05,2021-01-08
+0000300064,Oakridge Paper Services Ltd,Accounts Dept,165 Church Lane,Leeds,NA8 8XA,GB,081 6626 2346,info@oakridgepaperservice.example,Z200,,2019-06-12,2020-03-19
+0000300111,Thornbury Gifts Imports Ltd,,234 High Street,Leeds,ER4 1DR,GB,0044 43 3986 7488,info@thornburygiftsimport.example,Z200,,2019-06-14,2024-01-01
+0000300285,Ironbridge Living & Retail Inc,c/o Head Office,83 Oak Ave,New York,67536,US,+1 21 5748 8380,info@ironbridgelivingreta.example,Z200,,2020-04-26,2023-09-15
+0000300221,Silverline Crafts Wholesale Inc,c/o Head Office,24 Maple Dr,New York,76345,US,001 81 5760 1585,info@silverlinecraftswhol.example,Z100,,2011-12-07,2021-01-25
+0000300030,Starling Vintage Wholesale Pvt Ltd,,55 Park Street,Chennai,522540,IN,+91 85 7185 5007,info@starlingvintagewhole.example,Z100,,2008-04-08,2022-08-22
+0000300299,Ashford Bakeware Services B.V.,,165 Molenweg,Utrecht,6452 AH,NL,076 6724 5581,orders@ashfordbakewareservi.example,Z100,,2015-04-18,2021-04-24
+0000300286,Foxglove Decor & Logistics Ltd,Accounts Dept,97 Station Road,Manchester,UE2 2YU,GB,+44 12,sales@foxglovedecorlogisti.example,Z200,,2021-05-25,2023-03-14
+0000300027,Hawthorn Crafts Distribution Ltd,Accounts Dept,220 Station Road,Bristol,LK1 2JF,gb,091-8121-2181,sales@hawthorncraftsdistri.example,Z200,,2018-02-10,2020-03-11
+0000300008,Ironbridge Textile & Packaging Ltd,,6 High Street,Birmingham,DR7 0SL,GB,0044 77 9615 9530,orders@ironbridgetextilepac.example,Z200,,2022-10-15,2024-10-02
+0000300410,  Foxglove  Party  Distribution Ltd,,232 Victoria Road,Leeds,HT1 2XW,GB,026 4709 5427,accounts@foxglovepartydistrib.example,Z100,,2012-09-15,2023-01-21
+0000300109,Foxglove Party Distribution Ltd,,232 Victoria Road,Leeds,HT1 2XW,GB,026 4709 5427,accounts@foxglovepartydistrib.example,Z100,,2013-08-19,2023-01-21
+0000300230,Kingsway Lighting Retail Ltd,,183 Station Road,Bristol,CC7 8ND,GB,033 6028 7335,sales@kingswaylightingreta.example,Z200,,2006-02-17,2024-03-13
+0000300421,THORNBURY HOME WHOLESALE LTD,,133 High Street,Bristol,JD9 0JJ,GB,072 1696 9865,,Z100,,2017-02-15,2024-04-09
+0000300119,Redwood Toys Packaging Teoranta,,92 Bridge Street,Dublin,H65 H282,IE,055 7710 5030,orders@redwoodtoyspackaging.example,Z100,,2017-03-28,2020-11-22
+0000300115,Ashford Interiors Logistics Pvt Ltd,,82 MG Road,Bengaluru,929617,IN,064-3859-9411,salesashfordinteriorslogi.example,Z200,,2018-04-08,2024-02-08
+0000300432,Foxglove Decor Packaging Ltd,c/o Head Office,5 High Street,London,YN4 5PJ,GB,+44 26 8526 3812,sales@foxglovedecorpackagi.example,Z100,,2019-03-17,2021-09-20
+0000300156,Greenfield Decor Logistics GmbH,Accounts Dept,221 Schulstrasse,Berlin,23554,DE,+49 40 6976 5778,sales@greenfielddecorlogis.example,Z100,,2004-01-18,2020-06-13
+0000300333,Stonegate Candle Supplies Ltd,Accounts Dept,73 Station Road,London,FP7 6MN,GB,+44 25 3875 4631,orders@stonegatecandlesuppl.example,Z100,,2017-06-11,2024-01-14
+0000300343,Copperleaf Gifts Services Ltd,c/o Head Office,1 High Street,Bristol,BB4 2SN,GB,0044 41 9640 1395,orders@copperleafgiftsservi.example,Z200,,2019-08-26,2020-02-09
+0000300155,Kingsway Stationery Services SARL,,18 Rue du Moulin,Lyon,43404,FR,077 5414 2398,info@kingswaystationeryse.example,Z200,,2010-07-15,2020-04-23
+0000300173,Westbrook Crafts Trading Teoranta,c/o Head Office,56 Bridge Street,Galway,T29 G385,IE,+353 56 1223 4871,orders@westbrookcraftstradi.example,Z200,,2008-09-11,2025-01-24
+0000300402,Elmstead Stationery Packaging Limit,,12 Station Road,London,MS3 3CE,GB,+44 61 3424 5481,,Z200,,2015-03-15,2025-07-27
+0000300142,Harbourside Decor Wholesale Ltd,,246 Victoria Road,Bristol,HD8 3WK,GB,074-3535-5473,sales@harboursidedecorwhol.example,Z100,,2021-06-28,2010-06-30
+0000300401,Pinecrest Gifts Trading S.A.R.L.,,104 Avenue Victor Hugo,Lyon,71140,FR,0033 60 1293 2600,sales@pinecrestgiftstradin.example,Z200,,2008-11-15,2022-03-27
+0000300419,  Maplewood  Party  Merchants Ltd ,Accounts Dept,116 Church Lane,London,UL8 1CP,GB,058 6805 8063,,Z200,,2023-05-15,2021-02-17
+0000300169,Copperleaf Toys Logistics SARL,,55 Rue du Moulin,Lille,80910,FR,0033 86 6779 3384,orders@copperleaftoyslogist.example,Z100,,2021-05-25,2021-10-15
+0000300247,Goldcrest Textile & Retail GmbH,,179 Schulstrasse,Hamburg,78109,DE,+49 49 8624 3290,orders@goldcresttextilereta.example,Z100,,2009-06-25,2024-04-04
+0000300110,Bluebell Interiors & Imports Ltd,,108 Church Lane,Bristol,HS7 2KF,United Kingdom,+44 71 7257 3267,accounts@bluebellinteriorsimp.example,Z200,,2008-01-08,2023-10-08
+0000300200,Northwind Toys & Wholesale Ltd,,34 Station Road,Bristol,YK4 3BG,  ,076 3887 9061,orders@northwindtoyswholesa.example,Z100,,2013-05-15,2022-07-07
+0000300146,Ashford Gifts Supplies Ltd,,22 Church Lane,Bristol,CP2 9RG,GB,091 5225 5134,sales@ashfordgiftssupplies.example,Z100,,2011-01-02,2025-12-18
+0000300366,Redwood Florals Retail SARL,c/o Head Office,148 Rue de la Paix,Lille,94948,FR,044-3726-8527,info@redwoodfloralsretail.example,Z200,,2005-05-06,2025-04-12
+0000300153,Wildrose Home Logistics B.V.,,200 Dorpsstraat,Eindhoven,1854 FM,NL,093 2605 3489,accounts@wildrosehomelogistic.example,Z200,,2011-08-06,2020-07-06
+0000300411,  Pinecrest  Interiors  Packaging B,,101 Molenweg,Eindhoven,1757 XH,NL,0031 28 7885 1590,info@pinecrestinteriorspa.example,Z100,,2005-12-15,2024-04-20
+0000300194,Bluebell Bakeware Distribution Ltd,,247 Church Lane,Bristol,PT9 5XH,GB,0044 41 2251 4977,orders@bluebellbakewaredist.example,Z100,,2020-11-07,2020-11-15
+0000300084,Silverline Party Trading SARL,,156 Rue du Moulin,Paris,60712,FR,052 1543 8971,sales@silverlinepartytradi.example,Z200,,2008-06-27,2025-02-23
+0000300197,Elmstead Vintage Services Ltd,c/o Head Office,167 Victoria Road,Birmingham,UT8 7LK,GB,0044 55 6396 9400,orders@elmsteadvintageservi.example,Z200,,2006-04-09,2020-02-20
+0000300235,Westbrook Living & Merchants S.L.,,29 Avenida del Sol,Madrid,94981,ES,0034 77 4353 5438,orders@westbrooklivingmerch.example,Z200,,2014-10-06,2021-06-22
+0000300075,Northwind Gifts & Imports Ltd,c/o Head Office,120 Church Lane,Manchester,SY5 9HP,GBR,071-4686-6138,orders@northwindgiftsimport.example,Z200,,2006-12-09,2024-01-07
+0000300406,HARBOURSIDE PARTY & TRADING INC,,83 Maple Dr,Boston,19497,US,001 88 1109 3870,,Z200,,2022-01-15,2023-10-07
+0000300359,Copperleaf Ceramics Retail B.V.,c/o Head Office,70 Molenweg,Amsterdam,5754 DK,NL,0031 20 2377 4545,orders@copperleafceramicsre.example,Z100,,2022-02-10,2021-07-11
+0000300371,Foxglove Stationery Merchants Ltd,Accounts Dept,223 High Street,Manchester,FG9 1ET,GB,+44 30 8231 2034,accounts@foxglovestationeryme.example,Z200,,2018-12-22,2025-06-05
+0000300120,Silverline Toys Trading Teoranta,,81 Mill Road,Galway,H74 M697,,+353 78 2267 6014,sales@silverlinetoystradin.example,Z200,,2004-09-02,2025-10-02
+0000300251,Silverline Decor & Trading Teoranta,,153 Mill Road,Cork,W96 P551,IE,023 3093 6433,orders@silverlinedecortradi.example,Z200,,2017-12-21,2024-07-21
+0000300267,Granite Living Logistics B.V.,,185 Kerkstraat,Rotterdam,1975 NW,NL,0031 67 2203 8034,orders@granitelivinglogisti.example,Z100,,2009-02-04,2024-07-02
+0000300384,Brightwater Living Distribution Ltd,,178 Church Lane,Leeds,HA8 3EK,GB,068-7932-9685,accounts@brightwaterlivingdis.example,Z100,,2010-11-25,2020-05-26
+0000300318,Pinecrest Paper & Imports Ltd,,15 Church Lane,Leeds,ML9 3KM,GB,N/A,sales@pinecrestpaperimport.example,Z100,,2017-09-22,2021-04-12
+0000300263,Sunrise Gifts Distribution GmbH,Accounts Dept,192 Hauptstrasse,Frankfurt,48692,DE,097-2899-4107,accounts@sunrisegiftsdistribu.example,Z100,,2015-06-04,2024-02-22
+0000300312,Pinecrest Toys & Distribution Ltd,,96 High Street,Birmingham,FS3 3TE,GB,0044 75 5497 3154,info@pinecresttoysdistrib.example,Z200,,2009-06-12,2025-08-22
+0000300444,Silverline Florals Imports GmbH,c/o Head Office,13 Bahnhofstrasse,Frankfurt,52339,DE,0049 26 3307 7481,info@silverlinefloralsimp.example,Z100,,2017-05-10,2020-04-15
+0000300392,Pinecrest Stationery Packaging Ltd,,74 Church Lane,Birmingham,NJ4 0KP,GB,056-1866-1799,info@pinecreststationeryp.example,Z200,,2022-09-28,2024-03-13
+0000300350,Copperleaf Textile Packaging Ltd,,81 Church Lane,Bristol,SS2 7KG,GB,+44 29 3056 5935,accounts@copperleaftextilepac.example,Z200,,2010-06-08,2024-12-03
+0000300037,Clearview Vintage Supplies Ltd,Accounts Dept,131 Victoria Road,London,JR7 6YN,GB,0044 90 3412 1259,sales@clearviewvintagesupp.example,Z200,,2016-06-20,2024-06-01
+0000300140,Goldcrest Home Packaging Pvt Ltd,,239 MG Road,Delhi,211796,IN,093 7932 1853,accounts@goldcresthomepackagi.example,Z100,,2009-02-09,2022-05-03
+0000300439,Oakridge Textile Packaging Ltd,Accounts Dept,215 High Street,Birmingham,TE8 3KU,GB,030 4493 2158,accounts@oakridgetextilepacka.example,Z100,,2005-03-12,2024-11-20
+0000300196,Stonegate Party Trading Teoranta,c/o Head Office,64 Bridge Street,Dublin,H80 J721,IE,053-8041-2286,sales@stonegatepartytradin.example,Z200,,2014-09-02,2022-06-26
+0000300254,Greenfield Gifts Trading GmbH,Accounts Dept,241 Bahnhofstrasse,Cologne,98012,DE,0049 68 4628 3748,orders@greenfieldgiftstradi.example,Z200,,2010-12-23,2021-03-24
+0000300422,Foxglove Textile Services Limited,,24 Church Lane,Manchester,YY4 5ME,GB,089-4309-4494,sales@foxglovetextileservi.example,Z200,,2022-07-15,2023-10-18
+0000300060,Starling Toys Services Ltd,,45 Church Lane,Manchester,ET5 8GK,GB,096-3742-8857,orders@starlingtoysservices.example,Z100,,2022-11-17,2014-06-30
+0000300112,Wildrose Candle Wholesale SARL,c/o Head Office,136 Rue du Moulin,Marseille,68769,FR,+33 59 3680 3587,accounts@wildrosecandlewholes.example,Z200,,2017-12-16,2023-02-12
+0000300209,Pinecrest Living Imports Teoranta,,91 Mill Road,Cork,H13 A623,IE,00353 98 5288 6124,sales@pinecrestlivingimpor.example,Z200,,2012-01-16,2023-01-21
+0000300303,Highland Textile Services Teoranta,Accounts Dept,145 Mill Road,Cork,T76 G306,IE,+353 31 5318 5122,accounts@highlandtextileservi.example,Z200,,2015-05-23,2023-09-19
+0000300007,Starling Garden & Services Pvt Ltd,,124 MG Road,Delhi,445852,IND,096 4654 5590,info@starlinggardenservic.example,Z200,,2005-07-24,2025-03-19
+0000300324,Ironbridge Ceramics Logistics GmbH,,79 Gartenweg,Cologne,89935,  ,047 6487 5084,accounts@ironbridgeceramicslo.example,Z200,,2017-07-10,2025-03-07
+0000300376,Silverline Bakeware Services SARL,c/o Head Office,241 Rue du Moulin,Nantes,75118,FR,090-8437-9046,orders@silverlinebakewarese.example,Z200,,2015-02-07,2024-08-15
+0000300159,Granite Gifts Trading Ltd,c/o Head Office,78 Church Lane,Manchester,EP3 3BA,GB,046-7854-1175,sales@granitegiftstrading.example,Z100,,2011-06-02,2021-12-21
+0000300151,Oakridge Woodworks Services GmbH,,240 Bahnhofstrasse,Munich,34249,DE,0049 98 7790 5214,accounts@oakridgewoodworksser.example,Z200,,2011-12-21,2023-12-24
+0000300178,Riverside Stationery Merchants Ltd,,237 Station Road,Manchester,YE8 6GW,GB,096-2011-5306,info@riversidestationerym.example,Z100,,2020-03-23,2025-04-13
+0000300185,Granite Woodworks Merchants Ltd,Accounts Dept,245 Station Road,Birmingham,KE7 8BX,GB,037-9399-3402,n/a,Z200,,2012-02-15,2020-01-11
+0000300011,Granite Interiors Trading Teoranta,,179 Main Street,Dublin,ABC,IE,+353 83 6702 4088,info@graniteinteriorstrad.example,Z200,,2011-12-07,2023-02-26
+0000300246,Greenfield Textile Packaging Ltd,Accounts Dept,95 High Street,Manchester,LU4 7YW,United Kingdom,0044 95 1405 2013,sales@greenfieldtextilepac.example,Z200,,2017-10-07,2021-03-16
+0000300104,Foxglove Party Trading Ltd,,75 Station Road,Manchester,AW6 8SE,GB,050 4541 7519,orders@foxglovepartytrading.example,Z100,,2006-05-11,2023-10-05
+0000300082,Riverside Vintage Supplies SARL,,199 Avenue Victor Hugo,Lille,28924,FR,097-7114-1042,orders@riversidevintagesupp.example,Z200,,2006-11-14,2021-02-16
+0000300039,Maplewood Living & Retail SARL,,91 Rue de la Paix,Lyon,21565,Atlantis,088 7365 7161,accounts@maplewoodlivingretai.example,Z200,,2013-08-28,2021-04-18
+0000300281,Pinecrest Garden & Logistics S.L.,,124 Avenida del Sol,Madrid,ABC,ES,53 4602 1062,info@pinecrestgardenlogis.example,Z200,,2006-05-10,2022-03-19
+0000300168,Northwind Bakeware Wholesale Ltd,Accounts Dept,175 High Street,Manchester,TY9 9XH,GB,020-9123-5600,info@northwindbakewarewho.example,Z100,,2011-12-27,2024-10-25
+0000300423,WESTBROOK PARTY SUPPLIES LTD,Accounts Dept,110 Victoria Road,London,HR8 1TT,GB,+44 73 3316 7973,accounts@westbrookpartysuppli.example,Z200,,2005-12-15,2023-07-25
+0000300337,Highland Toys Distribution GmbH,c/o Head Office,7 Bahnhofstrasse,Berlin,49922,DE,0049 28 2061 6291,info@highlandtoysdistribu.example,Z200,,2007-01-20,2021-04-10
+0000300199,Elmstead Bakeware Imports Teoranta,Accounts Dept,155 Main Street,Cork,C62 D156,IE,+353 90 7587 3229,sales@elmsteadbakewareimpo.example,Z100,,2018-01-22,2023-06-20
+0000300393,Maplewood Garden Packaging Ltd,,206 Station Road,Bristol,RW4 8MY,GB,057 7223 1339,sales@maplewoodgardenpacka.example,Z100,,2004-05-01,2023-03-28
+0000300362,Redwood Paper Trading Inc,,56 Main St,Boston,62775,US,001 88 3798 4863,sales@redwoodpapertrading.example,Z200,,2004-12-05,2021-12-24
+0000300210,Westbrook Paper & Trading SARL,,58 Rue de la Paix,Nantes,77063,France,023-2922-4953,info@westbrookpapertradin.example,Z200,,2008-09-08,2021-06-14
+0000300195,Goldcrest Textile & Merchants B.V.,,227 Kerkstraat,Rotterdam,7858 JE,NL,064 9115 3199,accounts@goldcresttextilemerc.example,Z200,X,2013-09-27,2021-10-17
+0000300090,Oakridge Party Trading Ltd,Accounts Dept,65 Station Road,Birmingham,WL4 3RN,GB,091-5241-2889,orders@oakridgepartytrading.example,Z200,,2018-11-14,2014-06-30
+0000300245,Brightwater Home & Wholesale Ltd,Accounts Dept,170 Church Lane,Leeds,FM8 3HA,United Kingdom,0044 98 1540 8560,info@brightwaterhomewhole.example,Z200,,2011-06-03,2023-09-11
+0000300164,Pinecrest Ceramics Packaging B.V.,,241 Dorpsstraat,Rotterdam,6965 BD,NL,+31 31 2897 6400,accounts@pinecrestceramicspac.example,Z200,,2020-11-14,2021-08-15
+0000300240,Thornbury Toys & Retail Teoranta,Accounts Dept,249 Bridge Street,Galway,H68 A078,IE,00353 91 2982 3408,sales@thornburytoysretail.example,Z100,,2014-02-06,2020-11-24
+0000300148,Clearview Candle Logistics B.V.,,249 Dorpsstraat,,2150 XE,NL,+31 36 2176 9688,sales@clearviewcandlelogis.example,Z100,,2017-04-25,2020-09-24
+0000300003,Westbrook Party Supplies Ltd,Accounts Dept,110 Victoria Road,London,HR8 1TT,GB,+44 73 3316 7973,accounts@westbrookpartysuppli.example,Z200,,2007-03-24,2023-07-25
+0000300093,Redwood Home Packaging Ltd,c/o Head Office,122 Victoria Road,Leeds,RM5 5PL,GB,079-3455-9384,sales@redwoodhomepackaging.example,Z100,,2016-11-19,2021-05-17
+0000300361,Wildrose Woodworks & Supplies GmbH,Accounts Dept,118 Gartenweg,Frankfurt,23340,DE,073 6114 5474,accounts@wildrosewoodworkssup.example,Z100,,2008-12-04,2024-11-01
+0000300070,Elmstead Decor Packaging SARL,,214 Avenue Victor Hugo,Marseille,75743,FR,032 7697 7593,sales@elmsteaddecorpackagi.example,Z200,,2007-04-14,2021-04-07
+0000300256,Maplewood Home Services SARL,c/o Head Office,51 Avenue Victor Hugo,Paris,64373,FR,057 6992 2760,accounts@maplewoodhomeservice.example,Z200,,2019-04-23,2022-07-14
+0000300124,Sunrise Candle Trading S.L.,c/o Head Office,114 Calle Real,Valencia,23531,ES,+34 52 6679 5653,orders@sunrisecandletrading.example,Z200,,2006-05-13,2023-05-19
+0000300332,Foxglove Crafts Packaging Ltd,,,London,PC1 9EE,GB,0044 33 7577 8467,accounts@foxglovecraftspackag.example,Z100,,2018-02-10,2023-04-27
+0000300097,Northwind Party Services B.V.,,182 Kerkstraat,Amsterdam,7534 XM,NL,036-4124-6587,orders@northwindpartyservic.example,Z200,,2008-10-10,2020-03-17
+0000300144,Riverside Candle Distribution SARL,,31 Rue du Moulin,Paris,60932,FR,037-6554-1401,sales@riversidecandledistr.example,Z200,,2012-07-10,2023-04-27
+0000300341,Oakridge Ceramics Trading GmbH,,238 Gartenweg,Hamburg,53784,DE,093-4319-7039,info@oakridgeceramicstrad.example,Z200,,2016-06-01,2024-05-13
+0000300322,Goldcrest Bakeware Imports Ltd,Accounts Dept,134 High Street,Bristol,RP7 3JE,GB,0044 21 9907 4810,info@goldcrestbakewareimp.example,Z100,,2013-03-24,2023-07-10
+0000300238,Goldcrest Home Retail Ltd,,97 Church Lane,Bristol,SD2 5TU,GB,036-2060-9596,info@goldcresthomeretail.example,Z200,,2006-12-01,2023-12-19
+0000300098,Riverside Home Trading Ltd,,65 Church Lane,Leeds,US6 3DD,gb,0044 94 9524 1160,sales@riversidehometrading.example,Z200,,2015-05-05,2024-01-11
+0000300276,Elmstead Woodworks Wholesale Ltd,,63 Station Road,Manchester,DA2 2WJ,GB,0044 53 4706 2785,info@elmsteadwoodworkswho.example,Z200,,2004-09-26,2023-09-08
+0000300069,Starling Stationery & Imports SARL,c/o Head Office,85 Rue du Moulin,Marseille,71288,FR,12345,sales@starlingstationeryim.example,Z200,,2015-06-18,2020-11-24
+0000300024,Northwind Home Services Ltd,,71 Station Road,Birmingham,TR4 4KX,GBR,071-7181-9459,orders@northwindhomeservice.example,Z200,,2022-09-20,2024-05-15
+0000300038,Fairway Gifts Imports GmbH,,178 Bahnhofstrasse,Berlin,33655,Germany,093-4046-9132,accounts@fairwaygiftsimports.example,Z100,,2014-05-27,2023-11-08
+0000300145,Oakridge Garden Packaging SARL,,186 Rue du Moulin,Lille,62105,FR,0033 94 3472 6932,sales@oakridgegardenpackag.example,Z100,,2014-01-20,2021-07-02
+0000300123,Bluebell Crafts Packaging Ltd,Accounts Dept,41 High Street,Birmingham,DK8 2YG,GB,078-4453-6762,accounts@bluebellcraftspackag.example,Z100,,2018-09-08,2025-12-23
+0000300184,Clearview Paper Packaging GmbH,,121 Schulstrasse,Frankfurt,80299,DE,053 1230 8233,accounts@clearviewpaperpackag.example,Z200,,2014-08-15,2023-01-14
+0000300203,Bluebell Toys & Retail GmbH,,172 Bahnhofstrasse,Hamburg,90857,DE,+49 89 8541 2493,sales@bluebelltoysretail.example,Z100,,2004-04-28,2011-06-30
+0000300183,Highland Crafts Supplies Ltd,,108 High Street,Leeds,JP7 5TW,GB,061-3250-5435,orders@highlandcraftssuppli.example,Z100,,2022-07-27,2025-01-21
+0000300068,Redwood Toys Imports Ltd,,197 Church Lane,Birmingham,JH2 4US,GB,0044 37 3833 6773,orders@redwoodtoysimports.example,Z200,,2016-05-04,2021-06-09
+0000300239,Maplewood Kitchen Supplies Ltd,Accounts Dept,66 Church Lane,Bristol,YC2 9TH,GB,0044 27 8495 6951,sales@maplewoodkitchensupp.example,Z200,,2019-04-24,2025-09-18
+0000300273,Wildrose Lighting & Logistics B.V.,Accounts Dept,100 Kerkstraat,Eindhoven,8133 AG,NL,0031 59 9553 3088,orders@wildroselightinglogi.example,Z200,,2019-11-02,2020-07-12
+0000300266,Bluebell Paper Packaging Pvt Ltd,,240 Anna Salai,Delhi,480859,IN,+91 86 6714 7313,orders@bluebellpaperpackagi.example,Z200,,2021-01-13,2023-02-03
+0000300315,Thornbury Paper Distribution B.V.,c/o Head Office,131 Kerkstraat,Amsterdam,9319 EE,Holland,0031 77 8186 6402,orders@thornburypaperdistri.example,Z200,,2019-08-09,2022-10-28
+0000300330,Goldcrest Living Packaging B.V.,,200 Dorpsstraat,Rotterdam,4394 GU,NL,N/A,info@goldcrestlivingpacka.example,Z200,,2005-01-12,2021-03-20
+0000300358,Fairway Gifts Distribution Ltd,,142 High Street,Bristol,YX2 5SU,GB,+44 41 1975 6393,accounts@fairwaygiftsdistribu.example,Z100,,2009-02-27,2024-02-21
+0000300420,Northwind Ceramics Merchants G.m.b.,,203 Schulstrasse,Munich,92040,DE,087-2553-2362,accounts@northwindceramicsmer.example,Z200,,2013-12-15,2024-11-23
+0000300126,Wildrose Paper Wholesale Ltd,Accounts Dept,124 Station Road,London,GD7 7US,GB,033 3635 7810,accounts@wildrosepaperwholesa.example,Z200,,2021-08-22,2021-01-28
+0000300147,Copperleaf Paper Merchants GmbH,Accounts Dept,214 Hauptstrasse,Frankfurt,63068,DE,+49 81 3094 4221,info@copperleafpapermerch.example,Z100,,2012-11-09,2024-02-16
+0000300348,Harbourside Bakeware Retail Ltd,Accounts Dept,96 Station Road,Manchester,LL3 6FB,GB,037-5534-9992,accounts@harboursidebakewarer.example,Z200,,2020-02-04,2021-09-06
+0000300370,Hawthorn Kitchen Trading Ltd,Accounts Dept,80 Church Lane,London,HP4 6MX,GB,0044 21 6491 1498,info@hawthornkitchentradi.example,Z200,,2011-08-05,2021-04-09
+0000300224,Lakeshore Woodworks Logistics S.L.,,16 Avenida del Sol,Seville,70510,Spain,0034 22 1223 6658,orders@lakeshorewoodworkslo.example,Z200,,2016-11-20,2021-12-05
+0000300229,Silverline Garden Trading GmbH,,118 Gartenweg,Munich,32106,DE,093-8246-8877,info@silverlinegardentrad.example,Z100,,2012-06-17,2022-01-17
+0000300087,Elmstead Ceramics Wholesale S.L.,c/o Head Office,164 Calle Mayor,Madrid,63510,ES,0034 66 8350 4920,info@elmsteadceramicswhol.example,Z200,,2013-06-09,2013-06-30
+0000300379,Hawthorn Interiors Supplies SARL,c/o Head Office,164 Avenue Victor Hugo,Lyon,96727,FR,0033 70 3297 1540,accounts@hawthorninteriorssup.example,Z200,,2010-04-19,2021-08-03
+0000300220,Lakeshore Kitchen Services Ltd,,132 Station Road,London,GG6 6UG,GB,+44 32 8246 3483,orders@lakeshorekitchenserv.example,Z200,,2019-01-10,2025-12-03
+0000300130,Stonegate Home Distribution Inc,Accounts Dept,116 Main St,Chicago,57110,US,30 7045 9497,accounts@stonegatehomedistrib.example,Z100,,2020-11-06,2024-01-11
+0000300380,Westbrook Textile Trading B.V.,,133 Dorpsstraat,Eindhoven,8472 AE,NL,0031 26 8671 2223,sales@westbrooktextiletrad.example,Z200,,2021-11-09,2021-01-22
+0000300430,Elmstead Woodworks and Packaging SA,,193 Rue de la Paix,Lyon,92992,FR,0033 58 4707 5824,orders@elmsteadwoodworkspac.example,Z200,,2015-11-15,2024-12-14
+0000300427,ASHFORD CRAFTS WHOLESALE LTD,c/o Head Office,130 Church Lane,Bristol,TM7 0PN,GB,095 3981 7680,sales@ashfordcraftswholesa.example,Z100,,2023-04-15,2020-10-25
+0000300389,Goldcrest Florals Imports Ltd,,199 Victoria Road,London,DP2 5XW,GB,+44 98 6096 5425,orders@goldcrestfloralsimpo.example,Z100,,2021-05-28,2022-06-07
+0000300377,Greenfield Paper Services SARL,c/o Head Office,249 Rue du Moulin,Lyon,90573,  ,0033 78 3633 1683,orders@greenfieldpaperservi.example,Z100,,2005-05-12,2020-10-09
+0000300319,Hawthorn Stationery Logistics S.L.,,144 Calle Real,Valencia,11019,ES,58-2501-1491,info@hawthornstationerylo.example,Z200,,2010-02-16,2020-06-11
+0000300262,Greenfield Florals Logistics Ltd,Accounts Dept,1 High Street,Manchester,TL6 0AF,GB,+44 95 6549 8895,info@greenfieldfloralslog.example,Z100,,2004-02-06,2022-06-28
+0000300305,Foxglove Paper & Services Inc,,126 Oak Ave,Boston,57699,US,96 9534 5875,sales@foxglovepaperservice.example,Z100,,2019-07-17,2023-01-11
+0000300113,Fairway Crafts & Retail Ltd,,190 Church Lane,Bristol,HN6 0BG,UK,038 1260 1621,orders@fairwaycraftsretail.example,Z200,,2018-07-03,2025-05-10
+0000300180,Hawthorn Lighting Trading SARL,,245 Avenue Victor Hugo,Paris,32628,FR,+33 24 1914 4394,accounts@hawthornlightingtrad.example,Z200,,2005-08-14,2024-08-06
+0000300275,Highland Toys Merchants Ltd,,154 Victoria Road,London,RF2 5BL,GBR,+44 39 1135 6897,accounts@highlandtoysmerchant.example,Z100,,2006-04-24,2020-09-09
+0000300368,Thornbury Ceramics Services GmbH,c/o Head Office,157 Schulstrasse,Hamburg,55416,DE,078-7191-9266,orders@thornburyceramicsser.example,Z100,,2006-04-18,2020-06-19
+0000300295,Granite Stationery & Packaging Ltd,,175 Church Lane,Leeds,XD8 7GY,United Kingdom,043-7778-1075,accounts@granitestationerypac.example,Z200,,2020-09-23,2024-11-22
+0000300434,Westbrook Lighting Packaging Inc,,141 Maple Dr,Chicago,67373,US,+1 37 8713 5573,sales@westbrooklightingpac.example,Z100,,2007-03-10,2020-09-24
+0000300323,Greenfield Vintage Imports GmbH,,66 Schulstrasse,Frankfurt,35444,DE,041-9108-8112,sales@greenfieldvintageimp.example,Z200,,2014-09-03,2025-12-18
+0000300234,Pinecrest Vintage Retail GmbH,c/o Head Office,85 Gartenweg,Berlin,49961,DE,0049 43 6822 5179,orders@pinecrestvintagereta.example,Z200,,2022-06-10,2021-02-24
+0000300278,Clearview Bakeware Services Ltd,Accounts Dept,208 Station Road,Leeds,MT8 7KM,GB,0044 36 7832 4493,sales@clearviewbakewareser.example,Z100,,2019-11-05,2022-05-10
+0000300165,Brightwater Gifts Packaging B.V.,c/o Head Office,5 Kerkstraat,Amsterdam,5173 MU,EU,084 1114 8715,orders@brightwatergiftspack.example,Z100,,2013-03-06,2024-04-12
+0000300137,Fairway Candle Wholesale GmbH,,101 Gartenweg,Berlin,34356,DE,071 5922 2160,orders@,Z100,,2011-03-14,2023-06-08
+0000300198,Greenfield Interiors Wholesale Inc,,177 Oak Ave,Seattle,33854,US,+1 78 6453 2048,accounts@greenfieldinteriorsw.example,Z200,,2011-09-20,2020-02-05
+0000300259,Greenfield Candle Trading Ltd,c/o Head Office,166 Victoria Road,Leeds,NX3 4HK,GB,049-6870-5114,accounts@greenfieldcandletrad.example,Z100,,2007-03-27,2020-11-12
+0000300233,Foxglove Paper Logistics GmbH,,137 Gartenweg,Berlin,86143,DE,+49 61 8388 1351,accounts@foxglovepaperlogisti.example,Z100,,2022-02-14,2025-06-02
+0000300116,Hawthorn Stationery Wholesale Ltd,,162 Station Road,London,FH7 4DF,GB,0044 39 5802 8793,info@hawthornstationerywh.example,Z200,,2010-12-27,2023-03-02
+0000300121,Silverline Ceramics Logistics Ltd,,188 Station Road,Birmingham,ES9 8TU,GB,032 9813 4393,accounts@silverlineceramicslo.example,Z200,,2007-07-08,2024-09-04
+0000300225,Hawthorn Gifts Imports Pvt Ltd,c/o Head Office,108 MG Road,Bengaluru,291475,IN,047 5886 4530,orders@hawthorngiftsimports.example,Z200,,2021-08-10,2022-12-18
+0000300409,  Fairway  Gifts  Distribution Ltd ,,142 High Street,Bristol,YX2 5SU,GB,+44 41 1975 6393,,Z100,,2010-12-15,2024-02-21
+0000300302,Brightwater Paper Retail Ltd,,211 Victoria Road,Leeds,DL3 0WK,GB,028 1874 2454,sales@brightwaterpaperreta.example,Z200,,2017-01-16,2024-02-22
+0000300128,Goldcrest Crafts Wholesale Ltd,,64 Station Road,London,AA2 4HL,GB,040 6033 4703,orders@goldcrestcraftswhole.example,Z200,,2007-08-19,2024-11-14
+0000300437,Northwind Garden Supplies Teoranta,Accounts Dept,58 Main Street,Dublin,T57 U004,IE,00353 25 2815 1786,info@northwindgardensuppl.example,Z100,,2014-12-20,2023-05-23
+0000300108,Copperleaf Interiors Packaging GmbH,,195 Schulstrasse,Cologne,72916,DE,+49 41 5225 5867,accounts@copperleafinteriorsp.example,Z100,,2014-05-20,2023-09-16
+0000300334,Oakridge Lighting Distribution S.L.,,108 Avenida del Sol,Barcelona,17096,ES,50 7638 8750,sales@oakridgelightingdist.example,Z200,,2014-02-01,2020-06-24
+0000300291,Fairway Gifts Services Ltd,c/o Head Office,7 Church Lane,Manchester,PS3 3GX,United Kingdom,097-1212-9028,info@fairwaygiftsservices.example,Z200,,2004-01-04,2020-02-08
+0000300134,Harbourside Woodworks Retail Ltd,Accounts Dept,105 Station Road,Leeds,CB4 4CJ,United Kingdom,031 4244 2142,info@harboursidewoodworks.example,Z100,,2013-01-11,2020-12-23
+0000300347,Oakridge Vintage & Services Ltd,Accounts Dept,208 Victoria Road,London,WC7 9WG,GB,046 7054 4915,sales@oakridgevintageservi.example,Z100,,2011-09-16,2024-04-02
+0000300045,Riverside Paper & Imports Ltd,,76 Victoria Road,London,GH2 5YM,GB,066 4207 1884,accounts@riversidepaperimport.example,Z100,,2005-04-02,2022-05-01
+0000300415,SILVERLINE DECOR SERVICES TEORANTA,,103 Mill Road,Cork,T77 N569,IE,00353 21 5866 5563,,Z200,,2009-09-15,2025-03-20
+0000300066,Lakeshore Home & Packaging S.L.,,78 Calle Real,Valencia,95018,ES,46-6012-4647,orders@lakeshorehomepackagi.example,Z200,,2007-06-28,2023-10-06
+0000300284,Starling Bakeware Merchants SARL,Accounts Dept,132 Avenue Victor Hugo,Paris,27148,FR,034-7002-3514,accounts@starlingbakewaremerc.example,Z100,,2018-07-08,2024-03-16
+0000300086,Harbourside Crafts & Retail SARL,Accounts Dept,147 Rue du Moulin,Paris,82142,FR,0033 85 8462 7010,info@harboursidecraftsret.example,Z100,,2011-04-25,2022-09-08
+0000300243,Granite Bakeware Wholesale Pvt Ltd,,153 MG Road,Delhi,615593,India,058-9860-8213,sales@granitebakewarewhole.example,Z200,,2015-01-28,2023-05-22
+0000300187,Thornbury Textile Retail Inc,,61 Oak Ave,Boston,20905,US,71 1295 2388,accounts@thornburytextilereta.example,Z100,,2020-08-01,2025-02-16
+0000300160,Northwind Paper Imports GmbH,,51 Schulstrasse,Munich,36831,DE,+49 93 2879 8122,info@northwindpaperimport.example,Z100,,2017-12-13,2021-02-14
+0000300013,Westbrook Toys Supplies Ltd,,18 Station Road,Leeds,UC5 7PF,GB,033-3985-4078,info@westbrooktoyssupplie.example,Z100,,2021-07-08,2012-06-30
+0000300036,Silverline Woodworks Services GmbH,c/o Head Office,189 Schulstrasse,Munich,20531,DE,0049 31 9972 2667,sales@silverlinewoodworkss.example,Z200,,2012-07-14,2020-05-24
+0000300029,Lakeshore Party Services Teoranta,c/o Head Office,167 Main Street,Dublin,C92 T527,IE,078-6738-9588,orders@lakeshorepartyservic.example,Z100,,2010-07-11,2023-03-02
+0000300171,Thornbury Lighting Distribution Ltd,,177 Victoria Road,London,JH6 9YT,GB,046 9449 6396,orders@thornburylightingdis.example,Z200,,2015-09-28,2022-08-17
+0000300143,Ashford Candle & Services Ltd,Accounts Dept,169 Victoria Road,Birmingham,RC5 1HJ,GB,093-4289-3037,orders@ashfordcandleservice.example,Z200,,2005-07-01,2022-06-18
+0000300381,Kingsway Decor Distribution Inc,,69 Oak Ave,New York,69005,US,86-7769-8471,sales@kingswaydecordistrib.example,Z100,,2007-01-24,2020-08-25
+0000300404,Fairway Decor and Services Inc,,186 Oak Ave,Chicago,98403,US,+1 30 4132 6222,accounts@fairwaydecorservices.example,Z200,,2023-11-15,2023-11-01
+0000300222,Brightwater Textile Imports Inc,Accounts Dept,8 Oak Ave,New York,43567,US,001 86 8778 7403,info@brightwatertextileim.example,Z200,,2018-06-25,2025-03-12
+0000300096,Ironbridge Home Logistics GmbH,,74 Bahnhofstrasse,Hamburg,40386,DE,+49 44 4962 1850,sales@ironbridgehomelogist.example,Z100,,2012-05-13,2020-07-27
+0000300052,Maplewood Party & Imports GmbH,,231 Schulstrasse,Munich,92182,de,+49 65 8068 3204,orders@maplewoodpartyimport.example,Z200,,2016-06-14,2025-10-20
+0000300241,Elmstead Crafts Merchants S.L.,,104 Avenida del Sol,Madrid,90544,ES,72 7649 7749,sales@elmsteadcraftsmercha.example,Z200,,2015-12-27,2021-09-07
+0000300336,Foxglove Decor Imports Ltd,c/o Head Office,180 Church Lane,London,PL8 0RW,UK,057 4085 3380,sales@foxglovedecorimports.example,Z100,,2008-05-06,2023-11-09
+0000300342,Northwind Stationery Merchants Ltd,,  ,Manchester,RD3 6AE,GB,069-2062-2987,info@northwindstationerym.example,Z100,,2004-10-26,2021-07-27
+0000300179,Starling Garden Logistics SARL,c/o Head Office,5 Rue de la Paix,Lyon,29617,FR,0033 27 8276 7136,info@starlinggardenlogist.example,Z200,,2007-08-25,2024-01-14
+0000300042,Greenfield Decor Merchants Ltd,,231 Victoria Road,Leeds,UC6 3XT,GB,088 6974 3749,orders@greenfielddecormerch.example,Z200,,2014-10-26,2024-01-26
+0000300369,Fairway Textile Merchants Ltd,,72 Station Road,Manchester,MW6 5DG,GB,044 1566 6364,accounts@fairwaytextilemercha.example,Z200,X,2007-10-14,2021-11-23
+0000300207,Wildrose Textile Trading B.V.,,85 Dorpsstraat,Utrecht,5757 PT,NL,097-4652-8370,info@wildrosetextiletradi.example,Z200,,2007-02-14,2011-06-30
+0000300283,Elmstead Woodworks & Packaging SARL,,193 Rue de la Paix,Lyon,92992,FR,0033 58 4707 5824,orders@elmsteadwoodworkspac.example,Z200,,2021-12-12,2024-12-14
+0000300255,Goldcrest Woodworks Supplies Ltd,Accounts Dept,2 High Street,Birmingham,DB1 4UT,gb,075-7493-1375,sales@goldcrestwoodworkssu.example,Z100,,2017-05-10,2023-09-19
+0000300374,Maplewood Gifts Logistics Ltd,Accounts Dept,137 Victoria Road,Manchester,FC5 9XW,GB,+44 81 1176 4434,info@maplewoodgiftslogist.example,Z200,,2010-11-10,2025-08-09
+0000300005,Stonegate Kitchen Supplies Ltd,Accounts Dept,200 High Street,Leeds,FY2 5FK,GB,085-4715-2846,orders@stonegatekitchensupp.example,Z100,X,2017-05-16,2020-05-13
+0000300257,Elmstead Ceramics Imports Pvt Ltd,,,Delhi,905425,IN,+91 90 1933 6334,info@elmsteadceramicsimpo.example,Z200,,2016-07-12,2020-09-07
+0000300405,THORNBURY CANDLE PACKAGING TEORANTA,,143 Bridge Street,Cork,D43 E076,IE,00353 79 6811 2319,orders@thornburycandlepacka.example,Z200,,2012-01-15,2020-06-25
+0000300101,Maplewood Living Services Ltd,Accounts Dept,235 Victoria Road,Leeds,KD7 0HG,GB,043 9878 9299,orders@maplewoodlivingservi.example,Z100,,2004-06-03,2025-01-06
+0000300227,Granite Interiors Logistics Pvt Ltd,,236 Anna Salai,Bengaluru,1234,IN,+91 50 8018 9120,orders@graniteinteriorslogi.example,Z100,,2016-10-27,2025-04-05
+0000300385,Highland Kitchen Packaging Pvt Ltd,c/o Head Office,225 Park Street,Bengaluru,373806,IN,071-3635-5646,info@highlandkitchenpacka.example,Z200,,2020-02-04,2025-04-02
+0000300214,Copperleaf Bakeware Retail S.L.,,101 Calle Real,Valencia,22619,ES,0034 28 4030 2516,accounts@copperleafbakewarere.example,Z200,,2013-12-10,2022-03-02
+0000300172,Wildrose Florals Supplies S.L.,c/o Head Office,80 Calle Mayor,Valencia,98760,ES,24 9008 4449,orders@wildrosefloralssuppl.example,Z100,,2018-08-13,2020-11-21
+0000300099,Clearview Vintage Imports Ltd,,86 High Street,Bristol,UP9 8YR,GB,+44 89 7502 1449,info@clearviewvintageimpo.example,Z100,,2022-03-06,2020-04-03
+0000300293,Hawthorn Party Imports Ltd,c/o Head Office,5 Church Lane,Birmingham,99999999,GB,023-7249-8441,orders@hawthornpartyimports.example,Z100,,2016-08-06,2020-10-22
+0000300216,Silverline Living Imports B.V.,,3 Molenweg,Rotterdam,4281 PH,Netherlands,057 1361 5104,sales@silverlinelivingimpo.example,Z100,,2021-01-12,2025-11-06
+0000300062,Harbourside Home Services Inc,Accounts Dept,220 Oak Ave,Seattle,92967,US,37 9122 3228,accounts@harboursidehomeservi.example,Z100,,2016-12-28,2012-06-30
+0000300048,Ironbridge Textile Retail SARL,,104 Rue du Moulin,Lyon,64709,FRA,084 3063 3489,orders@ironbridgetextileret.example,Z200,,2016-03-21,2023-10-19
+0000300033,Thornbury Candle Packaging Teoranta,Accounts Dept,143 Bridge Street,Cork,D43 E076,IE,00353 79 6811 2319,orders@thornburycandlepacka.example,Z200,,2010-05-03,2020-06-25
+0000300268,Hawthorn Garden Trading Teoranta,,57 Main Street,Cork,C86 P889,IE,033 1330 7339,orders@hawthorngardentradin.example,Z100,,2013-06-01,2022-03-03
+0000300328,Wildrose Textile & Retail Ltd,,39 High Street,Birmingham,PR5 7DM,GB,0044 37 1830 5088,info@wildrosetextileretai.example,Z100,,2022-09-12,2025-11-01
+0000300201,Goldcrest Florals Trading Teoranta,,143 Bridge Street,Galway,D60 P154,XX,064-9366-6428,orders@goldcrestfloralstrad.example,Z100,,2015-07-11,2025-05-03
+0000300403,WESTBROOK CRAFTS DISTRIBUTION LTD,,105 High Street,Manchester,RA7 8SL,GB,075-8707-1990,info@westbrookcraftsdistr.example,Z100,,2015-07-15,2021-12-13
+0000300028,Foxglove Candle Merchants Ltd,Accounts Dept,110 Station Road,Bristol,KT2 6HT,GB,056 5005 7671,orders@foxglovecandlemercha.example,Z100,,2014-09-12,2021-01-24
+0000300353,Wildrose Gifts Merchants Teoranta,c/o Head Office,107 Mill Road,Galway,D37 E935,IE,00353 77 6258 4442,info@wildrosegiftsmerchan.example,Z100,,2006-06-23,2023-01-28
+0000300231,Northwind Toys Distribution B.V.,,98 Dorpsstraat,Utrecht,3874 NT,NL,0031 51 7222 9299,sales@northwindtoysdistrib.example,Z200,X,2018-02-09,2020-04-10
+0000300261,Starling Gifts & Logistics Ltd,,30 Church Lane,London,HW7 5MU,GB,072 9236 2149,n/a,Z200,,2007-06-17,2024-04-07
+0000300289,Northwind Ceramics Merchants GmbH,,203 Schulstrasse,Munich,92040,DE,087-2553-2362,accounts@northwindceramicsmer.example,Z200,,2015-12-27,2024-11-23
+0000300163,Fairway Vintage Services Ltd,Accounts Dept,26 Station Road,London,LF6 5FH,UK,0044 40 3181 1786,sales@fairwayvintageservic.example,Z200,,2018-11-10,2021-06-09
+0000300383,Greenfield Vintage Retail Pvt Ltd,,211 Anna Salai,Mumbai,829498,IN,053-9988-7789,info@greenfieldvintageret.example,Z100,,2004-02-17,2023-08-25
+0000300139,Stonegate Crafts Trading Ltd,,244 Victoria Road,Bristol,XK9 6YY,GB,0044 94 9500 5450,info@stonegatecraftstradi.example,Z200,,2004-11-08,2023-02-01
+0000300063,Kingsway Vintage Packaging Ltd,,206 Church Lane,London,FC6 5YG,GB,091-5028-1321,orders@kingswayvintagepacka.example,Z200,,2014-09-05,2020-03-13
+0000300136,Thornbury Garden Packaging Inc,Accounts Dept,154 Oak Ave,New York,69636,US,+1 54 1447 4645,orders@thornburygardenpacka.example,Z200,,2012-10-21,2024-10-17
+0000300129,Oakridge Vintage & Logistics Ltd,c/o Head Office,128 Station Road,Leeds,DT7 2EL,GB,039-8411-6362,info@oakridgevintagelogis.example,Z100,,2009-03-08,2020-03-08
+0000300429,OAKRIDGE HOME RETAIL LTD,,87 Church Lane,London,BL5 9BT,GB,024-4420-9126,orders@oakridgehomeretail.example,Z100,,2019-01-15,2021-05-13
+0000300009,Hawthorn Garden Supplies Ltd,,72 Victoria Road,Leeds,PM9 1UX,GB,088-2671-1154,info@hawthorngardensuppli.example,Z200,,2010-11-26,2025-12-11
+0000300327,Ashford Party Distribution S.L.,Accounts Dept,129 Avenida del Sol,Madrid,17092,ESP,+34 65 6526 2099,orders@ashfordpartydistribu.example,Z200,,2017-05-21,2022-10-09
+0000300418,  Northwind  Living  &  Services Lt,,129 High Street,Manchester,BC5 9KU,GB,024 3666 9612,info@northwindlivingservi.example,Z200,,2005-03-15,2022-03-07
+0000300065,Oakridge Ceramics Supplies B.V.,c/o Head Office,200 Kerkstraat,Utrecht,4375 DP,NL,+31 55 9871 3913,accounts@oakridgeceramicssupp.example,Z200,,2012-08-15,2023-06-13
+0000300301,Harbourside Paper Retail Teoranta,,215 Main Street,Cork,D15 E658,IE,049-9732-8404,sales@harboursidepaperreta.example,Z100,,2013-07-15,2022-11-14
+0000300015,Starling Home Merchants Ltd,c/o Head Office,155 Station Road,London,RS4 5YC,GB,073 7561 9326,info@starlinghomemerchant.example,Z100,,2010-10-16,2021-07-15
+0000300157,Clearview Candle Retail Pvt Ltd,,228 Anna Salai,Bengaluru,187267,IN,041-8231-4760,accounts@clearviewcandleretai.example,Z200,,2021-06-05,2021-01-16
+0000300041,Hawthorn Candle Merchants B.V.,,215 Dorpsstraat,Amsterdam,9802 PP,NL,0031 59 9141 8849,info@hawthorncandlemercha.example,Z100,,2006-04-12,2020-09-22
+0000300428,SUNRISE GIFTS DISTRIBUTION GMBH,Accounts Dept,192 Hauptstrasse,Frankfurt,48692,DE,097-2899-4107,accounts@sunrisegiftsdistribu.example,Z100,,2008-10-15,2024-02-22
+0000300365,Northwind Woodworks Packaging Ltd,,73 Victoria Road,Manchester,MJ3 6MK,GB,+44 28 8157 9713,sales@northwindwoodworkspa.example,Z200,,2017-12-25,2025-12-08
+0000300217,Lakeshore Toys Services Ltd,,73 Victoria Road,Birmingham,JC3 3EL,GB,058 7662 1133,info@lakeshoretoysservice.example,Z100,,2010-05-24,2025-04-09
+0000300280,Maplewood Party Logistics Ltd,c/o Head Office,33 Victoria Road,Leeds,LT8 1EB,GB,080 6134 4401,sales@maplewoodpartylogist.example,Z200,,2021-06-20,2021-02-12
+0000300391,Brightwater Decor & Merchants Ltd,,243 Church Lane,Manchester,TT1 5AS,GB,060 1746 9144,orders@brightwaterdecormerc.example,Z100,,2015-05-26,2022-03-12
+0000300338,Kingsway Candle Wholesale Ltd,,196 Station Road,London,LS6 4GR,GB,0044 26 1047 9851,info@kingswaycandlewholes.example,Z200,,2012-04-15,2023-01-21
+0000300237,Foxglove Textile Services Ltd,,24 Church Lane,Manchester,YY4 5ME,GB,089-4309-4494,sales@foxglovetextileservi.example,Z200,,2015-07-22,2023-10-18
+0000300208,Silverline Decor Services Teoranta,,103 Mill Road,Cork,T77 N569,IE,00353 21 5866 5563,orders@silverlinedecorservi.example,Z200,,2011-04-06,2025-03-20
+0000300213,Harbourside Garden Services B.V.,,114 Kerkstraat,Utrecht,9420 MK,NL,+31 29 4674 6652,accounts@harboursidegardenser.example,Z100,,2015-03-26,2020-08-22
+0000300296,Thornbury Gifts Trading SARL,c/o Head Office,88 Rue du Moulin,Nantes,72165,FR,045-6681-9207,orders@thornburygiftstradin.example,Z200,,2010-12-07,2023-05-09
+0000300412,Ashford Canlde & Services Ltd,,169 Victoria Road,Birmingham,RC5 1HJ,GB,093-4289-3037,orders@ashfordcandleservice.example,Z200,,2019-08-15,2022-06-18
+0000300252,Foxglove Ceramics Services B.V.,c/o Head Office,110 Kerkstraat,Rotterdam,6871 XC,NL,0031 20 4786 9646,sales@foxgloveceramicsserv.example,Z200,,2008-08-13,2021-03-04
+0000300440,Northwind Textile Merchants S.L.,,102 Calle Real,Valencia,27332,ES,0034 91 1673 3938,sales@northwindtextilemerc.example,Z100,,2014-08-05,2020-06-23
+0000300413,HAWTHORN STATIONERY WHOLESALE LTD,,162 Station Road,London,FH7 4DF,GB,0044 39 5802 8793,info@hawthornstationerywh.example,Z200,,2007-04-15,2023-03-02
+0000300304,Westbrook Crafts Distribution Ltd,,105 High Street,Manchester,RA7 8SL,GB,075-8707-1990,info@westbrookcraftsdistr.example,Z100,,2009-10-06,2021-12-13
+0000300351,Lakeshore Garden & Packaging Ltd,c/o Head Office,70 High Street,Manchester,NW6 7YM,GB,+44 73 4054 5203,sales@lakeshoregardenpacka.example,Z100,,2017-09-13,2023-01-26
+0000300270,Westbrook Textile Imports GmbH,,8 Schulstrasse,Berlin,87414,DE,062-9216-1569,sales@westbrooktextileimpo.example,Z200,,2012-06-13,2023-10-18
+0000300202,Ironbridge Toys & Retail GmbH,,235 Schulstrasse,Cologne,86546,Germany,025-6178-5464,accounts@ironbridgetoysretail.example,Z100,,2021-09-06,2025-09-10
+0000300162,Ashford Florals Imports Ltd,,142 High Street,London,LY2 7PK,GB,038 7764 3784,sales@ashfordfloralsimport.example,Z200,,2007-02-12,2020-06-27
+0000300044,Pinecrest Home Trading Ltd,c/o Head Office,17 Church Lane,Bristol,GJ3 9FK,GB,040-2684-7061,sales@pinecresthometrading.example,Z100,,2022-12-04,2021-02-17
+0000300218,Pinecrest Decor & Packaging S.L.,,154 Calle Real,Seville,33055,  ,79-8004-9959,info@pinecrestdecorpackag.example,Z100,,2019-04-10,2021-02-25
+0000300191,Stonegate Kitchen Distribution Ltd,,113 Church Lane,London,MC4 3RX,GB,049-8276-7942,orders@stonegatekitchendist.example,Z200,,2021-02-24,2025-07-25
+0000300310,Wildrose Home Retail Teoranta,,237 Main Street,Dublin,D28 Y953,IE,031 6347 1071,accounts@wildrosehomeretail.example,Z100,,2010-02-22,2024-03-23
+0000300260,Northwind Bakeware & Merchants Ltd,,223 Church Lane,Bristol,XK7 6AK,GB,095-1960-4472,orders@northwindbakewaremer.example,Z200,,2018-05-15,2023-12-19
+0000300106,Sunrise Garden Merchants Ltd,,33 Station Road,Manchester,EW8 0JW,GB,+44 45 8808 6578,info@sunrisegardenmerchan.example,Z200,,2021-11-12,2022-02-03
+0000300054,Northwind Paper & Distribution Ltd,,220 Church Lane,Manchester,UF5 4CW,GBR,035 5253 8530,accounts@northwindpaperdistri.example,Z100,,2013-08-05,2024-04-19
+0000300002,Fairway Toys & Supplies GmbH,Accounts Dept,2 Gartenweg,Berlin,24434,DE,0049 94 2318 5338,accounts@fairwaytoyssupplies.example,Z200,,2015-07-20,2023-03-20
+0000300435,Thornbury Kitchen Logistics SARL,,30 Rue de la Paix,Paris,72851,FR,+33 64 6104 6940,orders@thornburykitchenlogi.example,Z100,,2009-12-10,2020-12-27
+0000300050,Greenfield Crafts Trading Ltd,Accounts Dept,234 Church Lane,Birmingham,LX8 2JG,United Kingdom,+44 91 8587 3000,accounts@greenfieldcraftstrad.example,Z100,,2013-06-06,2025-01-11
+0000300081,Brightwater Toys Imports Ltd,,29 Station Road,Bristol,FU4 6AG,GB,020-9325-8891,accounts@brightwatertoysimpor.example,Z200,,2019-01-24,2024-01-14
+0000300206,Copperleaf Garden Packaging Ltd,,15 Church Lane,Leeds,1234,GB,047-1997-3061,sales@copperleafgardenpack.example,Z100,,2009-09-12,2023-01-10
+0000300035,Maplewood Decor Wholesale Ltd,,234 Station Road,Manchester,PP1 0BJ,GB,079 1473 2289,info@maplewooddecorwholes.example,Z100,,2013-10-25,2025-06-27
+0000300264,Wildrose Interiors Wholesale S.L.,c/o Head Office,106 Calle Real,Seville,20680,ES,84 8095 9068,orders@wildroseinteriorswho.example,Z100,,2021-01-21,2022-10-05
+0000300367,Fairway Decor & Services Inc,,186 Oak Ave,Chicago,98403,US,+1 30 4132 6222,accounts@fairwaydecorservices.example,Z200,,2005-06-01,2023-11-01
+0000300092,Sunrise Home Services Ltd,Accounts Dept,186 Station Road,London,UC6 6AL,GB,057 3657 8924,orders@sunrisehomeservices.example,Z200,,2022-12-10,2023-07-27
+0000300340,Clearview Party Services GmbH,,91 Hauptstrasse,Cologne,41031,DE,092 4915 1500,info@clearviewpartyservic.example,Z200,,2015-10-03,2023-10-25
+0000300426,Starling Decor Merchants Private Li,,102 Park Street,Bengaluru,707730,IN,,accounts@starlingdecormerchan.example,Z100,,2023-12-15,2020-10-08
+0000300053,Silverline Paper Logistics Teoranta,,107 Mill Road,Dublin,T85 A113,IE,00353 91 7261 1149,orders@silverlinepaperlogis.example,Z200,,2018-02-25,2024-10-01
+0000300346,Stonegate Stationery Packaging Ltd,,222 Church Lane,Birmingham,KG9 3MN,GB,+44 97 8695 3034,accounts@stonegatestationeryp.example,Z100,,2005-02-20,2021-01-23
+0000300265,Goldcrest Living Merchants SARL,,5 Avenue Victor Hugo,Paris,88664,FRA,+33 74 2371 3518,sales@goldcrestlivingmerch.example,Z100,,2006-04-09,2024-06-06
+0000300242,Redwood Crafts & Trading Teoranta,Accounts Dept,3 Mill Road,Galway,D67 B378,IE,027-9646-9390,orders@redwoodcraftstrading.example,Z100,,2009-01-16,2025-01-19
+0000300014,Redwood Paper Merchants Ltd,,25 Church Lane,Bristol,GB4 0SX,GB,071 9541 6532,orders@redwoodpapermerchant.example,Z200,,2015-10-18,2023-03-21
+0000300316,Clearview Garden Imports Ltd,,124 Victoria Road,Birmingham,BA8 0KL,GB,0044 66 5656 9968,orders@clearviewgardenimpor.example,Z200,,2012-12-28,2020-07-14
+0000300089,Lakeshore Interiors Trading B.V.,,207 Molenweg,Eindhoven,2637 SS,NL,+31 30 8961 1439,info@lakeshoreinteriorstr.example,Z200,,2017-09-15,2020-10-10
+0000300388,Riverside Kitchen Wholesale Inc,c/o Head Office,53 Main St,New York,57248,US,001 36 3892 2235,accounts@riversidekitchenwhol.example,Z100,,2017-08-21,2021-12-25
+0000300274,Elmstead Stationery Packaging Ltd,,12 Station Road,London,MS3 3CE,GB,+44 61 3424 5481,sales@elmsteadstationerypa.example,Z200,,2008-06-27,2025-07-27
+0000300167,Northwind Florals Services Pvt Ltd,,248 Park Street,Delhi,140869,IN,+91 33 6711 3750,info@northwindfloralsserv,Z100,,2010-07-23,2024-10-25
+0000300329,Maplewood Decor & Supplies S.L.,,226 Calle Real,Valencia,16509,ES,+34 89 2435 5310,sales@maplewooddecorsuppli.example,Z100,,2022-09-28,2015-06-30
+0000300443,Granite Florals Merchants GmbH,,161 Gartenweg,Hamburg,81758,DE,+49 80 9166 5079,orders@granitefloralsmercha.example,Z100,,2020-11-03,2023-05-08
+0000300135,Ashford Crafts Imports Ltd,,129 Church Lane,Bristol,AW5 0NR,GB,032-5848-9246,sales@ashfordcraftsimports.example,Z100,,2004-04-04,2022-06-25
+0000300307,Highland Textile Merchants Ltd,,59 Church Lane,Birmingham,MR4 6LK,GB,+44 20 5768 5297,orders@highlandtextilemerch.example,Z100,,2020-01-20,2020-04-04
+0000300433,Silverline Gifts Wholesale Ltd,,113 Station Road,Bristol,XB9 3GL,GB,0044 25 1232 3502,accounts@silverlinegiftswhole.example,Z100,,2015-08-07,2025-01-13
+0000300320,Pinecrest Interiors Packaging B.V.,,101 Molenweg,Eindhoven,1757 XH,NL,0031 28 7885 1590,info@pinecrestinteriorspa.example,Z100,,2005-06-12,2024-04-20
+0000300244,Ashford Textile Supplies Teoranta,c/o Head Office,42 Mill Road,Dublin,H85 J779,IE,+353 64 1057 1661,accounts@ashfordtextilesuppli.example,Z200,,2008-03-02,2021-07-06
+0000300055,Bluebell Interiors Distribution Ltd,,169 Victoria Road,Bristol,AU5 8TN,GB,087-7780-6435,sales@bluebellinteriorsdis.example,Z100,,2015-11-22,2024-11-06
+0000300364,Stonegate Garden Services Ltd,,167 Victoria Road,Bristol,NS5 0US,United Kingdom,082 3196 2229,orders@stonegategardenservi.example,Z200,,2009-05-27,2025-01-01
+0000300051,Bluebell Ceramics & Merchants B.V.,,68 Kerkstraat,Eindhoven,6875 KS,Holland,0031 53 8391 7539,info@bluebellceramicsmerc.example,Z100,,2012-02-21,2024-12-19
+0000300175,Lakeshore Candle Distribution Inc,,178 Oak Ave,New York,29503,  ,24 1670 7735,orders@lakeshorecandledistr.example,Z200,,2006-04-14,2022-05-26
+0000300190,Riverside Decor Services Ltd,Accounts Dept,69 Victoria Road,Leeds,YH7 5XR,GB,0044 59 5168 3736,sales@riversidedecorservic.example,Z200,,2012-11-21,2021-01-10
+0000300447,Riverside Textile Distribution SARL,,198 Rue du Moulin,Marseille,29815,FR,085-2706-1826,orders@riversidetextiledist.example,Z100,,2007-10-20,2020-09-02
+0000300188,Redwood Decor & Retail Ltd,Accounts Dept,167 High Street,London,SK1 4HH,GB,074-9977-7111,orders@redwooddecorretail.example,Z200,,2008-11-10,2023-02-22
+0000300170,Northwind Stationery Wholesale Ltd,,158 Church Lane,Leeds,LR5 4JD,GB,+44 25 8403 7602,orders@northwindstationeryw.example,Z100,,2016-11-25,2022-05-21
+0000300059,Silverline Decor Logistics S.L.,,157 Avenida del Sol,Seville,79387,ES,96 7992 4892,info@silverlinedecorlogis.example,Z100,,2015-12-17,2021-01-27
+0000300049,Oakridge Stationery Services S.L.,,191 Calle Mayor,Madrid,  ,ES,0034 92 4774 3279,orders@oakridgestationeryse.example,Z100,,2008-09-21,2023-01-23
+0000300345,Starling Bakeware & Services GmbH,,13 Schulstrasse,Munich,23872,DE,074-8650-5352,orders@starlingbakewareserv.example,Z100,,2015-09-04,2024-03-24
+0000300236,Maplewood Paper & Merchants Ltd,,109 Church Lane,Birmingham,XS2 0BC,United Kingdom,076 1209 8620,sales@maplewoodpapermercha.example,Z200,,2014-08-13,2020-12-24
+0000300253,Clearview Ceramics Wholesale Ltd,Accounts Dept,59 Church Lane,Birmingham,LX5 0GU,GB,0044 92 6699 6249,orders@clearviewceramicswho.example,Z200,,2017-11-21,2022-04-03
+0000300022,Fairway Textile Trading GmbH,,208 Gartenweg,Hamburg,47260,DE,+49 51 3893 7286,accounts@fairwaytextiletradin.example,Z200,,2004-08-09,2021-06-27
+0000300314,Elmstead Ceramics Merchants Ltd,c/o Head Office,190 High Street,Leeds,AT3 4KP,GB,0044 57 1672 4888,info@elmsteadceramicsmerc.example,Z200,,2017-10-12,2022-06-20
+0000300161,Wildrose Vintage Services Teoranta,c/o Head Office,121 Mill Road,Galway,C11 H304,Eire,067 5562 5140,info@wildrosevintageservi.example,Z200,,2007-07-13,2022-10-15
+0000300277,Foxglove Ceramics Trading Ltd,,238 High Street,Bristol,TE4 1GS,GB,099 9471 2323,info@foxgloveceramicstrad.example,Z100,,2022-07-05,2022-03-14
+0000300192,Elmstead Bakeware Distribution Inc,,207 Oak Ave,Boston,88474,US,001 25 6950 9535,orders@elmsteadbakewaredist.example,Z100,,2012-05-19,2024-01-17
+0000300386,Maplewood Ceramics & Wholesale Ltd,,209 Church Lane,Leeds,NM2 8DF,United Kingdom,079-7016-2321,info@maplewoodceramicswho.example,Z100,,2011-05-08,2023-05-07
+0000300294,Bluebell Living Wholesale Ltd,Accounts Dept,79 Station Road,Manchester,BM9 6WW,GB,0044 76 3592 5373,orders@bluebelllivingwholes.example,Z100,X,2015-06-22,2023-10-07
+0000300414,GREENFIELD DECOR LOGISTICS GMBH,Accounts Dept,221 Schulstrasse,Berlin,23554,DE,+49 40 6976 5778,sales@greenfielddecorlogis.example,Z100,,2018-06-15,2020-06-13
+0000300344,Maplewood Woodworks Logistics B.V.,,247 Dorpsstraat,Eindhoven,ABC,NL,096 6931 7395,sales@maplewoodwoodworkslo.example,Z100,,2005-06-28,2020-04-12
+0000300258,Wildrose Ceramics Packaging GmbH,c/o Head Office,136 Bahnhofstrasse,Cologne,45840,DE,051 5325 6812,orders@wildroseceramicspack.example,Z200,,2010-09-02,2023-03-24
+0000300309,Copperleaf Decor & Logistics Ltd,,40 Victoria Road,Birmingham,XB2 5FG,GB,024-3135-7589,sales@copperleafdecorlogis.example,Z100,,2004-10-27,2021-04-12
+0000300150,Copperleaf Woodworks & Services Ltd,Accounts Dept,112 Church Lane,London,HE4 9CW,GB,+44 49 3943 6624,sales@copperleafwoodworkss.example,Z200,,2018-02-06,2023-10-08
+0000300131,Wildrose Kitchen & Retail Ltd,,125 Church Lane,Leeds,N/A,GB,0044 44 7820 2358,sales@wildrosekitchenretai.example,Z200,,2016-10-11,2024-05-10
+0000300152,Highland Kitchen & Supplies GmbH,,57 Hauptstrasse,Cologne,43751,DE,0049 23 9515 1401,orders@highlandkitchensuppl.example,Z200,,2006-06-11,2025-06-20
+0000300360,Granite Kitchen Retail Ltd,,28 Victoria Road,Leeds,BE1 9TY,GB,058-6033-8140,orders@granitekitchenretail.example,Z200,,2013-09-03,2025-09-05
+0000300100,Granite Toys Merchants Inc,Accounts Dept,237 Main St,,80771,US,+1 80 9593 8930,orders@granitetoysmerchants.example,Z100,,2006-05-26,2021-05-19
+0000300373,Brightwater Home Logistics Ltd,,201 Church Lane,London,AH9 1TA,GB,0044 51 7840 5879,info@brightwaterhomelogis.example,Z100,,2005-03-03,2024-03-10
+0000300088,Pinecrest Decor & Supplies S.L.,,189 Calle Mayor,Valencia,16171,ES,+34 31 3466 9897,sales@pinecrestdecorsuppli.example,Z100,,2022-06-12,2024-11-19
+0000300331,Oakridge Decor Packaging Ltd,,149 Victoria Road,Leeds,,GB,022-3952-6756,info@oakridgedecorpackagi.example,Z100,,2013-04-11,2024-04-02
+0000300215,Bluebell Garden Packaging S.L.,c/o Head Office,226 Avenida del Sol,Seville,36539,ES,+34 23 9403 9960,accounts@bluebellgardenpackag.example,Z100,,2010-12-12,2025-04-06
+0000300122,Highland Stationery Merchants GmbH,,136 Gartenweg,Cologne,88103,DE,0,accounts@highlandstationeryme.example,Z200,,2021-09-25,2021-07-16
+0000300450,Hawthorn Candle Distribution S.L.,,3 Avenida del Sol,Madrid,30902,ES,0034 99 2551 3285,info@hawthorncandledistri.example,Z100,,2017-02-21,2021-11-11
+0000300021,Copperleaf Garden & Imports Ltd,Accounts Dept,173 Station Road,Birmingham,GJ7 3GK,gb,+44 86 9827 4769,accounts@copperleafgardenimpo.example,Z100,,2019-06-04,2025-09-13
+0000300189,Lakeshore Crafts Trading Ltd,,209 High Street,Bristol,UM1 2AM,GB,0044 26 3434 6701,orders@lakeshorecraftstradi.example,Z100,,2011-12-22,2024-03-02
+0000300072,Stonegate Decor & Logistics GmbH,Accounts Dept,7 Bahnhofstrasse,Frankfurt,60895,DE,032-1316-2275,accounts@stonegatedecorlogist.example,Z100,,2005-02-15,2025-01-13
+0000300107,Fairway Living Trading GmbH,Accounts Dept,86 Schulstrasse,Munich,24509,DE,059-4006-5899,sales@fairwaylivingtrading.example,Z200,,2009-07-05,2022-10-03
+0000300271,Fairway Florals Distribution Ltd,,125 Church Lane,Manchester,XJ2 4EX,GB,022-5757-6883,orders@fairwayfloralsdistri.example,Z200,,2009-06-28,2021-11-25
+0000300349,Foxglove Interiors Wholesale GmbH,,32 Schulstrasse,Hamburg,84787,DE,+49 41 3089 3251,info@foxgloveinteriorswho.example,Z200,,2018-09-14,2022-01-26
+0000300436,Starling Vintage & Distribution Ltd,Accounts Dept,24 Victoria Road,Manchester,RF3 3WS,GB,0044 43 5621 1344,sales@starlingvintagedistr.example,Z100,,2016-11-20,2021-02-05
+0000300103,Pinecrest Gifts Trading SARL,,104 Avenue Victor Hugo,Lyon,71140,FR,0033 60 1293 2600,sales@pinecrestgiftstradin.example,Z200,,2022-08-09,2022-03-27
