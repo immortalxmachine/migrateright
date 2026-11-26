@@ -1,0 +1,17 @@
+[project]
+name = "migrateright"
+version = "1.0.0"
+description = "SAP ECC to S/4HANA master-data migration toolkit: profiling, rule-based cleansing, Business Partner mapping, dedup and Excel/Streamlit reconciliation reports"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["B905"]   # zip() without strict= is fine for same-length DataFrame columns
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Raw downloaded dataset (~45 MB, fetched by src/download.py)
+data/raw/
+
+# Local SQLite database created by the pipeline
+data/*.db
+
+# Generated outputs (re-created on every run)
+reports/
+logs/
