@@ -1,75 +1,18 @@
 {
   "title": "MigrateRight",
-  "tagline": "Case study: SAP ECC to S/4HANA customer, vendor and product master migration on real public data",
-  "description": "Migrating a Brazilian retailer's customer and vendor master (Olist) and a UK retailer's product master (Online Retail II) from legacy ECC-style extracts to S/4HANA Business Partner and product master: profiling, YAML rules with quarantine, address standardisation against geolocation data, dedup with survivorship, load to PostgreSQL/SQLite and Excel + Streamlit reconciliation for sign-off.",
-  "repo": "https://github.com/immortalxmachine/migrateright",
-  "tech": [
-    "Python 3.11",
-    "pandas",
-    "SQL",
-    "PostgreSQL",
-    "SQLite",
-    "SQLAlchemy",
-    "rapidfuzz",
-    "openpyxl",
-    "Streamlit",
-    "pytest",
-    "ruff",
-    "Docker",
-    "GitHub Actions",
-    "Kaggle API"
+  "tagline": "SAP ECC→S/4HANA master-data migration on real retail data",
+  "category": "Data",
+  "highlights": [
+    "Python/SQL SAP ECC→S/4HANA migration case study on real Olist and Online Retail II data, loading 16,167 of 18,330 legacy records.",
+    "YAML address rules against Brazilian geolocation data, quarantining 1,719 records (9.38%) with reason codes and no silent drops.",
+    "Merged 444 real duplicates with survivorship and showed location-only matching reached only 3.83% precision vs customer_unique_id."
   ],
-  "metrics": {
-    "records_in": 18330,
-    "records_loaded": 16167,
-    "records_quarantined": 1719,
-    "quarantined_pct": 9.38,
-    "duplicates_merged": 444,
-    "business_partners_created": 12240,
-    "location_only_matcher_precision_pct": 3.83,
-    "location_only_matcher_recall_pct": 90.58,
-    "reconciliation_checks_passed": "52/52"
-  },
-  "data": [
-    {
-      "name": "Brazilian E-Commerce Public Dataset by Olist (Kaggle olistbr/brazilian-ecommerce)",
-      "license": "CC BY-NC-SA 4.0",
-      "use": "real customers, sellers and geolocation address reference"
-    },
-    {
-      "name": "Online Retail II (UCI ML Repository id 502 / Kaggle mashlyn/online-retail-ii-uci)",
-      "license": "CC BY 4.0",
-      "use": "real legacy material master"
-    }
+  "metrics": [
+    { "label": "Legacy records", "value": "18.3K" },
+    { "label": "Loaded clean", "value": "16.2K" },
+    { "label": "Quarantined", "value": "9.4%" }
   ],
-  "images": [
-    {
-      "src": "docs/screenshots/demo.gif",
-      "caption": "Streamlit sign-off flow"
-    },
-    {
-      "src": "docs/screenshots/01-reconciliation.png",
-      "caption": "Reconciliation dashboard"
-    },
-    {
-      "src": "docs/screenshots/02-rejections.png",
-      "caption": "Rejected records (quarantine)"
-    },
-    {
-      "src": "docs/screenshots/03-excel-report.png",
-      "caption": "Excel reconciliation workbook (rendered from the real .xlsx)"
-    },
-    {
-      "src": "docs/screenshots/04-profiling.png",
-      "caption": "Legacy data profiling report"
-    },
-    {
-      "src": "docs/screenshots/05-terminal-run.png",
-      "caption": "Terminal output of a pipeline run"
-    },
-    {
-      "src": "docs/screenshots/06-ci-passing.png",
-      "caption": "GitHub Actions CI passing"
-    }
-  ]
+  "demo": null,
+  "featured": true,
+  "order": 10
 }
